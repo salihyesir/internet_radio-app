@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.internetradio.bt.proje.Alarm">
+
+    <ImageButton
+        android:id="@+id/alarmbackbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_left_arrow"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/linearLayout">
+
+        <ImageView
+            android:id="@+id/alarmkanalimage"
+            android:layout_width="170dp"
+            android:layout_height="100dp" />
+
+        <ImageButton
+            android:id="@+id/alarmplaybutton"
+            android:layout_width="110dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_play" />
+
+        <ImageButton
+            android:id="@+id/alarmstopbutton"
+            android:layout_width="110dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_pause" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/alarmbackbutton"
+        android:src="@drawable/ic_alarm" />
+
+    <TimePicker
+        android:id="@+id/timePicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView5"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/linearLayout" />
+
+    <Button
+        android:id="@+id/alarmstartbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView5"
+        android:layout_marginTop="77dp"
+        android:layout_toEndOf="@+id/timePicker"
+        android:layout_toRightOf="@+id/timePicker"
+        android:text="Start" />
+
+</RelativeLayout>

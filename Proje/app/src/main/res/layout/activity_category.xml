@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.internetradio.bt.proje.Category">
+
+    <ImageButton
+        android:id="@+id/categoryalarmbutton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/ic_alarm" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/categoryalarmbutton"
+        android:orientation="horizontal"
+        android:id="@+id/linearLayout4">
+
+        <Button
+            android:id="@+id/categorykanallarbutton"
+            android:layout_width="130dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:text="Kanallar" />
+
+        <Button
+            android:id="@+id/categorykategorilerbutton"
+            android:layout_width="130dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:text="Kategoriler" />
+
+        <Button
+            android:id="@+id/categoryfavorilerbutton"
+            android:layout_width="130dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:text="Favoriler" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/linearLayout4">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="515dp">
+
+                <Button
+                    android:id="@+id/rockbutton"
+                    android:layout_width="130dp"
+                    android:layout_height="100dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/linearLayout4"
+                    android:layout_marginTop="100dp"
+                    android:text="Rock" />
+
+                <Button
+                    android:id="@+id/haberbutton"
+                    android:layout_width="130dp"
+                    android:layout_height="100dp"
+                    android:text="Haber" />
+
+                <Button
+                    android:id="@+id/sporbutton"
+                    android:layout_width="130dp"
+                    android:layout_height="100dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_toEndOf="@+id/haberbutton"
+                    android:layout_toRightOf="@+id/haberbutton"
+                    android:text="Spor" />
+
+                <Button
+                    android:id="@+id/nostaljibutton"
+                    android:layout_width="130dp"
+                    android:layout_height="100dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_toEndOf="@+id/sporbutton"
+                    android:layout_toRightOf="@+id/sporbutton"
+                    android:text="Nostalji" />
+
+                <Button
+                    android:id="@+id/jazzbutton"
+                    android:layout_width="130dp"
+                    android:layout_height="100dp"
+                    android:layout_below="@+id/haberbutton"
+                    android:layout_toEndOf="@+id/haberbutton"
+                    android:layout_toRightOf="@+id/haberbutton"
+                    android:text="Jazz" />
+
+                <Button
+                    android:id="@+id/arabeskbutton"
+                    android:layout_width="130dp"
+                    android:layout_height="100dp"
+                    android:layout_below="@+id/nostaljibutton"
+                    android:layout_toEndOf="@+id/sporbutton"
+                    android:layout_toRightOf="@+id/sporbutton"
+                    android:text="Arabesk" />
+
+                <Button
+                    android:id="@+id/slowbutton"
+                    android:layout_width="130dp"
+                    android:layout_height="100dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/jazzbutton"
+                    android:text="Slow" />
+
+                <Button
+                    android:id="@+id/turkcepopbutton"
+                    android:layout_width="130dp"
+                    android:layout_height="100dp"
+                    android:layout_below="@+id/jazzbutton"
+                    android:layout_toEndOf="@+id/slowbutton"
+                    android:layout_toRightOf="@+id/slowbutton"
+                    android:text="Türkçe Pop" />
+
+                <Button
+                    android:id="@+id/yabancibutton"
+                    android:layout_width="130dp"
+                    android:layout_height="100dp"
+                    android:layout_below="@+id/jazzbutton"
+                    android:layout_toEndOf="@+id/turkcepopbutton"
+                    android:layout_toRightOf="@+id/turkcepopbutton"
+                    android:text="Yabancı" />
+
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/categoryimage"
+            android:layout_width="170dp"
+            android:layout_height="100dp" />
+
+        <ImageButton
+            android:id="@+id/categoryplaybutton"
+            android:layout_width="110dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_play" />
+
+        <ImageButton
+            android:id="@+id/categorystopbutton"
+            android:layout_width="110dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_pause" />
+    </LinearLayout>
+
+</RelativeLayout>

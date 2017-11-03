@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.internetradio.bt.proje.Chat">
+
+    <ImageView
+        android:id="@+id/chatkanalimage"
+        android:layout_width="170dp"
+        android:layout_height="100dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true" />
+
+    <ImageButton
+        android:id="@+id/chatplaybutton"
+        android:layout_width="110dp"
+        android:layout_height="100dp"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/chatkanalimage"
+        android:layout_toRightOf="@+id/chatkanalimage"
+        android:src="@drawable/ic_play" />
+
+    <ImageButton
+        android:id="@+id/chatstopbutton"
+        android:layout_width="110dp"
+        android:layout_height="100dp"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/chatplaybutton"
+        android:layout_toRightOf="@+id/chatplaybutton"
+        android:src="@drawable/ic_pause" />
+
+    <EditText
+        android:id="@+id/chattext"
+        android:layout_width="wrap_content"
+        android:layout_height="250dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/chatkanalimage"
+        android:ems="10"
+        android:inputType="textMultiLine" />
+
+    <LinearLayout
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:orientation="horizontal"
+        android:id="@+id/linearLayout7">
+
+        <Button
+            android:id="@+id/chatgonderbutton"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:text="Gönder" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/chatkullanicitext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/linearLayout7"
+        android:layout_toRightOf="@+id/linearLayout7"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <ImageButton
+        android:id="@+id/chatbackbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/chattext"
+        android:layout_toEndOf="@+id/chatkanalimage"
+        android:layout_toRightOf="@+id/chatkanalimage"
+        android:src="@drawable/ic_left_arrow" />
+
+</RelativeLayout>

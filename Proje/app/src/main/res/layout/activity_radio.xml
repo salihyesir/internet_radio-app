@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.internetradio.bt.proje.Radio">
+
+    <ImageButton
+        android:id="@+id/radioalarmbutton"
+        style="@android:style/Widget.DeviceDefault.Light.ImageButton"
+        android:layout_width="390dp"
+        android:layout_height="60dp"
+        android:src="@drawable/ic_alarm" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/radioalarmbutton"
+        android:orientation="horizontal"
+        android:id="@+id/linearLayout5">
+
+        <Button
+            android:id="@+id/radiokanallarbutton"
+            style="@style/?android:attr/imageButtonStyle"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:text="Kanallar" />
+
+        <Button
+            android:id="@+id/radiokategorilerbutton"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:text="Kategoriler" />
+
+        <Button
+            android:id="@+id/radiofavorilerbutton"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:text="Favoriler" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/linearLayout5"
+        android:orientation="horizontal"
+        android:id="@+id/linearLayout6"></LinearLayout>
+
+    <SeekBar
+        android:id="@+id/radioseekBar2"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout6"
+        android:layout_centerHorizontal="true" />
+
+    <ImageButton
+        android:id="@+id/radiohoparloronbutton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignBottom="@+id/radioseekBar2"
+        android:layout_below="@+id/linearLayout6"
+        android:layout_toLeftOf="@+id/radioseekBar2"
+        android:layout_toStartOf="@+id/radioseekBar2"
+        android:src="@drawable/ic_speaker" />
+
+    <ImageButton
+        android:id="@+id/radiohoparloroffbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/radiokanalimage"
+        android:layout_alignLeft="@+id/radiohoparloronbutton"
+        android:layout_alignStart="@+id/radiohoparloronbutton"
+        android:layout_below="@+id/linearLayout6"
+        android:src="@drawable/ic_speaker_off" />
+
+    <ImageView
+        android:id="@+id/radiokanalimage"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/radiohoparloronbutton"
+        android:src="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/radioadi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/radiokanalimage"
+        android:layout_centerHorizontal="true"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/radiosarkiciadi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/radioadi"
+        android:layout_alignStart="@+id/radioadi"
+        android:layout_below="@+id/radioadi"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/radiosarkiadi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/radiosarkiciadi"
+        android:layout_alignStart="@+id/radiosarkiciadi"
+        android:layout_below="@+id/radiosarkiciadi"
+        android:text="TextView" />
+
+    <ImageButton
+        android:id="@+id/radiochatbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/radiosarkiadi"
+        android:src="@drawable/ic_chat" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <ImageButton
+            android:id="@+id/radioplaybutton"
+            android:layout_width="130dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_play" />
+
+        <ImageButton
+            android:id="@+id/radiostopbutton"
+            android:layout_width="130dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_pause" />
+
+        <ImageButton
+            android:id="@+id/radioaddfavbutton"
+            android:layout_width="130dp"
+            android:layout_height="100dp"
+            android:src="@android:drawable/btn_star_big_off" />
+    </LinearLayout>
+
+</RelativeLayout>

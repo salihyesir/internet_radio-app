@@ -1,0 +1,284 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageButton
+        android:id="@+id/mainalarmbutton"
+        style="@android:style/Widget.DeviceDefault.Light.ImageButton"
+        android:layout_width="390dp"
+        android:layout_height="60dp"
+        android:src="@drawable/ic_alarm" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/mainalarmbutton"
+        android:orientation="horizontal"
+        android:id="@+id/linearLayout2">
+
+        <Button
+            android:id="@+id/mainkanallarbutton"
+            style="?android:attr/imageButtonStyle"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:text="Kanallar" />
+
+        <Button
+            android:id="@+id/mainkategorilerbutton"
+            style="@android:style/Widget.Holo.ImageButton"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:text="Kategoriler" />
+
+        <Button
+            android:id="@+id/mainfavorilerbutton"
+            style="@android:style/Widget.Holo.ImageButton"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:text="Favoriler" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout2"
+        android:layout_alignParentBottom="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="515dp">
+
+                <Button
+                    android:id="@+id/kanal1button"
+                    android:layout_width="200dp"
+                    android:layout_height="70dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_toEndOf="@+id/kanal1imagebutton"
+                    android:layout_toRightOf="@+id/kanal1imagebutton"
+                    android:visibility="invisible" />
+
+                <ImageButton
+                    android:id="@+id/kanal1imagebutton"
+                    android:layout_width="100dp"
+                    android:layout_height="70dp"
+                    android:src="@mipmap/ic_launcher" />
+
+                <ImageButton
+                    android:id="@+id/kanal1addfavoributton"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_toEndOf="@+id/kanal1button"
+                    android:layout_toRightOf="@+id/kanal1button"
+                    android:src="@android:drawable/btn_star_big_off" />
+
+                <EditText
+                    android:id="@+id/kanal1text"
+                    android:layout_width="200dp"
+                    android:layout_height="70dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_toEndOf="@+id/kanal1imagebutton"
+                    android:layout_toRightOf="@+id/kanal1imagebutton"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="Name" />
+
+                <Button
+                    android:id="@+id/kanal2button"
+                    android:layout_width="200dp"
+                    android:layout_height="70dp"
+                    android:layout_below="@+id/kanal1button"
+                    android:layout_toEndOf="@+id/kanal1imagebutton"
+                    android:layout_toRightOf="@+id/kanal1imagebutton"
+                    android:visibility="invisible" />
+
+                <ImageButton
+                    android:id="@+id/kanal3addfavoributton"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_below="@+id/kanal2button"
+                    android:layout_toEndOf="@+id/kanal2button"
+                    android:layout_toRightOf="@+id/kanal2button"
+                    android:src="@android:drawable/btn_star_big_off" />
+
+                <EditText
+                    android:id="@+id/kanal4text"
+                    android:layout_width="200dp"
+                    android:layout_height="70dp"
+                    android:layout_alignLeft="@+id/kanal2button"
+                    android:layout_alignStart="@+id/kanal2button"
+                    android:layout_below="@+id/kanal3addfavoributton"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="Name" />
+
+                <Button
+                    android:id="@+id/kanal4button"
+                    android:layout_width="200dp"
+                    android:layout_height="70dp"
+                    android:layout_alignLeft="@+id/kanal4text"
+                    android:layout_alignStart="@+id/kanal4text"
+                    android:layout_alignTop="@+id/kanal4text"
+                    android:visibility="invisible" />
+
+
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <ImageButton
+        android:id="@+id/kanal2imagebutton"
+        android:layout_width="100dp"
+        android:layout_height="70dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/linearLayout2"
+        android:layout_marginTop="72dp"
+        android:src="@mipmap/ic_launcher" />
+
+    <EditText
+        android:id="@+id/kanal2text"
+        android:layout_width="200dp"
+        android:layout_height="70dp"
+        android:layout_alignTop="@+id/kanal2imagebutton"
+        android:layout_toEndOf="@+id/kanal2imagebutton"
+        android:layout_toRightOf="@+id/kanal2imagebutton"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name" />
+
+    <ImageButton
+        android:id="@+id/kanal2addfavoributton"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_alignTop="@+id/kanal2text"
+        android:layout_toEndOf="@+id/kanal2text"
+        android:layout_toRightOf="@+id/kanal2text"
+        android:src="@android:drawable/btn_star_big_off" />
+
+    <ImageButton
+        android:id="@+id/kanal3imagebutton"
+        android:layout_width="100dp"
+        android:layout_height="70dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/kanal2imagebutton"
+        android:src="@mipmap/ic_launcher" />
+
+    <EditText
+        android:id="@+id/kanal3text"
+        android:layout_width="200dp"
+        android:layout_height="70dp"
+        android:layout_below="@+id/kanal2text"
+        android:layout_toRightOf="@+id/kanal2imagebutton"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name" />
+
+    <Button
+        android:id="@+id/kanal3button"
+        android:layout_width="200dp"
+        android:layout_height="70dp"
+        android:layout_below="@+id/kanal2text"
+        android:layout_toEndOf="@+id/kanal2imagebutton"
+        android:layout_toRightOf="@+id/kanal2imagebutton"
+        android:visibility="invisible" />
+
+    <ImageButton
+        android:id="@+id/kanal4imagebutton"
+        android:layout_width="100dp"
+        android:layout_height="70dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/kanal3imagebutton"
+        android:src="@mipmap/ic_launcher" />
+
+    <ImageButton
+        android:id="@+id/kanal4addfavoributton"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_toEndOf="@+id/kanal3text"
+        android:layout_toRightOf="@+id/kanal3text"
+        android:src="@android:drawable/btn_star_big_off"
+        android:layout_below="@+id/kanal3text" />
+
+    <ImageButton
+        android:id="@+id/kanal5imagebutton"
+        android:layout_width="100dp"
+        android:layout_height="70dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/kanal4imagebutton"
+        android:src="@mipmap/ic_launcher" />
+
+    <EditText
+        android:id="@+id/kanal5text"
+        android:layout_width="200dp"
+        android:layout_height="70dp"
+        android:layout_below="@+id/kanal4imagebutton"
+        android:layout_toEndOf="@+id/kanal5imagebutton"
+        android:layout_toRightOf="@+id/kanal5imagebutton"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name" />
+
+    <Button
+        android:id="@+id/kanal5button"
+        android:layout_width="200dp"
+        android:layout_height="70dp"
+        android:layout_alignTop="@+id/kanal5text"
+        android:layout_toEndOf="@+id/kanal5imagebutton"
+        android:layout_toRightOf="@+id/kanal5imagebutton"
+        android:visibility="invisible" />
+
+    <ImageButton
+        android:id="@+id/kanal5addfavoributton"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_below="@+id/kanal4addfavoributton"
+        android:layout_toEndOf="@+id/kanal5text"
+        android:layout_toRightOf="@+id/kanal5text"
+        android:src="@android:drawable/btn_star_big_off" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:orientation="horizontal"
+        android:visibility="visible">
+
+        <ImageView
+            android:id="@+id/mainimage"
+            android:layout_width="170dp"
+            android:layout_height="100dp" />
+
+        <ImageButton
+            android:id="@+id/mainplaybutton"
+            style="@android:style/Widget.DeviceDefault.Light.ImageButton"
+            android:layout_width="110dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_play"></ImageButton>
+
+        <ImageButton
+            android:id="@+id/mainstopbutton"
+            style="@android:style/Widget.DeviceDefault.Light.ImageButton"
+            android:layout_width="110dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_pause" />
+
+
+    </LinearLayout>
+
+</RelativeLayout>
