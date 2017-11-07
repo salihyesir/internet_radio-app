@@ -48,15 +48,15 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="515dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/linearLayout4">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:layout_height="515dp"
+            android:orientation="vertical">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -141,6 +141,26 @@
                     android:layout_toRightOf="@+id/turkcepopbutton"
                     android:text="Yabancı" />
 
+                <Button
+                    android:id="@+id/dinibutton"
+                    android:layout_width="130dp"
+                    android:layout_height="100dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/slowbutton"
+                    android:text="Dini" />
+
+                <Button
+                    android:id="@+id/halkbutton"
+                    android:layout_width="130dp"
+                    android:layout_height="100dp"
+                    android:layout_alignBottom="@+id/dinibutton"
+                    android:layout_below="@+id/slowbutton"
+                    android:layout_toEndOf="@+id/slowbutton"
+                    android:layout_toLeftOf="@+id/yabancibutton"
+                    android:layout_toRightOf="@+id/slowbutton"
+                    android:text="Halk Müziği" />
+
             </RelativeLayout>
         </LinearLayout>
     </ScrollView>
@@ -151,7 +171,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:id="@+id/linearLayout10">
 
         <ImageView
             android:id="@+id/categoryimage"

@@ -19,7 +19,8 @@
         <activity android:name=".Alarm" />
         <activity android:name=".Chat" />
         <activity android:name=".Radio" />
-        <activity android:name=".Category"></activity>
+        <activity android:name=".Category" />
+        <activity android:name=".Favourites"></activity>
     </application>
 
 </manifest>

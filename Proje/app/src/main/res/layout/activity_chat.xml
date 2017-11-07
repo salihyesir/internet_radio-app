@@ -6,6 +6,31 @@
     android:layout_height="match_parent"
     tools:context="com.internetradio.bt.proje.Chat">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/chatbackbutton"
+        android:layout_below="@+id/chatkanalimage">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/chattext"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/chatkanalimage"
+                android:ems="10"
+                android:inputType="textMultiLine" />
+        </LinearLayout>
+    </ScrollView>
+
     <ImageView
         android:id="@+id/chatkanalimage"
         android:layout_width="170dp"
@@ -31,18 +56,6 @@
         android:layout_toEndOf="@+id/chatplaybutton"
         android:layout_toRightOf="@+id/chatplaybutton"
         android:src="@drawable/ic_pause" />
-
-    <EditText
-        android:id="@+id/chattext"
-        android:layout_width="wrap_content"
-        android:layout_height="250dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/chatkanalimage"
-        android:ems="10"
-        android:inputType="textMultiLine" />
 
     <LinearLayout
         android:layout_width="100dp"
@@ -72,10 +85,9 @@
         android:id="@+id/chatbackbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/chattext"
-        android:layout_toEndOf="@+id/chatkanalimage"
-        android:layout_toRightOf="@+id/chatkanalimage"
-        android:src="@drawable/ic_left_arrow" />
+        android:src="@drawable/ic_left_arrow"
+        android:layout_above="@+id/chatkullanicitext"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:id="@+id/chatgonderbutton"
