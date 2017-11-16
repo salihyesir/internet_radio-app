@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+
+    >
+
+
+    <ImageButton
+        android:id="@+id/imageKanalFav"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginLeft="48dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="39dp"
+        app:srcCompat="@mipmap/ic_launcher"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/textHeaderFav"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imageKanalFav"
+        android:layout_marginLeft="41dp"
+        android:layout_marginStart="41dp"
+        android:textSize="25sp"
+        android:layout_toEndOf="@+id/imageKanalFav"
+        android:layout_toRightOf="@+id/imageKanalFav"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/textDescriptionFav"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imageKanalFav"
+        android:layout_alignLeft="@+id/textHeaderFav"
+        android:layout_alignStart="@+id/textHeaderFav"
+        android:textSize="25sp"
+        android:text="TextView" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="28dp"
+        android:layout_marginRight="28dp"
+        app:srcCompat="@android:drawable/ic_menu_delete"
+        android:layout_marginTop="12dp"
+        android:layout_alignTop="@+id/textHeaderFav"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+
+</RelativeLayout>

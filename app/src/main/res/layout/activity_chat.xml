@@ -97,6 +97,6 @@
         android:layout_alignParentBottom="true"
         android:layout_toEndOf="@+id/chatplaybutton"
         android:layout_toRightOf="@+id/chatplaybutton"
-        android:text="Gönder" />
+        android:text="@string/gonder" />
 
 </RelativeLayout>

@@ -71,6 +71,6 @@
         android:layout_marginTop="77dp"
         android:layout_toEndOf="@+id/timePicker"
         android:layout_toRightOf="@+id/timePicker"
-        android:text="Start" />
+        android:text="@string/Start" />
 
 </RelativeLayout>

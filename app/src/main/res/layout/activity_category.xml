@@ -29,21 +29,21 @@
             android:layout_width="130dp"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:text="Kanallar" />
+            android:text="@string/Kanallar" />
 
         <Button
             android:id="@+id/categorykategorilerbutton"
             android:layout_width="130dp"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:text="Kategoriler" />
+            android:text="@string/Kategoriler" />
 
         <Button
             android:id="@+id/categoryfavorilerbutton"
             android:layout_width="130dp"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:text="Favoriler" />
+            android:text="@string/Favoriler" />
     </LinearLayout>
 
     <ScrollView
@@ -68,15 +68,14 @@
                     android:layout_height="100dp"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
-                    android:layout_below="@+id/linearLayout4"
                     android:layout_marginTop="100dp"
-                    android:text="Rock" />
+                    android:text="@string/Rock" />
 
                 <Button
                     android:id="@+id/haberbutton"
                     android:layout_width="130dp"
                     android:layout_height="100dp"
-                    android:text="Haber" />
+                    android:text="@string/Haber" />
 
                 <Button
                     android:id="@+id/sporbutton"
@@ -85,7 +84,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_toEndOf="@+id/haberbutton"
                     android:layout_toRightOf="@+id/haberbutton"
-                    android:text="Spor" />
+                    android:text="@string/Spor" />
 
                 <Button
                     android:id="@+id/nostaljibutton"
@@ -94,7 +93,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_toEndOf="@+id/sporbutton"
                     android:layout_toRightOf="@+id/sporbutton"
-                    android:text="Nostalji" />
+                    android:text="@string/Nostalji" />
 
                 <Button
                     android:id="@+id/jazzbutton"
@@ -103,7 +102,7 @@
                     android:layout_below="@+id/haberbutton"
                     android:layout_toEndOf="@+id/haberbutton"
                     android:layout_toRightOf="@+id/haberbutton"
-                    android:text="Jazz" />
+                    android:text="@string/Jazz" />
 
                 <Button
                     android:id="@+id/arabeskbutton"
@@ -112,7 +111,7 @@
                     android:layout_below="@+id/nostaljibutton"
                     android:layout_toEndOf="@+id/sporbutton"
                     android:layout_toRightOf="@+id/sporbutton"
-                    android:text="Arabesk" />
+                    android:text="@string/Arabesk" />
 
                 <Button
                     android:id="@+id/slowbutton"
@@ -121,7 +120,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
                     android:layout_below="@+id/jazzbutton"
-                    android:text="Slow" />
+                    android:text="@string/Slow" />
 
                 <Button
                     android:id="@+id/turkcepopbutton"
@@ -130,7 +129,7 @@
                     android:layout_below="@+id/jazzbutton"
                     android:layout_toEndOf="@+id/slowbutton"
                     android:layout_toRightOf="@+id/slowbutton"
-                    android:text="Türkçe Pop" />
+                    android:text="@string/turkcepop" />
 
                 <Button
                     android:id="@+id/yabancibutton"
@@ -139,7 +138,7 @@
                     android:layout_below="@+id/jazzbutton"
                     android:layout_toEndOf="@+id/turkcepopbutton"
                     android:layout_toRightOf="@+id/turkcepopbutton"
-                    android:text="Yabancı" />
+                    android:text="@string/Yabancı" />
 
                 <Button
                     android:id="@+id/dinibutton"
@@ -148,7 +147,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
                     android:layout_below="@+id/slowbutton"
-                    android:text="Dini" />
+                    android:text="@string/Dini" />
 
                 <Button
                     android:id="@+id/halkbutton"
@@ -159,7 +158,7 @@
                     android:layout_toEndOf="@+id/slowbutton"
                     android:layout_toLeftOf="@+id/yabancibutton"
                     android:layout_toRightOf="@+id/slowbutton"
-                    android:text="Halk Müziği" />
+                    android:text="@string/halkmuzigi" />
 
             </RelativeLayout>
         </LinearLayout>

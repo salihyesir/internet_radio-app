@@ -26,19 +26,19 @@
             android:id="@+id/radiokanallarbutton"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
-            android:text="Kanallar" />
+            android:text="@string/Kanallar" />
 
         <Button
             android:id="@+id/radiokategorilerbutton"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
-            android:text="Kategoriler" />
+            android:text="@string/Kategoriler" />
 
         <Button
             android:id="@+id/radiofavorilerbutton"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
-            android:text="Favoriler" />
+            android:text="@string/Favoriler" />
 
     </LinearLayout>
 

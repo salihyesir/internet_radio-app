@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">Proje</string>
+    <string name="Kanallar">Kanallar</string>
+    <string name="Kategoriler">Kategoriler</string>
+    <string name="Favoriler">Favoriler</string>
+    <string name="Haber">Haber</string>
+    <string name="Spor">Spor</string>
+    <string name="Nostalji">Nostalji</string>
+    <string name="Rock">Rock</string>
+    <string name="Jazz">Jazz</string>
+    <string name="Arabesk">Arabesk</string>
+    <string name="Slow">Slow</string>
+    <string name="Yabancı">Yabancı</string>
+    <string name="Dini">Dini</string>
+    <string name="Start">Start</string>
+    <string name="turkcepop">Türkçe Pop</string>
+    <string name="halkmuzigi">Halk Müziği</string>
+    <string name="gonder">Gönder</string>
+    <string name
 </resources>

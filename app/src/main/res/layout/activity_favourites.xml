@@ -30,233 +30,27 @@
             android:id="@+id/Favkanallarbutton"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
-            android:text="Kanallar" />
+            android:text="@string/Kanallar" />
 
         <Button
             android:id="@+id/Favkategorilerbutton"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
-            android:text="Kategoriler" />
+            android:text="@string/Kategoriler" />
 
         <Button
             android:id="@+id/Favfavorilerbutton"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
-            android:text="Favoriler" />
+            android:text="@string/Favoriler" />
     </LinearLayout>
 
-    <ScrollView
+    <ListView
+        android:id="@+id/listViewFav"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/linearLayout8">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="515dp">
-
-                <ImageButton
-                    android:id="@+id/Favkanal1imagebutton"
-                    android:layout_width="100dp"
-                    android:layout_height="70dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_below="@+id/linearLayout8"
-                    android:src="@mipmap/ic_launcher" />
-
-                <EditText
-                    android:id="@+id/Favkanal1text"
-                    android:layout_width="200dp"
-                    android:layout_height="71dp"
-                    android:layout_below="@+id/linearLayout8"
-                    android:layout_toEndOf="@+id/Favkanal1imagebutton"
-                    android:layout_toRightOf="@+id/Favkanal1imagebutton"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:text="Name" />
-
-                <Button
-                    android:id="@+id/Favkanal1button"
-                    android:layout_width="200dp"
-                    android:layout_height="70dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginLeft="100dp"
-                    android:layout_marginStart="100dp"
-                    android:visibility="invisible" />
-
-                <ImageButton
-                    android:id="@+id/Favkanal1favbutton"
-                    android:layout_width="match_parent"
-                    android:layout_height="70dp"
-                    android:layout_below="@+id/linearLayout8"
-                    android:layout_toEndOf="@+id/Favkanal1text"
-                    android:layout_toRightOf="@+id/Favkanal1text"
-                    android:src="@android:drawable/btn_star_big_off" />
-
-                <ImageButton
-                    android:id="@+id/Favkanal2imagebutton"
-                    android:layout_width="100dp"
-                    android:layout_height="70dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_below="@+id/linearLayout8"
-                    android:layout_marginTop="71dp"
-                    android:src="@mipmap/ic_launcher" />
-
-                <EditText
-                    android:id="@+id/Favkanal2text"
-                    android:layout_width="200dp"
-                    android:layout_height="70dp"
-                    android:layout_alignTop="@+id/Favkanal2imagebutton"
-                    android:layout_toEndOf="@+id/Favkanal2imagebutton"
-                    android:layout_toRightOf="@+id/Favkanal2imagebutton"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:text="Name" />
-
-                <Button
-                    android:id="@+id/Favkanal2button"
-                    android:layout_width="200dp"
-                    android:layout_height="70dp"
-                    android:layout_alignLeft="@+id/Favkanal1text"
-                    android:layout_alignStart="@+id/Favkanal1text"
-                    android:layout_below="@+id/Favkanal1text"
-                    android:visibility="invisible" />
-
-                <ImageButton
-                    android:id="@+id/Favkanal2favbutton"
-                    android:layout_width="match_parent"
-                    android:layout_height="70dp"
-                    android:layout_alignTop="@+id/Favkanal2text"
-                    android:layout_toEndOf="@+id/Favkanal2text"
-                    android:layout_toRightOf="@+id/Favkanal2text"
-                    android:src="@android:drawable/btn_star_big_off" />
-
-                <ImageButton
-                    android:id="@+id/Favkanal3imagebutton"
-                    android:layout_width="100dp"
-                    android:layout_height="70dp"
-                    android:src="@mipmap/ic_launcher"
-                    android:layout_below="@+id/Favkanal2imagebutton"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true" />
-
-                <EditText
-                    android:id="@+id/Favkanal3text"
-                    android:layout_width="200dp"
-                    android:layout_height="70dp"
-                    android:layout_alignTop="@+id/Favkanal3imagebutton"
-                    android:layout_toEndOf="@+id/Favkanal3imagebutton"
-                    android:layout_toRightOf="@+id/Favkanal3imagebutton"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:text="Name" />
-
-                <Button
-                    android:id="@+id/Favkanal3button"
-                    android:layout_width="200dp"
-                    android:layout_height="70dp"
-                    android:layout_below="@+id/Favkanal2imagebutton"
-                    android:layout_toEndOf="@+id/Favkanal2imagebutton"
-                    android:layout_toRightOf="@+id/Favkanal2imagebutton"
-                    android:visibility="invisible" />
-
-                <ImageButton
-                    android:id="@+id/Favkanal3favbutton"
-                    android:layout_width="match_parent"
-                    android:layout_height="70dp"
-                    android:layout_below="@+id/Favkanal2button"
-                    android:layout_toEndOf="@+id/Favkanal2button"
-                    android:layout_toRightOf="@+id/Favkanal2button"
-                    android:src="@android:drawable/btn_star_big_off" />
-
-                <ImageButton
-                    android:id="@+id/Favkanal4imagebutton"
-                    android:layout_width="100dp"
-                    android:layout_height="70dp"
-                    android:src="@mipmap/ic_launcher"
-                    android:layout_below="@+id/Favkanal3button"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true" />
-
-                <EditText
-                    android:id="@+id/Favkanal4text"
-                    android:layout_width="200dp"
-                    android:layout_height="70dp"
-                    android:layout_alignTop="@+id/Favkanal4imagebutton"
-                    android:layout_toEndOf="@+id/Favkanal4imagebutton"
-                    android:layout_toRightOf="@+id/Favkanal4imagebutton"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:text="Name" />
-
-                <Button
-                    android:id="@+id/Favkanal4button"
-                    android:layout_width="200dp"
-                    android:layout_height="70dp"
-                    android:layout_below="@+id/Favkanal3button"
-                    android:layout_toEndOf="@+id/Favkanal3imagebutton"
-                    android:layout_toRightOf="@+id/Favkanal3imagebutton"
-                    android:visibility="invisible" />
-
-                <ImageButton
-                    android:id="@+id/Favkanal4favbutton"
-                    android:layout_width="match_parent"
-                    android:layout_height="70dp"
-                    android:layout_alignTop="@+id/Favkanal4text"
-                    android:layout_toEndOf="@+id/Favkanal4text"
-                    android:layout_toRightOf="@+id/Favkanal4text"
-                    android:src="@android:drawable/btn_star_big_off" />
-
-                <ImageButton
-                    android:id="@+id/Favkanal5imagebutton"
-                    android:layout_width="100dp"
-                    android:layout_height="70dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_below="@+id/Favkanal4button"
-                    android:src="@mipmap/ic_launcher" />
-
-                <EditText
-                    android:id="@+id/Favkanal5text"
-                    android:layout_width="200dp"
-                    android:layout_height="70dp"
-                    android:layout_alignLeft="@+id/Favkanal5button"
-                    android:layout_alignStart="@+id/Favkanal5button"
-                    android:layout_below="@+id/Favkanal4button"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:text="Name"
-                    android:visibility="visible" />
-
-                <Button
-                    android:id="@+id/Favkanal5button"
-                    android:layout_width="200dp"
-                    android:layout_height="70dp"
-                    android:layout_below="@+id/Favkanal4button"
-                    android:layout_toEndOf="@+id/Favkanal4imagebutton"
-                    android:layout_toRightOf="@+id/Favkanal4imagebutton"
-                    android:visibility="invisible" />
-
-                <ImageButton
-                    android:id="@+id/Favkanal5favbutton"
-                    android:layout_width="match_parent"
-                    android:layout_height="70dp"
-                    android:layout_below="@+id/Favkanal4favbutton"
-                    android:layout_toEndOf="@+id/Favkanal5button"
-                    android:layout_toRightOf="@+id/Favkanal5button"
-                    android:src="@android:drawable/btn_star_big_off" />
-            </RelativeLayout>
-        </LinearLayout>
-    </ScrollView>
+        android:layout_below="@+id/linearLayout8"
+        android:layout_above="@+id/linearLayout9"></ListView>
 
     <LinearLayout
         android:layout_width="match_parent"

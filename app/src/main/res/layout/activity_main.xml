@@ -24,21 +24,21 @@
             style="?android:attr/imageButtonStyle"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
-            android:text="Kanallar" />
+            android:text="@string/Kanallar" />
 
         <Button
             android:id="@+id/mainkategorilerbutton"
             style="@android:style/Widget.Holo.ImageButton"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
-            android:text="Kategoriler" />
+            android:text="@string/Kategoriler" />
 
         <Button
             android:id="@+id/mainfavorilerbutton"
             style="@android:style/Widget.Holo.ImageButton"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
-            android:text="Favoriler" />
+            android:text="@string/Favoriler" />
     </LinearLayout>
 
 
@@ -57,7 +57,7 @@
     <LinearLayout
         android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"

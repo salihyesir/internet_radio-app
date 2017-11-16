@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             convertView= getLayoutInflater().inflate(R.layout.kanal_layout,null);
+            
 
             ImageView imageView=(ImageView) convertView.findViewById(R.id.imageKanal);
             TextView textView_header=(TextView) convertView.findViewById(R.id.textHeader);
