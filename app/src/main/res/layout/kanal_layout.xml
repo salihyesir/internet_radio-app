@@ -3,21 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
 
     <ImageButton
         android:id="@+id/imageKanal"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:layout_marginLeft="48dp"
         android:layout_marginStart="48dp"
         android:layout_marginTop="39dp"
-        app:srcCompat="@mipmap/ic_launcher"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        app:srcCompat="@mipmap/ic_launcher" />
 
     <TextView
         android:id="@+id/textHeader"
@@ -26,10 +25,10 @@
         android:layout_alignTop="@+id/imageKanal"
         android:layout_marginLeft="41dp"
         android:layout_marginStart="41dp"
-        android:textSize="25sp"
         android:layout_toEndOf="@+id/imageKanal"
         android:layout_toRightOf="@+id/imageKanal"
-        android:text="TextView" />
+        android:text="TextView"
+        android:textSize="25sp" />
 
     <TextView
         android:id="@+id/textDescription"
@@ -38,8 +37,8 @@
         android:layout_alignBottom="@+id/imageKanal"
         android:layout_alignLeft="@+id/textHeader"
         android:layout_alignStart="@+id/textHeader"
-        android:textSize="25sp"
-        android:text="TextView" />
+        android:text="TextView"
+        android:textSize="25sp" />
 
     <ImageButton
         android:id="@+id/imageFav"
@@ -51,6 +50,8 @@
         android:layout_marginEnd="28dp"
         android:layout_marginRight="28dp"
         app:srcCompat="@android:drawable/btn_star_big_off" />
+
+
 
 
 </RelativeLayout>

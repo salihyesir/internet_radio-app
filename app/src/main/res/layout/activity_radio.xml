@@ -151,4 +151,14 @@
             android:src="@android:drawable/btn_star_big_off" />
     </LinearLayout>
 
+    <Button
+        android:id="@+id/b_radioOn"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_alignBottom="@+id/radiokanalimage"
+        android:layout_alignLeft="@+id/radiohoparloronbutton"
+        android:layout_alignStart="@+id/radiohoparloronbutton"
+        android:background="@android:color/holo_green_dark"
+        android:text="Play" />
+
 </RelativeLayout>

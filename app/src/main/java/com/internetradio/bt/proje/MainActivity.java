@@ -1,17 +1,23 @@
 package com.internetradio.bt.proje;
 
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.util.List;
+import java.io.IOException;
+
 
 public class MainActivity extends AppCompatActivity {
+
+    Button b_channelOn;
 
     int[] IMAGES={R.drawable.alem,R.drawable.ntv,R.drawable.show,R.drawable.superfm,R.drawable.kralfm,R.drawable.trafik,
             R.drawable.power,R.drawable.mydonose,R.drawable.trt,R.drawable.virgin};
@@ -25,6 +31,19 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        b_channelOn = (Button)findViewById(R.id.b_channelOn);
+
+        //Butonumuza tıklama özelliği kazandırıyoruz.
+        b_channelOn.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                //Ardından Intent methodunu kullanarak nereden nereye gideceğini söylüyoruz.
+                Intent intocan = new Intent(MainActivity.this, Radio.class);
+                startActivity(intocan);
+            }
+        });
 
         ListView listView=(ListView)findViewById(R.id.listView);
 
@@ -68,3 +87,4 @@ public class MainActivity extends AppCompatActivity {
     }
 
 }
+
