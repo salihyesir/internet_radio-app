@@ -22,7 +22,6 @@ import java.io.IOException;
 public class MainActivity extends AppCompatActivity {
     ImageButton b_mainplaybutton;
 
-
     int[] IMAGES = {R.drawable.alem, R.drawable.ntv, R.drawable.show, R.drawable.superfm, R.drawable.kralfm, R.drawable.trafik,
             R.drawable.power, R.drawable.mydonose, R.drawable.trt, R.drawable.virgin};
 
@@ -51,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intocan);
                 }
         });
+
 /*
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
