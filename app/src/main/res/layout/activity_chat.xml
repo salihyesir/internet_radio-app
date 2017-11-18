@@ -1,102 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.internetradio.bt.proje.Chat">
+    tools:context=".MainActivity"
+    tools:ignore="MergeRootFrame">
 
-    <ScrollView
+
+    <FrameLayout
+        android:id="@+id/realtabcontent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/chatbackbutton"
-        android:layout_below="@+id/chatkanalimage">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <EditText
-                android:id="@+id/chattext"
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/chatkanalimage"
-                android:ems="10"
-                android:inputType="textMultiLine" />
-        </LinearLayout>
-    </ScrollView>
-
-    <ImageView
-        android:id="@+id/chatkanalimage"
-        android:layout_width="170dp"
-        android:layout_height="100dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true" />
-
-    <ImageButton
-        android:id="@+id/chatplaybutton"
-        android:layout_width="110dp"
-        android:layout_height="100dp"
-        android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/chatkanalimage"
-        android:layout_toRightOf="@+id/chatkanalimage"
-        android:src="@drawable/ic_play" />
-
-    <ImageButton
-        android:id="@+id/chatstopbutton"
-        android:layout_width="110dp"
-        android:layout_height="100dp"
-        android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/chatplaybutton"
-        android:layout_toRightOf="@+id/chatplaybutton"
-        android:src="@drawable/ic_pause" />
-
-    <LinearLayout
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:orientation="horizontal"
-        android:id="@+id/linearLayout7">
-
-    </LinearLayout>
-
-    <EditText
-        android:id="@+id/chatkullanicitext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:layout_alignBottom="@+id/chatgonderbutton"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignTop="@+id/linearLayout7"
-        android:layout_toLeftOf="@+id/chatgonderbutton"
-        android:layout_toStartOf="@+id/chatgonderbutton" />
-
-    <ImageButton
-        android:id="@+id/chatbackbutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_left_arrow"
-        android:layout_above="@+id/chatkullanicitext"
-        android:layout_centerHorizontal="true" />
-
-    <Button
-        android:id="@+id/chatgonderbutton"
-        android:drawableTop="@drawable/ic_send_button"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_alignParentBottom="true"
-        android:layout_toEndOf="@+id/chatplaybutton"
-        android:layout_toRightOf="@+id/chatplaybutton"
-        android:text="@string/gonder" />
-
-</RelativeLayout>
+        android:layout_weight="1" />
+</FrameLayout>

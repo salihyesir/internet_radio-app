@@ -1,20 +1,20 @@
 package com.internetradio.bt.proje;
 
+import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.os.AsyncTask;
-import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
 
 import java.io.IOException;
 
 public class Radio extends AppCompatActivity {
+
+    ImageButton b_radiochatbutton;
 
     private String streamUrl = "http://sc.powergroup.com.tr/RadyoFenomen/mpeg/128/tunein";
     private ImageButton startBtn;
@@ -35,12 +35,19 @@ public class Radio extends AppCompatActivity {
             stopRadioPlayer();
         }
     }
-
-    String stream="http://streams.fluxfm.de/klubradio/mp3-320";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_radio);
+
+        b_radiochatbutton = (ImageButton) findViewById(R.id.radiochatbutton);
+        b_radiochatbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intocan = new Intent(Radio.this, Chat.class);
+                startActivity(intocan);
+            }
+        });
 
         audioManager = (AudioManager)getSystemService(getApplicationContext().AUDIO_SERVICE);
 
@@ -93,6 +100,7 @@ public class Radio extends AppCompatActivity {
 
             }
         });
+
 
     }
 

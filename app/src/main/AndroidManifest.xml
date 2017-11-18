@@ -23,6 +23,13 @@
         <activity android:name=".Chat" />
         <activity android:name=".Radio" />
         <activity android:name=".Category" />
+        <activity
+            android:name="com.internetradio.bt.proje.LoginActivity"
+            android:label="@string/title_activity_login"
+            android:theme="@style/Theme.AppCompat"
+            android:windowSoftInputMode="adjustResize|stateVisible" >
+        </activity>
+
         <activity android:name=".Favourites"></activity>
     </application>
 
