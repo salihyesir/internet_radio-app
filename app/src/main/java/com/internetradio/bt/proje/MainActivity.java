@@ -21,6 +21,8 @@ import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
     ImageButton b_mainplaybutton;
+    public Button button_fav;
+    public Button button_kategori;
 
     int[] IMAGES = {R.drawable.alem, R.drawable.ntv, R.drawable.show, R.drawable.superfm, R.drawable.kralfm, R.drawable.trafik,
             R.drawable.power, R.drawable.mydonose, R.drawable.trt, R.drawable.virgin};
@@ -35,6 +37,31 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        //FAVORI
+        button_fav=(Button)findViewById(R.id.mainfavorilerbutton);
+
+        button_fav.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+
+                Intent favIntent=new Intent(MainActivity.this,Favourites.class);
+                startActivity(favIntent);
+            }
+        });
+
+        //KATEGORİ
+        button_kategori=(Button)findViewById(R.id.mainkategorilerbutton);
+
+        button_kategori.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+
+                Intent kategoriIntent=new Intent(MainActivity.this,Category.class);
+                startActivity(kategoriIntent);
+            }
+        });
 
 
         ListView listView = (ListView) findViewById(R.id.listView);
