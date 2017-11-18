@@ -28,11 +28,8 @@
             android:id="@+id/Favkanallarbutton"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
-<<<<<<< HEAD
-            android:text="@string/populer" />
-=======
+
             android:text="@string/Popüler" />
->>>>>>> 38cf5e7e3a8b8af9caecfbd231c6c7e51a502536
 
         <Button
             android:id="@+id/Favkategorilerbutton"
