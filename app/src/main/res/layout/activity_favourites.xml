@@ -8,11 +8,9 @@
 
     <ImageButton
         android:id="@+id/Favalarmimagebutton"
-        android:layout_width="390dp"
+        android:layout_width="100dp"
         android:layout_height="60dp"
-        android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:src="@drawable/ic_alarm" />
@@ -30,7 +28,11 @@
             android:id="@+id/Favkanallarbutton"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
+<<<<<<< HEAD
+            android:text="@string/populer" />
+=======
             android:text="@string/Popüler" />
+>>>>>>> 38cf5e7e3a8b8af9caecfbd231c6c7e51a502536
 
         <Button
             android:id="@+id/Favkategorilerbutton"
@@ -78,5 +80,16 @@
             android:layout_height="100dp"
             android:src="@drawable/ic_pause" />
     </LinearLayout>
+
+    <EditText
+        android:id="@+id/Favsearchtext"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/Favalarmimagebutton"
+        android:layout_toRightOf="@+id/Favalarmimagebutton"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Search" />
 
 </RelativeLayout>

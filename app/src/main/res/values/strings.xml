@@ -16,6 +16,7 @@
     <string name="turkcepop">Türkçe Pop</string>
     <string name="halkmuzigi">Halk Müziği</string>
     <string name="gonder">Gönder</string>
+    <string name="populer">Popüler</string>
 
     <string name="action_leave">Ayrılmak</string>
     <string name="action_send">Gönder</string>

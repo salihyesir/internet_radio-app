@@ -25,11 +25,15 @@
         android:id="@+id/linearLayout4">
 
         <Button
-            android:id="@+id/categorykanallarbutton"
+            android:id="@+id/categorypopulerbutton"
             android:layout_width="130dp"
             android:layout_height="40dp"
             android:layout_weight="1"
+<<<<<<< HEAD
+            android:text="@string/populer" />
+=======
             android:text="@string/Popüler" />
+>>>>>>> 38cf5e7e3a8b8af9caecfbd231c6c7e51a502536
 
         <Button
             android:id="@+id/categorykategorilerbutton"
