@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Proje</string>
-    <string name="Kanallar">Kanallar</string>
+    <string name="Popüler">Popüler</string>
     <string name="Kategoriler">Kategoriler</string>
     <string name="Favoriler">Favoriler</string>
     <string name="Haber">Haber</string>

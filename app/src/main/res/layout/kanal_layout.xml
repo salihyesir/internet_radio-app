@@ -8,27 +8,28 @@
 
     <ImageButton
         android:id="@+id/imageKanal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginLeft="34dp"
+        android:layout_marginStart="34dp"
+        android:layout_marginTop="15dp"
+        app:srcCompat="@mipmap/ic_launcher"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="48dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="39dp"
-        app:srcCompat="@mipmap/ic_launcher" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:id="@+id/textHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/imageKanal"
-        android:layout_marginLeft="41dp"
-        android:layout_marginStart="41dp"
-        android:layout_toEndOf="@+id/imageKanal"
-        android:layout_toRightOf="@+id/imageKanal"
+        android:layout_marginLeft="62dp"
+        android:layout_marginStart="62dp"
         android:text="TextView"
-        android:textSize="25sp" />
+        android:textSize="15sp"
+        android:layout_alignTop="@+id/imageKanal"
+        android:layout_toRightOf="@+id/imageKanal"
+        android:layout_toEndOf="@+id/imageKanal"
+        android:layout_above="@+id/textDescription" />
 
     <TextView
         android:id="@+id/textDescription"
@@ -38,18 +39,18 @@
         android:layout_alignLeft="@+id/textHeader"
         android:layout_alignStart="@+id/textHeader"
         android:text="TextView"
-        android:textSize="25sp" />
+        android:textSize="12sp" />
 
     <ImageButton
         android:id="@+id/imageFav"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/imageKanal"
-        android:layout_alignParentEnd="true"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="33dp"
+        android:layout_marginRight="33dp"
+        app:srcCompat="@android:drawable/btn_star_big_off"
+        android:layout_alignTop="@+id/textHeader"
         android:layout_alignParentRight="true"
-        android:layout_marginEnd="28dp"
-        android:layout_marginRight="28dp"
-        app:srcCompat="@android:drawable/btn_star_big_off" />
+        android:layout_alignParentEnd="true" />
 
 
 

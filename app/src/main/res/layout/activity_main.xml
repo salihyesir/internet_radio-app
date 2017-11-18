@@ -24,7 +24,7 @@
             style="?android:attr/imageButtonStyle"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
-            android:text="@string/Kanallar" />
+            android:text="@string/Popüler" />
 
 
         <Button
