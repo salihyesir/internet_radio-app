@@ -17,11 +17,13 @@
     <string name="halkmuzigi">Halk Müziği</string>
     <string name="gonder">Gönder</string>
     <string name="populer">Popüler</string>
-
+	
+	<string name="action_settings">Settings</string>
+	
     <string name="action_leave">Ayrılmak</string>
     <string name="action_send">Gönder</string>
     <string name="prompt_message">Mesaj</string>
-
+		
     <string name="error_connect">Bağlantı koptu</string>
 
     <!-- messages -->

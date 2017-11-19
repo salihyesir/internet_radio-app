@@ -1,7 +1,13 @@
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity">
 
     <ImageButton
         android:id="@+id/mainalarmbutton"
@@ -24,7 +30,7 @@
 
         <Button
             android:id="@+id/mainpopulerbutton"
-            android:layout_width="130dp"
+            android:layout_width="110dp"
             android:layout_height="wrap_content"
 
             android:text="@string/populer" />
@@ -41,6 +47,9 @@
             android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:text="@string/Favoriler" />
+
+
+
     </LinearLayout>
 
 
@@ -69,23 +78,26 @@
         android:orientation="horizontal"
         android:visibility="visible">
 
-        <ImageView
-            android:id="@+id/mainimage"
-            android:layout_width="170dp"
-            android:layout_height="100dp" />
+        <ImageButton
+            android:id="@+id/notify_me"
+            style="@android:style/Widget.Material.Light.ImageButton"
+            android:layout_width="115dp"
+            android:layout_height="110dp"
+            android:backgroundTint="?attr/colorControlActivated"
+            android:src="@mipmap/mainwidget"></ImageButton>
 
         <ImageButton
             android:id="@+id/mainplaybutton"
             style="@android:style/Widget.DeviceDefault.Light.ImageButton"
-            android:layout_width="110dp"
-            android:layout_height="100dp"
+            android:layout_width="115dp"
+            android:layout_height="110dp"
             android:src="@drawable/ic_play"></ImageButton>
 
         <ImageButton
             android:id="@+id/mainstopbutton"
             style="@android:style/Widget.DeviceDefault.Light.ImageButton"
-            android:layout_width="110dp"
-            android:layout_height="100dp"
+            android:layout_width="115dp"
+            android:layout_height="110dp"
             android:src="@drawable/ic_pause" />
 
 

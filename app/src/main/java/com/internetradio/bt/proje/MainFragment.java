@@ -1,3 +1,4 @@
+//Chat
 package com.internetradio.bt.proje;
  import android.app.Activity;
  import android.content.Intent;
@@ -24,7 +25,7 @@ package com.internetradio.bt.proje;
  import java.net.URISyntaxException;
  import java.util.ArrayList;
  import java.util.List;
-
+//Chat
 public class MainFragment extends Fragment {
     private static final int REQUEST_LOGIN = 0;
     private static final int TYPING_TIMER_LENGTH = 600;

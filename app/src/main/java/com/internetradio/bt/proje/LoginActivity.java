@@ -17,7 +17,7 @@ import io.socket.client.Socket;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.net.URISyntaxException;
-
+//Chat
 public class LoginActivity extends Activity {
     private EditText mUsernameView;
     private String mUsername;

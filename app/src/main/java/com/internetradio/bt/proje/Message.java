@@ -1,5 +1,6 @@
 package com.internetradio.bt.proje;
 
+//Chat
 public class Message {
     public static final int TYPE_MESSAGE = 0;
     public static final int TYPE_LOG = 1;

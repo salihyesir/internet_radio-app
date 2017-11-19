@@ -4,6 +4,8 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
+<!-- widget için-->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
 
     <application
         android:allowBackup="true"
@@ -23,6 +25,7 @@
         <activity android:name=".Chat" />
         <activity android:name=".Radio" />
         <activity android:name=".Category" />
+        <!-- Chat için-->
         <activity
             android:name="com.internetradio.bt.proje.LoginActivity"
             android:label="@string/title_activity_login"
@@ -31,6 +34,11 @@
         </activity>
 
         <activity android:name=".Favourites"></activity>
+        <!-- Widget için gerekli-->
+        <service
+            android:name=".FloatingViewService"
+            android:enabled="true"
+            android:exported="false"/>
     </application>
 
 </manifest>

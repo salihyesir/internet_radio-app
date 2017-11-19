@@ -53,16 +53,17 @@
     <SeekBar
         android:id="@+id/radioseekBar2"
         android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/linearLayout6"
-        android:layout_centerHorizontal="true" />
+        android:layout_height="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" />
 
     <ImageButton
         android:id="@+id/radiohoparloronbutton"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_alignBottom="@+id/radioseekBar2"
-        android:layout_below="@+id/linearLayout6"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="19dp"
+        android:layout_marginRight="19dp"
         android:layout_toLeftOf="@+id/radioseekBar2"
         android:layout_toStartOf="@+id/radioseekBar2"
         android:src="@drawable/ic_speaker" />
@@ -71,28 +72,27 @@
         android:id="@+id/radiohoparloroffbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/radiokanalimage"
+        android:layout_above="@+id/notify_me"
         android:layout_alignLeft="@+id/radiohoparloronbutton"
         android:layout_alignStart="@+id/radiohoparloronbutton"
         android:layout_below="@+id/linearLayout6"
         android:src="@drawable/ic_speaker_off" />
 
-    <ImageView
-        android:id="@+id/radiokanalimage"
-        android:layout_width="match_parent"
-        android:layout_height="75dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/radiohoparloronbutton"
-        android:src="@mipmap/ic_launcher" />
+    <ImageButton
+        android:id="@+id/notify_me"
+        android:layout_width="300dp"
+        android:layout_height="85dp"
+        android:layout_below="@+id/linearLayout5"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:backgroundTint="@color/colorAccent"
+        android:src="@drawable/radiowidget" />
+
 
     <TextView
         android:id="@+id/radioadi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/radiokanalimage"
         android:layout_centerHorizontal="true"
         android:text="TextView" />
 
@@ -120,7 +120,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/radiosarkiadi"
+        android:layout_below="@+id/radiohoparloronbutton"
         android:src="@drawable/ic_chat" />
 
     <LinearLayout
