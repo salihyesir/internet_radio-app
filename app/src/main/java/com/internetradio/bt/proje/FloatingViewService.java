@@ -28,13 +28,12 @@ public class FloatingViewService extends Service
     private WindowManager mWindowManager;
     private View mFloatingView;
 
-    ImageView playButton;
-    ImageView prevButton;
+    ImageView ppButton;
 
     private MediaPlayer player;
     public static boolean isAlreadyPlaying = false;
 
-
+    private int controlButton=0;//Play_pause kontorolü
 
 
     public FloatingViewService() {
@@ -74,7 +73,15 @@ public class FloatingViewService extends Service
         //The root element of the expanded view layout
         final View expandedView = mFloatingView.findViewById(R.id.expanded_container);
 
+
+
+        //radyo yüklenmesi
         initializeMediaPlayer();
+
+
+
+        //Pause butonu ilk başta gözükmesin
+//        pause_btn.setVisibility(View.INVISIBLE);
 
 
 
@@ -92,14 +99,28 @@ public class FloatingViewService extends Service
 
         //Set the view while floating view is expanded.
         //Set the play button.
-        playButton = (ImageView) mFloatingView.findViewById(R.id.play_btn);
-        playButton.setOnClickListener(new View.OnClickListener() {
+        ppButton = (ImageView) mFloatingView.findViewById(R.id.play_btn);
+        ppButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(FloatingViewService.this, "Playing the radio.", Toast.LENGTH_LONG).show();
+                //playing radio
+                if(controlButton == 0)
+                {
+                    Toast.makeText(FloatingViewService.this, "Playing the radio.", Toast.LENGTH_LONG).show();
+                    ppButton.setImageResource(R.mipmap.ic_pause);
+                    controlButton=1;
+                    isAlreadyPlaying = true;
+                    playRadioPlayer();
+                }
+                //Pause radio
+                else if(controlButton==1){
+                    Toast.makeText(FloatingViewService.this, "Pausing the radio.", Toast.LENGTH_LONG).show();
+                    ppButton.setImageResource(R.mipmap.ic_play);
+                    controlButton=0;
+                    isAlreadyPlaying = false;
+                    stopRadioPlayer();
+                }
 
-                isAlreadyPlaying = true;
-                playRadioPlayer();
             }
         });
 
@@ -120,11 +141,10 @@ public class FloatingViewService extends Service
             @Override
             public void onClick(View v) {
                 Toast.makeText(FloatingViewService.this, "Playing previous song.", Toast.LENGTH_LONG).show();
-                isAlreadyPlaying = false;
-                stopRadioPlayer();
+
             }
         });
-
+        //Bu expanded kısmındaki button baloncuğun açılmış hali
         //Set the close button
         ImageView closeButton = (ImageView) mFloatingView.findViewById(R.id.close_button);
         closeButton.setOnClickListener(new View.OnClickListener() {
@@ -143,6 +163,8 @@ public class FloatingViewService extends Service
             @Override
             public void onClick(View view) {
                 //Open the application  click.
+                isAlreadyPlaying = false;
+                stopRadioPlayer();
                 Intent intent = new Intent(FloatingViewService.this, MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);

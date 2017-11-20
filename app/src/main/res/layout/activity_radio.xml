@@ -89,31 +89,6 @@
         android:src="@drawable/radiowidget" />
 
 
-    <TextView
-        android:id="@+id/radioadi"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="TextView" />
-
-    <TextView
-        android:id="@+id/radiosarkiciadi"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/radioadi"
-        android:layout_alignStart="@+id/radioadi"
-        android:layout_below="@+id/radioadi"
-        android:text="TextView" />
-
-    <TextView
-        android:id="@+id/radiosarkiadi"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/radiosarkiciadi"
-        android:layout_alignStart="@+id/radiosarkiciadi"
-        android:layout_below="@+id/radiosarkiciadi"
-        android:text="TextView" />
-
     <ImageButton
         android:id="@+id/radiochatbutton"
         android:layout_width="wrap_content"
