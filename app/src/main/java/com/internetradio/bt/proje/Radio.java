@@ -5,24 +5,30 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
+import android.provider.ContactsContract;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
 
 public class Radio extends AppCompatActivity {
 
+    int pos=0;
+
     private static final int CODE_DRAW_OVER_OTHER_APP_PERMISSION = 2084;
 
     ImageButton b_radiochatbutton;
 
-    private String streamUrl = "http://sc.powergroup.com.tr/RadyoFenomen/mpeg/128/tunein";
+    /*private String streamUrl = "http://sc.powergroup.com.tr/RadyoFenomen/mpeg/128/tunein";*/
+    private String streamUrl = "rtmp://46.20.7.97:80/saran/trafik.stream/trafik.stream";
 
     private ImageButton startBtn;
     private ImageButton stopBtn;
@@ -50,7 +56,28 @@ public class Radio extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_radio);
-//Radyo linki kontrol
+
+
+        //Veri geçirme-START
+
+        Intent intent=getIntent();
+        pos=intent.getExtras().getInt("Position");
+
+        final CustomAdapter adapter=new CustomAdapter(this);
+        final ImageView img=(ImageView)findViewById(R.id.notify_me);
+        final TextView kanalAd=(TextView)findViewById(R.id.radio_name) ;
+        final TextView kanalDescription=(TextView)findViewById(R.id.radio_description);
+
+
+        img.setImageResource(adapter.IMAGES[pos]);
+        kanalAd.setText(adapter.NAMES[pos]);
+        kanalDescription.setText(adapter.DESCRIPTIONS[pos]);
+        streamUrl=adapter.radyoURL[pos];
+
+
+
+
+        //Radyo linki kontrol
         initializeMediaPlayer();
 
 

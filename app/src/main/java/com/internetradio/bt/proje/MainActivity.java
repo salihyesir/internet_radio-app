@@ -33,17 +33,10 @@ public class MainActivity extends AppCompatActivity {
     public Button button_kategori;
     ImageView ppButton;//Play pause button
     private int controlButton=0;//Play_pause kontorolü
-    private String streamUrl = "http://sc.powergroup.com.tr/RadyoFenomen/mpeg/128/tunein";
+    private String streamUrl = "http://17753.live.streamtheworld.com/SUPER_FM.mp3";
     private MediaPlayer player;
 
-    int[] IMAGES = {R.drawable.alem, R.drawable.ntv, R.drawable.show, R.drawable.superfm, R.drawable.kralfm, R.drawable.trafik,
-            R.drawable.power, R.drawable.mydonose, R.drawable.trt, R.drawable.virgin};
 
-    String[] NAMES = {"Alem FM", "NTV Radyo", "ShowFM", "SuperFM", "KralFM", "TrafikFM", "PowerFM",
-            "MydonoseFM", "TrtFM", "VirginRadyo"};
-
-    String[] DESCRIPTIONS = {"deneme1", "deneme2", "deneme3", "deneme4", "deneme5", "deneme6", "deneme7", "deneme8"
-            , "deneme9", "deneme10"};
 
 
     @Override
@@ -96,12 +89,26 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
+        //ListView İşlemleri
         ListView listView = (ListView) findViewById(R.id.listView);
-
-        CustomAdapter customAdapter = new CustomAdapter();
-
+        final CustomAdapter customAdapter = new CustomAdapter(this);
         listView.setAdapter(customAdapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int pos, long id) {
+
+
+                Intent intent=new Intent(getApplicationContext(),Radio.class);
+                intent.putExtra("Position",pos);
+
+                startActivity(intent);
+            }
+        });
+
+        //ListView İşlemleri-BİTİŞ
+
+
         ppButton = (ImageView) findViewById(R.id.mainpp_btn);
 
         ppButton.setOnClickListener(new View.OnClickListener() {
@@ -156,38 +163,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    class CustomAdapter extends BaseAdapter{
-        @Override
-        public int getCount() {
-            return IMAGES.length;
-        }
+    //CUSTOM ADAPTER BASLANGIC
 
-        @Override
-        public Object getItem(int position) {
-            return null;
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return 0;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            convertView= getLayoutInflater().inflate(R.layout.kanal_layout,null);
-
-
-            ImageView imageView=(ImageView) convertView.findViewById(R.id.imageKanal);
-            TextView textView_header=(TextView) convertView.findViewById(R.id.textHeader);
-            TextView textView_desc=(TextView) convertView.findViewById(R.id.textDescription);
-
-            imageView.setImageResource(IMAGES[position]);
-            textView_header.setText(NAMES[position]);
-            textView_desc.setText(DESCRIPTIONS[position]);
-
-            return convertView;
-        }
-    }
+    //CUSTOM ADAPTER BİTİŞ
 
     public void playRadioPlayer() {
 

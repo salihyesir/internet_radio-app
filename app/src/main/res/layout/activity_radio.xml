@@ -78,7 +78,7 @@
         android:layout_below="@+id/linearLayout6"
         android:src="@drawable/ic_speaker_off" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/notify_me"
         android:layout_width="300dp"
         android:layout_height="85dp"
@@ -93,10 +93,11 @@
         android:id="@+id/radiochatbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
+        android:src="@drawable/ic_chat"
+        android:layout_above="@+id/linearLayout2"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/radiohoparloronbutton"
-        android:src="@drawable/ic_chat" />
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="27dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -104,7 +105,8 @@
         android:orientation="horizontal"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:id="@+id/linearLayout2">
 
         <ImageButton
             android:id="@+id/radioplaybutton"
@@ -124,5 +126,29 @@
             android:layout_height="100dp"
             android:src="@android:drawable/btn_star_big_off" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/radio_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="25sp"
+        android:text="@string/radyoAd"
+        android:layout_above="@+id/radiochatbutton"
+        android:layout_toRightOf="@+id/radiohoparloronbutton"
+        android:layout_toEndOf="@+id/radiohoparloronbutton"
+        android:layout_marginLeft="28dp"
+        android:layout_marginStart="28dp" />
+
+    <TextView
+        android:id="@+id/radio_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/radio_name"
+        android:layout_alignRight="@+id/radio_name"
+        android:layout_below="@+id/radio_name"
+        android:layout_marginEnd="22dp"
+        android:layout_marginRight="22dp"
+        android:layout_marginTop="17dp"
+        android:text="TextView" />
 
 </RelativeLayout>

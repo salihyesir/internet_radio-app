@@ -63,7 +63,13 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/mLayout"
-        android:background="@color/username8">
+        android:background="@color/username8"
+        android:clickable="false"
+        android:descendantFocusability="blocksDescendants"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        >
+
 
     </ListView>
 
