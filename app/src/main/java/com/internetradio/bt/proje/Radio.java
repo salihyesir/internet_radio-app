@@ -57,6 +57,14 @@ public class Radio extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_radio);
 
+        startBtn = (ImageButton) findViewById(R.id.radioplaybutton);
+        stopBtn = (ImageButton) findViewById(R.id.radiostopbutton);
+
+        //Radyo otomatik baslatma-start
+        isAlreadyPlaying=true;
+        startBtn.setEnabled(false);
+        stopBtn.setEnabled(true);
+        //Radyo otomatik baslatma-end
 
         //Veri geçirme-START
 
@@ -91,8 +99,7 @@ public class Radio extends AppCompatActivity {
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON); // uyku modunu kapatma
 
-        startBtn = (ImageButton) findViewById(R.id.radioplaybutton);
-        stopBtn = (ImageButton) findViewById(R.id.radiostopbutton);
+
 
         startBtn.setOnClickListener(new View.OnClickListener() {
             @Override
