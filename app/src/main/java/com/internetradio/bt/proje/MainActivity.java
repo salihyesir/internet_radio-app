@@ -145,6 +145,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.music_playerlogo).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Bundle extras = new Bundle();
                 extras.putString(stream,streamUrl);
 

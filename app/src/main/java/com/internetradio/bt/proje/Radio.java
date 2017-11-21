@@ -29,13 +29,14 @@ public class Radio extends AppCompatActivity {
     ImageButton b_radiochatbutton;
 
     /*private String streamUrl = "http://sc.powergroup.com.tr/RadyoFenomen/mpeg/128/tunein";*/
-    private String streamUrl = "rtmp://46.20.7.97:80/saran/trafik.stream/trafik.stream";
-
+    private static String streamUrl = "rtmp://46.20.7.97:80/saran/trafik.stream/trafik.stream";
+    public static String STREAM="";
     ImageView ppButton;//Play pause button
     private int controlButton=0;//Play_pause kontorolü
 
-    private MediaPlayer player;
+    private static MediaPlayer player = null;
     public static boolean isAlreadyPlaying = false;
+    public static boolean ChatRadio = false;
     private SeekBar volumeBar = null;
     private AudioManager audioManager = null;
 
@@ -46,8 +47,10 @@ public class Radio extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        if(isAlreadyPlaying){
-
+         if(isAlreadyPlaying)
+        {
+            //Buraya gelirse on pausedan çıkmıştır radyo ekranındaysa chat de değildir
+            ChatRadio=false;
             playRadioPlayer();
         }else{
             stopRadioPlayer();
@@ -65,6 +68,8 @@ public class Radio extends AppCompatActivity {
         //Radyo otomatik baslatma-start
         isAlreadyPlaying=true;
         controlButton=1;
+        //Radyo linki kontrol
+        initializeMediaPlayer();
 
         ppButton = (ImageView) findViewById(R.id.radiopp_btn);
         ppButton.setImageResource(R.mipmap.ic_pause);
@@ -87,24 +92,9 @@ public class Radio extends AppCompatActivity {
         kanalAd.setText(adapter.NAMES[pos]);
         kanalDescription.setText(adapter.DESCRIPTIONS[pos]);
         streamUrl=adapter.radyoURL[pos];
-
-
-
-
-        //Radyo linki kontrol
-        initializeMediaPlayer();
-
         //Ses ayarları
         volumeControl();
-
-
-
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON); // uyku modunu kapatma
-
-
-
-
-
         ppButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -127,25 +117,28 @@ public class Radio extends AppCompatActivity {
             }
         });
 
-
-
-
         b_radiochatbutton = (ImageButton) findViewById(R.id.radiochatbutton);
         b_radiochatbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Bundle extras = new Bundle();
+                extras.putString(STREAM,streamUrl);
                 Intent intocan = new Intent(Radio.this, Chat.class);
+                ChatRadio=true;
+                intocan.putExtras(extras);
                 startActivity(intocan);
+
             }
         });
 
     }
 
 
-    public void playRadioPlayer() {
 
-        //stopBtn.setEnabled(true);
-        //startBtn.setEnabled(false);
+    public void playRadioPlayer() {
+        if (player.isPlaying())
+            player.stop();
+
         player.prepareAsync();
         player.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
 
@@ -157,19 +150,19 @@ public class Radio extends AppCompatActivity {
 
     public void stopRadioPlayer() {
 
+
         if (player.isPlaying()) {
             player.stop();
             player.release();
             initializeMediaPlayer();
         }
 
-        //startBtn.setEnabled(true);
-        //stopBtn.setEnabled(false);
     }
 // initializeMediaPlayer() methodunda urli  stream ediyoruz.
 
     private void initializeMediaPlayer() {
-        player = new MediaPlayer();
+
+            player = new MediaPlayer();
         try {
             player.setDataSource(streamUrl);
         } catch (IllegalArgumentException e) {
@@ -181,12 +174,21 @@ public class Radio extends AppCompatActivity {
         }
     }
 
+
     @Override
     protected void onPause() {
         super.onPause();
-        if (player.isPlaying()) {
+        if (ChatRadio == false)
+        {
+            if (player.isPlaying()) {
+                player.stop();
+            }
+        }
+        /*
+         if (player.isPlaying()) {
             player.stop();
         }
+        */
     }
 
     private void volumeControl() {
