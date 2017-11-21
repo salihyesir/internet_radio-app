@@ -27,13 +27,14 @@ import java.io.IOException;
 
 
 public class MainActivity extends AppCompatActivity {
+    //Widget
     private static final int CODE_DRAW_OVER_OTHER_APP_PERMISSION = 2084;
 
     public Button button_fav;
     public Button button_kategori;
     ImageView ppButton;//Play pause button
     private int controlButton=0;//Play_pause kontorolü
-    private String streamUrl = "http://sc.powergroup.com.tr/RadyoFenomen/mpeg/128/tunein";
+
     private MediaPlayer player;
 
     int[] IMAGES = {R.drawable.alem, R.drawable.ntv, R.drawable.show, R.drawable.superfm, R.drawable.kralfm, R.drawable.trafik,
@@ -45,6 +46,11 @@ public class MainActivity extends AppCompatActivity {
     String[] DESCRIPTIONS = {"deneme1", "deneme2", "deneme3", "deneme4", "deneme5", "deneme6", "deneme7", "deneme8"
             , "deneme9", "deneme10"};
 
+    //Bundle sayfalar arası geçiş
+    public static String streamUrl = "http://sc.powergroup.com.tr/RadyoFenomen/mpeg/128/tunein";
+
+    public static String stream="";
+    public static boolean isAlreadyPlaying = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
         CustomAdapter customAdapter = new CustomAdapter();
 
         listView.setAdapter(customAdapter);
+        //Player ve Pause buton kontrolü
         ppButton = (ImageView) findViewById(R.id.mainpp_btn);
 
         ppButton.setOnClickListener(new View.OnClickListener() {
@@ -129,11 +136,21 @@ public class MainActivity extends AppCompatActivity {
 * widget
 * */
 
+    //Widget başlatıldığı nokta
     private void initializeView() {
         findViewById(R.id.music_playerlogo).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startService(new Intent(MainActivity.this, FloatingViewService.class));
+
+                Bundle extras = new Bundle();
+                extras.putString(stream,streamUrl);
+
+               // String deneme="";
+                //extras.putBoolean(deneme,false);
+
+                Intent intent = new Intent(MainActivity.this, FloatingViewService.class);
+                intent.putExtras(extras);
+                startService(intent);
                 finish();
             }
         });
@@ -189,6 +206,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //Radyonun çalıştırıldı
     public void playRadioPlayer() {
 
         player.prepareAsync();
@@ -200,6 +218,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    //Radyonun durdurulduğu
     public void stopRadioPlayer() {
 
         if (player.isPlaying()) {
@@ -208,6 +227,7 @@ public class MainActivity extends AppCompatActivity {
             initializeMediaPlayer();
         }
     }
+
 // initializeMediaPlayer() methodunda urli  stream ediyoruz.
 
     private void initializeMediaPlayer() {

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.os.Binder;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
@@ -23,13 +24,14 @@ import static com.internetradio.bt.proje.Radio.isAlreadyPlaying;
 public class FloatingViewService extends Service
 {
 
-    private String streamUrl = "http://sc.powergroup.com.tr/RadyoFenomen/mpeg/128/tunein";
+
+    private static String streamUrl = "";
 
     private WindowManager mWindowManager;
     private View mFloatingView;
 
     ImageView ppButton;
-
+    private Bundle extras = null;
     private MediaPlayer player;
     public static boolean isAlreadyPlaying = false;
 
@@ -37,17 +39,32 @@ public class FloatingViewService extends Service
 
 
     public FloatingViewService() {
-        initializeMediaPlayer();
+
     }
+
+
 
     @Override
     public IBinder onBind(Intent intent) {
+
         return null;
     }
 
     @Override
-    public void onCreate() {
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        if (intent != null && intent.getExtras() != null){
+            extras=intent.getExtras();
+            streamUrl= extras.getString(MainActivity.stream,"http://sc.powergroup.com.tr/RadyoFenomen/mpeg/128/tunein");
+
+        }
+        return START_STICKY;
+    }
+    @Override
+    public void onCreate( ) {
         super.onCreate();
+
+
+
         //Inflate the floating view layout we created
         mFloatingView = LayoutInflater.from(this).inflate(R.layout.layout_floating_widget, null);
 
@@ -74,9 +91,6 @@ public class FloatingViewService extends Service
         final View expandedView = mFloatingView.findViewById(R.id.expanded_container);
 
 
-
-        //radyo yüklenmesi
-        initializeMediaPlayer();
 
 
 
@@ -106,10 +120,11 @@ public class FloatingViewService extends Service
                 //playing radio
                 if(controlButton == 0)
                 {
+                    //radyo yüklenmesi
+                    initializeMediaPlayer();
                     Toast.makeText(FloatingViewService.this, "Playing the radio.", Toast.LENGTH_LONG).show();
                     ppButton.setImageResource(R.mipmap.ic_pause);
                     controlButton=1;
-                    isAlreadyPlaying = true;
                     playRadioPlayer();
                 }
                 //Pause radio
@@ -117,7 +132,6 @@ public class FloatingViewService extends Service
                     Toast.makeText(FloatingViewService.this, "Pausing the radio.", Toast.LENGTH_LONG).show();
                     ppButton.setImageResource(R.mipmap.ic_play);
                     controlButton=0;
-                    isAlreadyPlaying = false;
                     stopRadioPlayer();
                 }
 

@@ -31,6 +31,8 @@ public class Radio extends AppCompatActivity {
     private AudioManager audioManager;
     private SeekBar volumeBar;
 
+    //Classdan gelen veriler bundle
+    private Bundle extras = null;
 
 
     @Override
@@ -43,6 +45,7 @@ public class Radio extends AppCompatActivity {
         }else{
             stopRadioPlayer();
         }
+
     }
 
 
@@ -50,7 +53,10 @@ public class Radio extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_radio);
-//Radyo linki kontrol
+
+
+
+        //Radyo linki kontrol
         initializeMediaPlayer();
 
 
