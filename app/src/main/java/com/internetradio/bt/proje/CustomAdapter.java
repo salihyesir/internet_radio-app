@@ -16,19 +16,19 @@ public class CustomAdapter extends BaseAdapter {
 
     Context c;
 
-    int[] IMAGES = {R.drawable.alem, R.drawable.ntv, R.drawable.show, R.drawable.superfm, R.drawable.kralfm, R.drawable.trafik,
-            R.drawable.power, R.drawable.mydonose, R.drawable.trt, R.drawable.virgin};
+    int[] IMAGES = {R.drawable.best, R.drawable.ntv, R.drawable.show, R.drawable.superfm, R.drawable.kralfm, R.drawable.fenomen,
+            R.drawable.radyo_d, R.drawable.mydonose, R.drawable.trt, R.drawable.virgin};
 
-    String[] NAMES = {"Alem FM", "NTV Radyo", "ShowFM", "SuperFM", "KralFM", "Radyo Fenomen", "PowerFM",
+    String[] NAMES = {"Best FM", "NTV Radyo", "ShowFM", "SuperFM", "KralFM", "Radyo Fenomen", "Radyo D",
             "MydonoseFM", "TrtFM", "VirginRadyo"};
 
     String[] DESCRIPTIONS = {"deneme1", "deneme2", "deneme3", "deneme4", "deneme5", "deneme6", "deneme7", "deneme8"
             , "deneme9", "deneme10"};
 
-    String[] radyoURL={"http://mn-l.mncdn.com/alemfm/alemfm1/playlist.m3u8","http://ntvrdfms.radyotvonline.com:80/dyg/ntvrd64/playlist.m3u8",
-    "rtmp://37.247.100.100:80/show/show64","http://17753.live.streamtheworld.com/SUPER_FM.mp3",
-            "http://kralfms.radyotvonline.com:80/dyg/kralfm64/playlist.m3u8 ","http://195.142.3.83/fenomen/fenomenweb_mpeg_128_home/icecast.audio",
-            "http://sc.powergroup.com.tr:80/PowerFM/mpeg/128/home","http://17753.live.streamtheworld.com/RADIO_MYDONOSE.mp3",
+    String[] radyoURL={"http://46.20.7.126:80","http://ntvrdfms.radyotvonline.com:80/dyg/ntvrd64/playlist.m3u8",
+    "http://46.20.3.229:80","http://17753.live.streamtheworld.com/SUPER2.mp3",
+            "http://kralwmp.radyotvonline.com:80","http://195.142.3.83/fenomen/fenomenweb_mpeg_128_home/icecast.audio",
+            "http://188.138.1.203:80/radyod","http://17753.live.streamtheworld.com/RADIO_MYDONOSE.mp3",
             "http://trtcanlifm-lh.akamaihd.net/i/TRTFM_1@181846/master.m3u8","http://17733.live.streamtheworld.com/VIRGIN_RADIO.mp3"
 
     };

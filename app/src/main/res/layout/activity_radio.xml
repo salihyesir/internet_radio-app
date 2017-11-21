@@ -133,22 +133,17 @@
         android:layout_height="wrap_content"
         android:textSize="25sp"
         android:text="@string/radyoAd"
-        android:layout_above="@+id/radiochatbutton"
-        android:layout_toRightOf="@+id/radiohoparloronbutton"
-        android:layout_toEndOf="@+id/radiohoparloronbutton"
-        android:layout_marginLeft="28dp"
-        android:layout_marginStart="28dp" />
+        android:layout_below="@+id/radiohoparloronbutton"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:id="@+id/radio_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/radio_name"
-        android:layout_alignRight="@+id/radio_name"
+        android:layout_marginTop="14dp"
+        android:text="TextView"
         android:layout_below="@+id/radio_name"
-        android:layout_marginEnd="22dp"
-        android:layout_marginRight="22dp"
-        android:layout_marginTop="17dp"
-        android:text="TextView" />
+        android:layout_alignLeft="@+id/radio_name"
+        android:layout_alignStart="@+id/radio_name" />
 
 </RelativeLayout>
