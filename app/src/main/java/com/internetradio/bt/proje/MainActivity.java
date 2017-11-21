@@ -27,17 +27,20 @@ import java.io.IOException;
 
 
 public class MainActivity extends AppCompatActivity {
+    //Widget
     private static final int CODE_DRAW_OVER_OTHER_APP_PERMISSION = 2084;
 
     public Button button_fav;
     public Button button_kategori;
     ImageView ppButton;//Play pause button
     private int controlButton=0;//Play_pause kontorolü
-    private String streamUrl = "http://17753.live.streamtheworld.com/SUPER_FM.mp3";
+
     private MediaPlayer player;
 
-
-
+    //Bundle sayfalar arası geçiş
+    private String streamUrl = "http://17753.live.streamtheworld.com/SUPER_FM.mp3";
+    public static String stream="";
+    public static boolean isAlreadyPlaying = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,15 +135,25 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-    }/*
-* widget
-* */
+    }
 
+    /*
+     * widget
+     * */
+    //Widget başlatıldığı nokta
     private void initializeView() {
         findViewById(R.id.music_playerlogo).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startService(new Intent(MainActivity.this, FloatingViewService.class));
+                Bundle extras = new Bundle();
+                extras.putString(stream,streamUrl);
+
+                // String deneme="";
+                //extras.putBoolean(deneme,false);
+
+                Intent intent = new Intent(MainActivity.this, FloatingViewService.class);
+                intent.putExtras(extras);
+                startService(intent);
                 finish();
             }
         });

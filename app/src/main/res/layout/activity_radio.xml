@@ -93,38 +93,64 @@
         android:id="@+id/radiochatbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_chat"
-        android:layout_above="@+id/linearLayout2"
-        android:layout_alignParentRight="true"
+        android:layout_above="@+id/linearLayout3"
         android:layout_alignParentEnd="true"
-        android:layout_marginBottom="27dp" />
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="39dp"
+        android:src="@drawable/ic_chat" />
 
     <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:orientation="horizontal"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/linearLayout2">
+        android:background="@color/username8"
+        android:orientation="horizontal"
+        android:visibility="visible">
 
-        <ImageButton
-            android:id="@+id/radioplaybutton"
-            android:layout_width="130dp"
-            android:layout_height="100dp"
-            android:src="@drawable/ic_play" />
 
-        <ImageButton
-            android:id="@+id/radiostopbutton"
-            android:layout_width="130dp"
-            android:layout_height="100dp"
-            android:src="@drawable/ic_pause" />
+        <!--Album image for the song currently playing.-->
+        <ImageView
+            android:id="@+id/music_playerlogo"
+            android:layout_width="150dp"
+            android:layout_height="80dp"
+            android:background="@color/username8"
+            android:src="@drawable/music_playerlogo"
+            tools:ignore="ContentDescription" />
 
-        <ImageButton
-            android:id="@+id/radioaddfavbutton"
-            android:layout_width="130dp"
-            android:layout_height="100dp"
-            android:src="@android:drawable/btn_star_big_off" />
+        <!--Previous button-->
+        <ImageView
+            android:id="@+id/radioPrev_btn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/ic_previous"
+            tools:ignore="ContentDescription" />
+
+        <!--Play button-->
+        <ImageView
+            android:id="@+id/radiopp_btn"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="20dp"
+            android:src="@mipmap/ic_play"
+            tools:ignore="ContentDescription" />
+
+
+        <!--Next button-->
+        <ImageView
+            android:id="@+id/radioNext_btn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/ic_play_next"
+            tools:ignore="ContentDescription" />
+
     </LinearLayout>
 
     <TextView
@@ -145,5 +171,4 @@
         android:layout_below="@+id/radio_name"
         android:layout_alignLeft="@+id/radio_name"
         android:layout_alignStart="@+id/radio_name" />
-
 </RelativeLayout>

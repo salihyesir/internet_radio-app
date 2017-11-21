@@ -1,5 +1,6 @@
 package com.internetradio.bt.proje;
 
+import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -30,12 +31,14 @@ public class Radio extends AppCompatActivity {
     /*private String streamUrl = "http://sc.powergroup.com.tr/RadyoFenomen/mpeg/128/tunein";*/
     private String streamUrl = "rtmp://46.20.7.97:80/saran/trafik.stream/trafik.stream";
 
-    private ImageButton startBtn;
-    private ImageButton stopBtn;
+    ImageView ppButton;//Play pause button
+    private int controlButton=0;//Play_pause kontorolü
+
     private MediaPlayer player;
     public static boolean isAlreadyPlaying = false;
-    private AudioManager audioManager;
-    private SeekBar volumeBar;
+    private SeekBar volumeBar = null;
+    private AudioManager audioManager = null;
+
 
 
 
@@ -57,13 +60,16 @@ public class Radio extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_radio);
 
-        startBtn = (ImageButton) findViewById(R.id.radioplaybutton);
-        stopBtn = (ImageButton) findViewById(R.id.radiostopbutton);
+
 
         //Radyo otomatik baslatma-start
         isAlreadyPlaying=true;
-        startBtn.setEnabled(false);
-        stopBtn.setEnabled(true);
+        controlButton=1;
+
+        ppButton = (ImageView) findViewById(R.id.radiopp_btn);
+        ppButton.setImageResource(R.mipmap.ic_pause);
+        //startBtn.setEnabled(false);
+        //stopBtn.setEnabled(true);
         //Radyo otomatik baslatma-end
 
         //Veri geçirme-START
@@ -88,57 +94,41 @@ public class Radio extends AppCompatActivity {
         //Radyo linki kontrol
         initializeMediaPlayer();
 
-
         //Ses ayarları
-        audioManager = (AudioManager)getSystemService(getApplicationContext().AUDIO_SERVICE);
+        volumeControl();
 
-        volumeBar = (SeekBar) findViewById(R.id.radioseekBar2) ;
-        volumeBar.setMax(audioManager.getStreamMaxVolume(AudioManager.STREAM_RING));
-        volumeBar.setKeyProgressIncrement(10);
-        volumeBar.setProgress(audioManager.getStreamVolume(AudioManager.STREAM_RING));
+
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON); // uyku modunu kapatma
 
 
 
-        startBtn.setOnClickListener(new View.OnClickListener() {
+
+
+        ppButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-                isAlreadyPlaying = true;
-                playRadioPlayer();
-
-
-            }
-        });
-        stopBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                isAlreadyPlaying = false;
-                stopRadioPlayer();
-
-            }
-        });
-
-
-        volumeBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, progress, 0);
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
+                //playing radio
+                if(controlButton == 0)
+                {
+                    Toast.makeText(Radio.this, "Playing the radio.", Toast.LENGTH_LONG).show();
+                    ppButton.setImageResource(R.mipmap.ic_pause);
+                    controlButton=1;
+                    playRadioPlayer();
+                }
+                //Pause radio
+                else if(controlButton==1){
+                    Toast.makeText(Radio.this, "Pausing the radio.", Toast.LENGTH_LONG).show();
+                    ppButton.setImageResource(R.mipmap.ic_play);
+                    controlButton=0;
+                    stopRadioPlayer();
+                }
 
             }
         });
+
+
+
 
         b_radiochatbutton = (ImageButton) findViewById(R.id.radiochatbutton);
         b_radiochatbutton.setOnClickListener(new View.OnClickListener() {
@@ -154,8 +144,8 @@ public class Radio extends AppCompatActivity {
 
     public void playRadioPlayer() {
 
-        stopBtn.setEnabled(true);
-        startBtn.setEnabled(false);
+        //stopBtn.setEnabled(true);
+        //startBtn.setEnabled(false);
         player.prepareAsync();
         player.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
 
@@ -173,8 +163,8 @@ public class Radio extends AppCompatActivity {
             initializeMediaPlayer();
         }
 
-        startBtn.setEnabled(true);
-        stopBtn.setEnabled(false);
+        //startBtn.setEnabled(true);
+        //stopBtn.setEnabled(false);
     }
 // initializeMediaPlayer() methodunda urli  stream ediyoruz.
 
@@ -196,6 +186,39 @@ public class Radio extends AppCompatActivity {
         super.onPause();
         if (player.isPlaying()) {
             player.stop();
+        }
+    }
+
+    private void volumeControl() {
+
+        try {
+            volumeBar = (SeekBar) findViewById(R.id.radioseekBar2);
+            audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+
+            volumeBar.setMax(audioManager
+                    .getStreamMaxVolume(AudioManager.STREAM_MUSIC));
+            volumeBar.setKeyProgressIncrement(10);
+            volumeBar.setProgress(audioManager
+                    .getStreamVolume(AudioManager.STREAM_MUSIC));
+
+
+            volumeBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                @Override
+                public void onStopTrackingTouch(SeekBar arg0) {
+                }
+
+                @Override
+                public void onStartTrackingTouch(SeekBar arg0) {
+                }
+
+                @Override
+                public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                    audioManager.setStreamVolume(AudioManager.STREAM_MUSIC,
+                            progress, 0);
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
