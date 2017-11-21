@@ -19,13 +19,15 @@ public class Chat extends FragmentActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_chat);
+
         extras = getIntent().getExtras();
         stream = extras.getString(Radio.STREAM);
+
         MainFragment mainFragment=new MainFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.realtabcontent, mainFragment);
         transaction.commit();
-        
+
     }
 
 

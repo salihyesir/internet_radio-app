@@ -52,7 +52,8 @@ public class Radio extends AppCompatActivity {
             //Buraya gelirse on pausedan çıkmıştır radyo ekranındaysa chat de değildir
             ChatRadio=false;
             playRadioPlayer();
-        }else{
+        }
+        else{
             stopRadioPlayer();
         }
     }
@@ -104,6 +105,7 @@ public class Radio extends AppCompatActivity {
                     Toast.makeText(Radio.this, "Playing the radio.", Toast.LENGTH_LONG).show();
                     ppButton.setImageResource(R.mipmap.ic_pause);
                     controlButton=1;
+                    isAlreadyPlaying=true;
                     playRadioPlayer();
                 }
                 //Pause radio
@@ -111,6 +113,7 @@ public class Radio extends AppCompatActivity {
                     Toast.makeText(Radio.this, "Pausing the radio.", Toast.LENGTH_LONG).show();
                     ppButton.setImageResource(R.mipmap.ic_play);
                     controlButton=0;
+                    isAlreadyPlaying=false;
                     stopRadioPlayer();
                 }
 

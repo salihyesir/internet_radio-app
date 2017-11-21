@@ -42,6 +42,19 @@ public class MainActivity extends AppCompatActivity {
     public static String stream="";
     public static boolean isAlreadyPlaying = false;
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if(isAlreadyPlaying)
+        {
+            playRadioPlayer();
+        }else{
+            stopRadioPlayer();
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -123,6 +136,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "Playing the radio.", Toast.LENGTH_LONG).show();
                     ppButton.setImageResource(R.mipmap.ic_pause);
                     controlButton=1;
+                    isAlreadyPlaying=true;
                     playRadioPlayer();
                 }
                 //Pause radio
@@ -130,6 +144,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "Pausing the radio.", Toast.LENGTH_LONG).show();
                     ppButton.setImageResource(R.mipmap.ic_play);
                     controlButton=0;
+                    isAlreadyPlaying=false;
                     stopRadioPlayer();
                 }
 
