@@ -20,8 +20,7 @@ public class Chat extends FragmentActivity {
 
         setContentView(R.layout.activity_chat);
 
-        extras = getIntent().getExtras();
-        stream = extras.getString(Radio.STREAM);
+
 
         MainFragment mainFragment=new MainFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();

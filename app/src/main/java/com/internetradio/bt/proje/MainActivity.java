@@ -8,21 +8,15 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.provider.Settings;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
-
 import java.io.IOException;
 
 
@@ -38,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private MediaPlayer player;
 
     //Bundle sayfalar arası geçiş
-    private String streamUrl = "http://17753.live.streamtheworld.com/SUPER_FM.mp3";
+    private static String streamUrl = null;
     public static String stream="";
     public static boolean isAlreadyPlaying = false;
 
@@ -47,11 +41,21 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
+
         if(isAlreadyPlaying)
         {
+
+            stopRadioPlayer();//player resetlensin
+            initializeMediaPlayer();
             playRadioPlayer();
-        }else{
+            ppButton.setImageResource(R.mipmap.ic_pause);
+            controlButton=1;
+
+        }else
+        {
+            ppButton.setImageResource(R.mipmap.ic_play);
             stopRadioPlayer();
+            controlButton=0;
         }
     }
 
@@ -115,16 +119,16 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int pos, long id) {
 
 
-                Intent intent=new Intent(getApplicationContext(),Radio.class);
-                intent.putExtra("Position",pos);
+                Intent i=new Intent(getApplicationContext(),Radio.class);
 
-                startActivity(intent);
+                i.putExtra("Position",pos);
+                startActivityForResult(i, 1453);
+
+                //startActivity(intent);
             }
         });
 
         //ListView İşlemleri-BİTİŞ
-
-
         ppButton = (ImageView) findViewById(R.id.mainpp_btn);
 
         ppButton.setOnClickListener(new View.OnClickListener() {
@@ -174,8 +178,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if(resultCode == 1453){
+             streamUrl = data.getExtras().get("stream").toString();
+        }
+
+
         if (requestCode == CODE_DRAW_OVER_OTHER_APP_PERMISSION) {
             //Check if the permission is granted or not.
             if (resultCode == RESULT_OK) {
@@ -196,7 +207,10 @@ public class MainActivity extends AppCompatActivity {
 
     //CUSTOM ADAPTER BİTİŞ
 
-    public void playRadioPlayer() {
+    public void playRadioPlayer()
+    {
+        if (player.isPlaying())
+            player.stop();
 
         player.prepareAsync();
         player.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
@@ -220,6 +234,10 @@ public class MainActivity extends AppCompatActivity {
     private void initializeMediaPlayer() {
         player = new MediaPlayer();
         try {
+
+            if (streamUrl == null)
+                streamUrl = "http://17753.live.streamtheworld.com/SUPER_FM.mp3";
+
             player.setDataSource(streamUrl);
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
@@ -234,7 +252,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         if (player.isPlaying()) {
-            player.stop();
+            //player.stop();
+            stopRadioPlayer();
         }
     }
 

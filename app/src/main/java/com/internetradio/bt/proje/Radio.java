@@ -34,7 +34,7 @@ public class Radio extends AppCompatActivity {
     ImageView ppButton;//Play pause button
     private int controlButton=0;//Play_pause kontorolü
 
-    private static MediaPlayer player = null;
+    private MediaPlayer player = null;
     public static boolean isAlreadyPlaying = false;
     public static boolean ChatRadio = false;
     private SeekBar volumeBar = null;
@@ -51,6 +51,7 @@ public class Radio extends AppCompatActivity {
         {
             //Buraya gelirse on pausedan çıkmıştır radyo ekranındaysa chat de değildir
             ChatRadio=false;
+            stopRadioPlayer();//player bir resetlensin sebebide chatden çıkınça radyo baştan başlar release edilmediğinden.
             playRadioPlayer();
         }
         else{
@@ -66,33 +67,26 @@ public class Radio extends AppCompatActivity {
 
 
 
+        //Veri geçirme-START
+        datapassing();
+
+
+
+
         //Radyo otomatik baslatma-start
         isAlreadyPlaying=true;
         controlButton=1;
         //Radyo linki kontrol
         initializeMediaPlayer();
 
+        //onstop dan geri dönüşte radio çalışmıyor olabilir.
+
         ppButton = (ImageView) findViewById(R.id.radiopp_btn);
         ppButton.setImageResource(R.mipmap.ic_pause);
-        //startBtn.setEnabled(false);
-        //stopBtn.setEnabled(true);
-        //Radyo otomatik baslatma-end
-
-        //Veri geçirme-START
-
-        Intent intent=getIntent();
-        pos=intent.getExtras().getInt("Position");
-
-        final CustomAdapter adapter=new CustomAdapter(this);
-        final ImageView img=(ImageView)findViewById(R.id.notify_me);
-        final TextView kanalAd=(TextView)findViewById(R.id.radio_name) ;
-        final TextView kanalDescription=(TextView)findViewById(R.id.radio_description);
 
 
-        img.setImageResource(adapter.IMAGES[pos]);
-        kanalAd.setText(adapter.NAMES[pos]);
-        kanalDescription.setText(adapter.DESCRIPTIONS[pos]);
-        streamUrl=adapter.radyoURL[pos];
+
+
         //Ses ayarları
         volumeControl();
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON); // uyku modunu kapatma
@@ -134,11 +128,31 @@ public class Radio extends AppCompatActivity {
             }
         });
 
+        Intent i = new Intent();
+        i.putExtra("stream", streamUrl);
+        setResult(1453,i);
+
+    }
+
+    private void datapassing() {
+        Intent intent=getIntent();
+        pos=intent.getExtras().getInt("Position");
+
+        final CustomAdapter adapter=new CustomAdapter(this);
+        final ImageView img=(ImageView)findViewById(R.id.notify_me);
+        final TextView kanalAd=(TextView)findViewById(R.id.radio_name) ;
+        final TextView kanalDescription=(TextView)findViewById(R.id.radio_description);
+
+
+        img.setImageResource(adapter.IMAGES[pos]);
+        kanalAd.setText(adapter.NAMES[pos]);
+        kanalDescription.setText(adapter.DESCRIPTIONS[pos]);
+        streamUrl=adapter.radyoURL[pos];
     }
 
 
-
     public void playRadioPlayer() {
+
         if (player.isPlaying())
             player.stop();
 
@@ -181,6 +195,7 @@ public class Radio extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        //Chatde değil ise durdur
         if (ChatRadio == false)
         {
             if (player.isPlaying()) {

@@ -55,6 +55,9 @@ public class FloatingViewService extends Service
         if (intent != null && intent.getExtras() != null){
             extras=intent.getExtras();
             streamUrl= extras.getString(MainActivity.stream,"http://sc.powergroup.com.tr/RadyoFenomen/mpeg/128/tunein");
+            //isAlreadyPlaying = true;
+            //ppButton.setImageResource(R.mipmap.ic_pause);
+            //playRadioPlayer();
 
         }
         return START_STICKY;
@@ -177,7 +180,7 @@ public class FloatingViewService extends Service
             @Override
             public void onClick(View view) {
                 //Open the application  click.
-                isAlreadyPlaying = false;
+                isAlreadyPlaying = true;
                 stopRadioPlayer();
                 Intent intent = new Intent(FloatingViewService.this, MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -241,8 +244,9 @@ public class FloatingViewService extends Service
 
     public void playRadioPlayer() {
 
-        // playButton.setEnabled(true);
-        //prevButton.setEnabled(false);
+        if (player.isPlaying())
+            player.stop();
+
         player.prepareAsync();
         player.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
 
