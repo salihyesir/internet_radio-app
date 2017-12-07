@@ -17,7 +17,17 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
 import java.io.IOException;
+import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -35,6 +45,20 @@ public class MainActivity extends AppCompatActivity {
     private static String streamUrl = null;
     public static String stream="";
     public static boolean isAlreadyPlaying = false;
+
+    private static String streamUrl1=null;
+    private static String radyoAd1=null;
+    private static String radyoImg1=null;
+
+    ArrayList<RadioModel> arrayList=new ArrayList<>();
+
+    // Write a message to the database
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myRef = database.getReference("Radios");
+
+    //Storage
+    private StorageReference mStorageRef;
+
 
 
     @Override
@@ -63,6 +87,59 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Initilazing reference.
+        mStorageRef = FirebaseStorage.getInstance().getReference();
+
+
+        final ListView listView = (ListView) findViewById(R.id.listView);
+
+        // Burdan devam edilecek. **********************************
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                arrayList.clear();
+
+                for(DataSnapshot radioSnapshot: dataSnapshot.getChildren()){
+                    RadioModel radio=radioSnapshot.getValue(RadioModel.class);
+                    arrayList.add(radio);
+                }
+
+                CustomAdapter adapter=new CustomAdapter(MainActivity.this,arrayList);
+                listView.setAdapter(adapter);
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+
+        //final CustomAdapter customAdapter = new CustomAdapter(this, );
+
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int pos, long id) {
+
+
+                Intent i=new Intent(getApplicationContext(),Radio.class);
+                streamUrl1=arrayList.get(pos).getRadyoUrl();
+                radyoAd1=arrayList.get(pos).getRadyoAd();
+                radyoImg1=arrayList.get(pos).getRadyoImg();
+
+                i.putExtra("streamUrl",streamUrl1);
+                i.putExtra("radyoAd",radyoAd1);
+                i.putExtra("radyoImg",radyoImg1);
+                startActivityForResult(i, 1453);
+
+                //startActivity(i);
+            }
+        });
+
 
 
         //Radyo linki kontrol
@@ -109,26 +186,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //ListView İşlemleri
-        ListView listView = (ListView) findViewById(R.id.listView);
-        final CustomAdapter customAdapter = new CustomAdapter(this);
-        listView.setAdapter(customAdapter);
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int pos, long id) {
-
-
-                Intent i=new Intent(getApplicationContext(),Radio.class);
-
-                i.putExtra("Position",pos);
-                startActivityForResult(i, 1453);
-
-                //startActivity(intent);
-            }
-        });
-
-        //ListView İşlemleri-BİTİŞ
         ppButton = (ImageView) findViewById(R.id.mainpp_btn);
 
         ppButton.setOnClickListener(new View.OnClickListener() {

@@ -1,5 +1,6 @@
 package com.internetradio.bt.proje;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
@@ -18,7 +19,15 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
+
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Radio extends AppCompatActivity {
 
@@ -29,10 +38,13 @@ public class Radio extends AppCompatActivity {
     ImageButton b_radiochatbutton;
 
     /*private String streamUrl = "http://sc.powergroup.com.tr/RadyoFenomen/mpeg/128/tunein";*/
-    private static String streamUrl = "rtmp://46.20.7.97:80/saran/trafik.stream/trafik.stream";
+    private static String streamUrl = "";
     public static String STREAM="";
     ImageView ppButton;//Play pause button
     private int controlButton=0;//Play_pause kontorolü
+
+    private static String radyoAd=null;
+    private static String radyoImg=null;
 
     private MediaPlayer player = null;
     public static boolean isAlreadyPlaying = false;
@@ -135,19 +147,24 @@ public class Radio extends AppCompatActivity {
     }
 
     private void datapassing() {
-        Intent intent=getIntent();
-        pos=intent.getExtras().getInt("Position");
 
-        final CustomAdapter adapter=new CustomAdapter(this);
+        /*final CustomAdapter adapter=new CustomAdapter(this,arrayList);*/
         final ImageView img=(ImageView)findViewById(R.id.notify_me);
         final TextView kanalAd=(TextView)findViewById(R.id.radio_name) ;
         final TextView kanalDescription=(TextView)findViewById(R.id.radio_description);
 
+        Intent intent=getIntent();
+        //pos=intent.getExtras().getInt("Position");
+        streamUrl=intent.getStringExtra("streamUrl");
+        radyoAd=intent.getStringExtra("radyoAd");
+        radyoImg=intent.getStringExtra("radyoImg");
 
-        img.setImageResource(adapter.IMAGES[pos]);
-        kanalAd.setText(adapter.NAMES[pos]);
-        kanalDescription.setText(adapter.DESCRIPTIONS[pos]);
-        streamUrl=adapter.radyoURL[pos];
+        kanalAd.setText(radyoAd);
+        Picasso.with(getApplicationContext()).load(radyoImg).into(img);
+        /*img.setImageResource();*//*
+        kanalAd.setText(adapter.getItem(pos).getRadyoAd());
+        *//*kanalDescription.setText(adapter.DESCRIPTIONS[pos]);*//*
+        streamUrl=adapter.getItem(pos).getRadyoUrl();*/
     }
 
 

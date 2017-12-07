@@ -128,16 +128,4 @@
 
     </LinearLayout>
 
-    <EditText
-        android:id="@+id/mainsearchtext"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/mainalarmbutton"
-        android:layout_toRightOf="@+id/mainalarmbutton"
-        android:background="@color/username8"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Search" />
-
 </RelativeLayout>
