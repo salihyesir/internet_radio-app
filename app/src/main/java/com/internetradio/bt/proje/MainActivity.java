@@ -1,15 +1,12 @@
 package com.internetradio.bt.proje;
 
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -49,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     private static String streamUrl1=null;
     private static String radyoAd1=null;
     private static String radyoImg1=null;
+    private static String radyoDescription1=null;
 
     ArrayList<RadioModel> arrayList=new ArrayList<>();
 
@@ -134,6 +132,7 @@ public class MainActivity extends AppCompatActivity {
                 i.putExtra("streamUrl",streamUrl1);
                 i.putExtra("radyoAd",radyoAd1);
                 i.putExtra("radyoImg",radyoImg1);
+                i.putExtra("radyoDescription",radyoDescription1);
                 startActivityForResult(i, 1453);
 
                 //startActivity(i);

@@ -1,35 +1,35 @@
 {
   "project_info": {
-    "project_number": "342656708063",
-    "firebase_url": "https://internet-radio-app.firebaseio.com",
-    "project_id": "internet-radio-app",
-    "storage_bucket": "internet-radio-app.appspot.com"
+    "project_number": "106119421904",
+    "firebase_url": "https://internet-radio-app-f63b9.firebaseio.com",
+    "project_id": "internet-radio-app-f63b9",
+    "storage_bucket": "internet-radio-app-f63b9.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:342656708063:android:d54f28452f0914ba",
+        "mobilesdk_app_id": "1:106119421904:android:d54f28452f0914ba",
         "android_client_info": {
           "package_name": "com.internetradio.bt.proje"
         }
       },
       "oauth_client": [
         {
-          "client_id": "342656708063-114vbkrd9hvn8ot7lh6j7r1a43l4a3k1.apps.googleusercontent.com",
+          "client_id": "106119421904-kppl1rpsill6n66v2pbenm9n4r0aec81.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.internetradio.bt.proje",
-            "certificate_hash": "39f7f51a87f0d29765050d2d18c5fdb8d5a5143a"
+            "certificate_hash": "4c78c14722c17cb0dd743ccd335fcda69c10f42e"
           }
         },
         {
-          "client_id": "342656708063-isjr8o3iukorpoh91oomj847a1dvlg8h.apps.googleusercontent.com",
+          "client_id": "106119421904-m938iissta325oqs17l4n2tnopdiapm8.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCy1MtEau6zOlRoupl2ltvpQjpF_hQ6tzU"
+          "current_key": "AIzaSyDSnXNsNS_S4VDtkNZktVn7X-aNUmbDbHs"
         }
       ],
       "services": {
@@ -40,7 +40,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "342656708063-isjr8o3iukorpoh91oomj847a1dvlg8h.apps.googleusercontent.com",
+              "client_id": "106119421904-m938iissta325oqs17l4n2tnopdiapm8.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

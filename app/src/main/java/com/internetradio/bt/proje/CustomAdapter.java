@@ -8,24 +8,22 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by HakanKurt on 20.11.2017.
- */
+
 
 public class CustomAdapter extends ArrayAdapter<RadioModel> {
 
     private Activity context;
     private List<RadioModel> radioList;
+
 
 
 
@@ -70,12 +68,16 @@ public class CustomAdapter extends ArrayAdapter<RadioModel> {
 
 
         ImageView imageView=(ImageView) convertView.findViewById(R.id.imageKanal);
+
         TextView textView_header=(TextView) convertView.findViewById(R.id.textHeader);
         TextView textView_desc=(TextView) convertView.findViewById(R.id.textDescription);
+
 
         Picasso.with(context).load(radioByPosition.getRadyoImg()).into(imageView);
         /*imageView.setImageResource(IMAGES[pos]);*/
         textView_header.setText(radioByPosition.getRadyoAd());
+
+        textView_desc.setText(radioByPosition.getRadyoDescription());
         /*textView_desc.setText(radioByPosition.getRadyoUrl());*/
 
 
