@@ -1,16 +1,11 @@
 package com.internetradio.bt.proje;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.net.Uri;
-import android.os.Build;
-import android.provider.ContactsContract;
-import android.provider.Settings;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageButton;
@@ -19,15 +14,9 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class Radio extends AppCompatActivity {
 
@@ -36,6 +25,7 @@ public class Radio extends AppCompatActivity {
     private static final int CODE_DRAW_OVER_OTHER_APP_PERMISSION = 2084;
 
     ImageButton b_radiochatbutton;
+    pl.droidsonroids.gif.GifImageView ritim;
 
     /*private String streamUrl = "http://sc.powergroup.com.tr/RadyoFenomen/mpeg/128/tunein";*/
     private static String streamUrl = "";
@@ -53,6 +43,7 @@ public class Radio extends AppCompatActivity {
     private AudioManager audioManager = null;
 
 
+    pl.droidsonroids.gif.GifImageView equ;
 
 
     @Override
@@ -97,6 +88,7 @@ public class Radio extends AppCompatActivity {
         ppButton.setImageResource(R.mipmap.ic_pause);
 
 
+        equ = (pl.droidsonroids.gif.GifImageView) findViewById(R.id.gifImageView3);
 
 
         //Ses ayarları
@@ -113,6 +105,7 @@ public class Radio extends AppCompatActivity {
                     controlButton=1;
                     isAlreadyPlaying=true;
                     playRadioPlayer();
+                    equ.setVisibility(View.VISIBLE);
                 }
                 //Pause radio
                 else if(controlButton==1){
@@ -121,6 +114,7 @@ public class Radio extends AppCompatActivity {
                     controlButton=0;
                     isAlreadyPlaying=false;
                     stopRadioPlayer();
+                    equ.setVisibility(View.INVISIBLE);
                 }
 
             }

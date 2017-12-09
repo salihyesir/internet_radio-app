@@ -89,15 +89,7 @@
         android:src="@drawable/radiowidget" />
 
 
-    <ImageButton
-        android:id="@+id/radiochatbutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/linearLayout3"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="39dp"
-        android:src="@drawable/ic_chat" />
+
 
     <LinearLayout
         android:id="@+id/linearLayout3"
@@ -171,4 +163,29 @@
         android:layout_below="@+id/radio_name"
         android:layout_alignLeft="@+id/radio_name"
         android:layout_alignStart="@+id/radio_name" />
+
+    <pl.droidsonroids.gif.GifImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@null"
+        android:src="@drawable/equalizer"
+        android:id="@+id/gifImageView3"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/radiohoparloronbutton" />
+
+    <ImageButton
+        android:id="@+id/radiochatbutton"
+        android:scaleType="fitXY"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:cropToPadding="false"
+        android:paddingLeft="10dp"
+        android:background="@drawable/gochat"
+        android:layout_above="@+id/radiohoparloronbutton"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"> // this is the image(eye)
+    </ImageButton>
+
 </RelativeLayout>
