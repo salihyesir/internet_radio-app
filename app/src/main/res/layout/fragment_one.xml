@@ -1,15 +1,79 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.internetradio.bt.fragments.OneFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <ListView
+
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/altRadyoLinear"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/tabs"
+        android:clickable="false"
+        android:descendantFocusability="blocksDescendants"
+        android:focusable="false"
+        android:focusableInTouchMode="false">
+
+
+    </ListView>
+
+    <LinearLayout
+        android:id="@+id/altRadyoLinear"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/one"
-        android:textSize="40dp"
-        android:textStyle="bold"
-        android:layout_centerInParent="true"/>
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:background="@color/username8"
+        android:orientation="horizontal"
+        android:visibility="visible">
+
+
+        <!--Album image for the song currently playing.-->
+        <ImageView
+            android:id="@+id/music_playerlogo"
+            android:layout_width="150dp"
+            android:layout_height="80dp"
+            android:background="@color/username8"
+            android:src="@drawable/music_playerlogo"
+            tools:ignore="ContentDescription" />
+
+        <!--Previous button-->
+        <ImageView
+            android:id="@+id/mainPrev_btn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/ic_previous"
+            tools:ignore="ContentDescription" />
+
+        <!--Play button-->
+        <ImageView
+            android:id="@+id/mainpp_btn"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="20dp"
+            android:src="@mipmap/ic_play"
+            tools:ignore="ContentDescription" />
+
+
+        <!--Next button-->
+        <ImageView
+            android:id="@+id/mainNext_btn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/ic_play_next"
+            tools:ignore="ContentDescription" />
+
+    </LinearLayout>
 
 </RelativeLayout>
