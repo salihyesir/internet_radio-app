@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion '26.0.2'
+
+    compileSdkVersion 26
     defaultConfig {
         applicationId "com.internetradio.bt.proje"
         minSdkVersion 15
-        targetSdkVersion 25
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -19,37 +19,9 @@ android {
     }
 }
 
+
 dependencies {
-
-    compile 'com.google.firebase:firebase-storage:11.0.4'
-    compile 'com.google.firebase:firebase-auth:11.0.4'
-    compile 'com.google.firebase:firebase-database:11.0.4'
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-
-    //noinspection GradleCompatible
-    compile 'com.android.support:appcompat-v7:25.2.0'
-    compile 'com.android.support:recyclerview-v7:25.2.0'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.android.support:gridlayout-v7:25.2.0'
-    compile 'com.android.support:design:25.2.0'
-    testCompile 'junit:junit:4.12'
-
-    //Circle image için
-    compile 'de.hdodenhof:circleimageview:2.2.0'
-
-    //Picasso
-    compile 'com.squareup.picasso:picasso:2.5.2'
-
-    // Chat için gerekli bağımlılık
-    compile('io.socket:socket.io-client:0.6.2') {
-        exclude group: 'org.json', module: 'json'
-    }
-    compile 'com.android.support:recyclerview-v7:25.4.0'
+    compile 'com.android.support:appcompat-v7:26.1.0'
+    compile 'com.android.support:design:26.1.0'
 }
-
-
-
-apply plugin: 'com.google.gms.google-services'
