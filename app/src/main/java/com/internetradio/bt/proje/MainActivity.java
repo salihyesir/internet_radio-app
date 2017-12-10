@@ -12,9 +12,9 @@ import android.support.v7.widget.Toolbar;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.internetradio.bt.fragments.ChatFragment;
-import com.internetradio.bt.fragments.OneFragment;
-import com.internetradio.bt.fragments.ThreeFragment;
-import com.internetradio.bt.fragments.TwoFragment;
+import com.internetradio.bt.fragments.PopulerFragment;
+import com.internetradio.bt.fragments.FavoriteFragment;
+import com.internetradio.bt.fragments.CategoryFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,9 +68,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFrag(new OneFragment(), "Popüler");
-        adapter.addFrag(new TwoFragment(), "Kategoriler");
-        adapter.addFrag(new ThreeFragment(), "Favoriler");
+        adapter.addFrag(new PopulerFragment(), "Popüler");
+        adapter.addFrag(new CategoryFragment(), "Kategoriler");
+        adapter.addFrag(new FavoriteFragment(), "Favoriler");
         adapter.addFrag(new ChatFragment(),"Chat");
         viewPager.setAdapter(adapter);
     }
