@@ -1,7 +1,11 @@
 package com.internetradio.bt.fragments;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,11 +22,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.internetradio.bt.proje.CustomAdapter;
+import com.internetradio.bt.proje.FloatingViewService;
 import com.internetradio.bt.proje.R;
 import com.internetradio.bt.proje.RadioModel;
 
 import java.io.IOException;
 import java.util.ArrayList;
+
+import static android.app.Activity.RESULT_OK;
 
 
 public class PopulerFragment extends Fragment{
@@ -48,6 +55,8 @@ public class PopulerFragment extends Fragment{
     private static String radyoImg1=null;
     private static String radyoDescription1=null;
 
+    private static View rootView;
+
 
 
     ArrayList<RadioModel> arrayList=new ArrayList<>();
@@ -69,11 +78,8 @@ public class PopulerFragment extends Fragment{
     @Override
     public void onResume() {
         super.onResume();
-
-
         if(isAlreadyPlaying)
         {
-
             stopRadioPlayer();//player resetlensin
             initializeMediaPlayer();
             playRadioPlayer();
@@ -94,16 +100,13 @@ public class PopulerFragment extends Fragment{
         super.onCreate(savedInstanceState);
 
 
-
-
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View rootView=inflater.inflate(R.layout.fragment_one,container,false);
+        rootView=inflater.inflate(R.layout.fragment_one,container,false);
 
         //  Firebaseden veri çekme
         // Write a message to the database
@@ -139,7 +142,6 @@ public class PopulerFragment extends Fragment{
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int pos, long id) {
-
                 streamUrl=arrayList.get(pos).getRadyoUrl();
                 Toast.makeText(getContext().getApplicationContext(), "Playing the radio.", Toast.LENGTH_LONG).show();
                 ppButton.setImageResource(R.mipmap.ic_pause);
@@ -180,6 +182,22 @@ public class PopulerFragment extends Fragment{
 
 
 
+        //Widget
+        //Check if the application has draw over other apps permission or not?
+        //This permission is by default available for API<23. But for API > 23
+        //you have to ask for the permission in runtime.
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(getContext())) {
+            //If the draw over permission is not available open the settings screen
+            //to grant the permission.
+            Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                    Uri.parse("package:" + getContext().getPackageName()));
+            startActivityForResult(intent, CODE_DRAW_OVER_OTHER_APP_PERMISSION);
+        } else {
+            initializeView();
+        }
+
+
 
         // Inflate the layout for this fragment
         return rootView;
@@ -205,8 +223,10 @@ public class PopulerFragment extends Fragment{
     }
     public void playRadioPlayer()
     {
-        if (player.isPlaying())
-            player.stop();
+        initializeMediaPlayer();
+       //Başka bir radyo çalışıyorsa
+        if(controlButton == 1)
+            stopRadioPlayer();
 
         player.prepareAsync();
         player.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
@@ -215,10 +235,13 @@ public class PopulerFragment extends Fragment{
                 player.start();
             }
         });
+        controlButton=1;
+        isAlreadyPlaying=true;
     }
 
     public void stopRadioPlayer() {
-
+        isAlreadyPlaying=false;
+        controlButton=0;
         if (player.isPlaying()) {
             player.stop();
             player.release();
@@ -232,6 +255,51 @@ public class PopulerFragment extends Fragment{
         if (player.isPlaying()) {
             //player.stop();
             stopRadioPlayer();
+        }
+    }
+
+
+    /*
+    * widget
+    * */
+    //Widget başlatıldığı nokta
+    private void initializeView() {
+        rootView.findViewById(R.id.music_playerlogo).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Bundle extras = new Bundle();
+                extras.putString(stream,streamUrl);
+
+                // String deneme="";
+                //extras.putBoolean(deneme,false);
+
+                Intent intent = new Intent(getContext().getApplicationContext(), FloatingViewService.class);
+                intent.putExtras(extras);
+                getContext().startService(intent);
+                getActivity().finish();
+            }
+        });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if(resultCode == 1453){
+            streamUrl = data.getExtras().get("stream").toString();
+        }
+        if (requestCode == CODE_DRAW_OVER_OTHER_APP_PERMISSION) {
+            //Check if the permission is granted or not.
+            if (resultCode == RESULT_OK) {
+                initializeView();
+            } else { //Permission is not available
+                Toast.makeText(getContext().getApplicationContext(), "Draw over other app permission not available. Closing the application",
+                        Toast.LENGTH_SHORT).show();
+
+                getActivity().finish();
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
         }
     }
 
