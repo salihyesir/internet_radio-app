@@ -50,11 +50,6 @@ public class PopulerFragment extends Fragment{
     public static String stream="";
     public static boolean isAlreadyPlaying = false;
 
-    private static String streamUrl1=null;
-    private static String radyoAd1=null;
-    private static String radyoImg1=null;
-    private static String radyoDescription1=null;
-
     private static View rootView;
 
 
@@ -78,19 +73,19 @@ public class PopulerFragment extends Fragment{
     @Override
     public void onResume() {
         super.onResume();
-        if(isAlreadyPlaying)
-        {
-            stopRadioPlayer();//player resetlensin
-            initializeMediaPlayer();
-            playRadioPlayer();
+
+        if(isAlreadyPlaying) {
+            //stopRadioPlayer();//player resetlensin
+            //initializeMediaPlayer();
+            //playRadioPlayer();
             ppButton.setImageResource(R.mipmap.ic_pause);
-            controlButton=1;
+            //controlButton=1;
 
         }else
         {
             ppButton.setImageResource(R.mipmap.ic_play);
-            stopRadioPlayer();
-            controlButton=0;
+            //stopRadioPlayer();
+            //controlButton=0;
         }
     }
 
@@ -128,8 +123,12 @@ public class PopulerFragment extends Fragment{
                     arrayList.add(radio);
                 }
                 //Çekilen verilerin lisview'e aktarımı
-                CustomAdapter adapter=new CustomAdapter(getActivity(),arrayList);
-                listView.setAdapter(adapter);
+                try {
+                    CustomAdapter adapter=new CustomAdapter(getActivity(),arrayList);
+                    listView.setAdapter(adapter);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
 
             }
 
@@ -139,19 +138,43 @@ public class PopulerFragment extends Fragment{
             }
         });
 
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            int previousPosition=-1;
+            int count=0;
+            long previousMil=0;
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int pos, long id) {
-                streamUrl=arrayList.get(pos).getRadyoUrl();
-                Toast.makeText(getContext().getApplicationContext(), "Playing the radio.", Toast.LENGTH_LONG).show();
-                ppButton.setImageResource(R.mipmap.ic_pause);
-                controlButton=1;
-                isAlreadyPlaying=true;
-                playRadioPlayer();
+
+                //Radyoya iki defa tıklama
+                if(previousPosition==pos)
+                {
+                    count++;
+                    if(count==2 && System.currentTimeMillis()-previousMil<=1000)
+                    {
+                        Toast.makeText(getContext(),"Double tap at"+pos,Toast.LENGTH_SHORT).show();
+                        count=1;
+                    }
+                }
+                //Radyo Bir kere tıklama
+                else
+                {
+                    previousPosition=pos;
+                    count=1;
+                    previousMil=System.currentTimeMillis();
+
+
+                    streamUrl=arrayList.get(pos).getRadyoUrl();
+                    Toast.makeText(getContext().getApplicationContext(), "Playing the radio.", Toast.LENGTH_LONG).show();
+                    ppButton.setImageResource(R.mipmap.ic_pause);
+                    controlButton=1;
+                    isAlreadyPlaying=true;
+                    playRadioPlayer();
+                }
             }
         });
-        //Radyo linki kontrol
-        initializeMediaPlayer();
+
+
 
 
         ppButton = (ImageView) rootView.findViewById(R.id.mainpp_btn);
@@ -164,23 +187,20 @@ public class PopulerFragment extends Fragment{
                 {
                     Toast.makeText(getContext().getApplicationContext(), "Playing the radio.", Toast.LENGTH_LONG).show();
                     ppButton.setImageResource(R.mipmap.ic_pause);
-                    controlButton=1;
-                    isAlreadyPlaying=true;
                     playRadioPlayer();
                 }
                 //Pause radio
                 else if(controlButton==1){
                     Toast.makeText(getContext().getApplicationContext(), "Pausing the radio.", Toast.LENGTH_LONG).show();
                     ppButton.setImageResource(R.mipmap.ic_play);
-                    controlButton=0;
-                    isAlreadyPlaying=false;
                     stopRadioPlayer();
                 }
 
             }
         });
 
-
+        if (isAlreadyPlaying == false)
+            initializeMediaPlayer();
 
         //Widget
         //Check if the application has draw over other apps permission or not?
@@ -204,6 +224,10 @@ public class PopulerFragment extends Fragment{
 
     }
 
+    public void onItemDoubleClick(AdapterView<?> adapterView, View view, int position, long l) {
+        Toast.makeText(getContext().getApplicationContext(), " Chat.", Toast.LENGTH_LONG).show();
+    }
+
     // initializeMediaPlayer() methodunda urli  stream ediyoruz.
 
     private void initializeMediaPlayer() {
@@ -223,10 +247,11 @@ public class PopulerFragment extends Fragment{
     }
     public void playRadioPlayer()
     {
-        initializeMediaPlayer();
-       //Başka bir radyo çalışıyorsa
-        if(controlButton == 1)
+
+        if(isAlreadyPlaying)
             stopRadioPlayer();
+
+        initializeMediaPlayer();
 
         player.prepareAsync();
         player.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
@@ -237,25 +262,31 @@ public class PopulerFragment extends Fragment{
         });
         controlButton=1;
         isAlreadyPlaying=true;
+
     }
 
     public void stopRadioPlayer() {
-        isAlreadyPlaying=false;
-        controlButton=0;
-        if (player.isPlaying()) {
-            player.stop();
-            player.release();
-            initializeMediaPlayer();
+        try {
+            if (player.isPlaying() == true && player != null) {
+                player.stop();
+                player.release();
+                initializeMediaPlayer();
+            }
+            isAlreadyPlaying = false;
+            controlButton = 0;
+        }
+        catch (Exception e){
+            e.printStackTrace();
         }
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        if (player.isPlaying()) {
+//        if (player.isPlaying()) {
             //player.stop();
-            stopRadioPlayer();
-        }
+            //stopRadioPlayer();
+        //       }
     }
 
 
@@ -270,6 +301,8 @@ public class PopulerFragment extends Fragment{
 
                 Bundle extras = new Bundle();
                 extras.putString(stream,streamUrl);
+
+                stopRadioPlayer();
 
                 // String deneme="";
                 //extras.putBoolean(deneme,false);
@@ -302,9 +335,4 @@ public class PopulerFragment extends Fragment{
             super.onActivityResult(requestCode, resultCode, data);
         }
     }
-
-
-
-
-
 }

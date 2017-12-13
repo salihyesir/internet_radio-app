@@ -2,7 +2,6 @@ package com.internetradio.bt.proje;
 import android.app.Service;
 import android.content.Intent;
 import android.graphics.PixelFormat;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.view.Gravity;
@@ -12,10 +11,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.Toast;
-
-import com.internetradio.bt.fragments.PopulerFragment;
-
-import java.io.IOException;
 
 public class FloatingViewService extends Service
 {
@@ -28,8 +23,6 @@ public class FloatingViewService extends Service
 
     ImageView ppButton;
     private Bundle extras = null;
-    private MediaPlayer player;
-    public static boolean isAlreadyPlaying = false;
 
     private int controlButton=0;//Play_pause kontorolü
 
@@ -50,7 +43,7 @@ public class FloatingViewService extends Service
     public int onStartCommand(Intent intent, int flags, int startId) {
         if (intent != null && intent.getExtras() != null){
             extras=intent.getExtras();
-            streamUrl= extras.getString(PopulerFragment.stream,"http://sc.powergroup.com.tr/RadyoFenomen/mpeg/128/tunein");
+            //streamUrl= extras.getString(PopulerFragment.stream,"http://sc.powergroup.com.tr/RadyoFenomen/mpeg/128/tunein");
             //isAlreadyPlaying = true;
             //ppButton.setImageResource(R.mipmap.ic_pause);
             //playRadioPlayer();
@@ -61,8 +54,6 @@ public class FloatingViewService extends Service
     @Override
     public void onCreate( ) {
         super.onCreate();
-
-
 
         //Inflate the floating view layout we created
         mFloatingView = LayoutInflater.from(this).inflate(R.layout.layout_floating_widget, null);
@@ -79,7 +70,6 @@ public class FloatingViewService extends Service
         params.gravity = Gravity.TOP | Gravity.LEFT;        //Initially view will be added to top-left corner
         params.x = 0;
         params.y = 100;
-
         //Add the view to the window
         mWindowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
         mWindowManager.addView(mFloatingView, params);
@@ -88,10 +78,6 @@ public class FloatingViewService extends Service
         final View collapsedView = mFloatingView.findViewById(R.id.collapse_view);
         //The root element of the expanded view layout
         final View expandedView = mFloatingView.findViewById(R.id.expanded_container);
-
-
-
-
 
         //Pause butonu ilk başta gözükmesin
 //        pause_btn.setVisibility(View.INVISIBLE);
@@ -103,8 +89,8 @@ public class FloatingViewService extends Service
         closeButtonCollapsed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                isAlreadyPlaying = false;
-                stopRadioPlayer();
+                //isAlreadyPlaying = false;
+                //stopRadioPlayer();
                 //close the service and remove the from from the window
                 stopSelf();
             }
@@ -120,18 +106,18 @@ public class FloatingViewService extends Service
                 if(controlButton == 0)
                 {
                     //radyo yüklenmesi
-                    initializeMediaPlayer();
+                    //initializeMediaPlayer();
                     Toast.makeText(FloatingViewService.this, "Playing the radio.", Toast.LENGTH_LONG).show();
                     ppButton.setImageResource(R.mipmap.ic_pause);
-                    controlButton=1;
-                    playRadioPlayer();
+                    //controlButton=1;
+                    //playRadioPlayer();
                 }
                 //Pause radio
                 else if(controlButton==1){
                     Toast.makeText(FloatingViewService.this, "Pausing the radio.", Toast.LENGTH_LONG).show();
                     ppButton.setImageResource(R.mipmap.ic_play);
-                    controlButton=0;
-                    stopRadioPlayer();
+                    //controlButton=0;
+                   // stopRadioPlayer();
                 }
 
             }
@@ -165,8 +151,8 @@ public class FloatingViewService extends Service
             public void onClick(View view) {
                 collapsedView.setVisibility(View.VISIBLE);
                 expandedView.setVisibility(View.GONE);
-                isAlreadyPlaying = false;
-                stopRadioPlayer();
+                //isAlreadyPlaying = false;
+                //stopRadioPlayer();
             }
         });
 
@@ -176,8 +162,8 @@ public class FloatingViewService extends Service
             @Override
             public void onClick(View view) {
                 //Open the application  click.
-                isAlreadyPlaying = true;
-                stopRadioPlayer();
+                //isAlreadyPlaying = true;
+                //stopRadioPlayer();
                 Intent intent = new Intent(FloatingViewService.this, MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
@@ -237,7 +223,7 @@ public class FloatingViewService extends Service
         });
 
     }
-
+/*
     public void playRadioPlayer() {
 
         if (player.isPlaying())
@@ -278,7 +264,7 @@ public class FloatingViewService extends Service
         }
     }
 
-
+*/
 
     /**
      * Detect if the floating view is collapsed or expanded.
