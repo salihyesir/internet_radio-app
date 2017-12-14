@@ -1,16 +1,14 @@
-package com.internetradio.bt.proje;
-
-/**
- * Created by Salih on 13.12.2017.
- */
+package com.internetradio.bt.fragments;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -22,10 +20,16 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.internetradio.bt.proje.ChatActivity;
+import com.internetradio.bt.proje.R;
 
 import java.util.ArrayList;
 
-public class HomeActivity extends AppCompatActivity {
+/**
+ * Created by Salih on 14.12.2017.
+ */
+
+public class HomeFragment extends Fragment {
 
     private ListView listView;
     private FirebaseAuth fAuth;
@@ -34,23 +38,35 @@ public class HomeActivity extends AppCompatActivity {
     private DatabaseReference dbRef;
     private ArrayAdapter<String> adapter;
 
+    private static View rootView;
+
+    public HomeFragment() {
+        // Required empty public constructor
+    }
+
+
+
+
     @Override
-    public void onBackPressed() {
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        rootView=inflater.inflate(R.layout.activity_home,container,false);
 
         fAuth = FirebaseAuth.getInstance();
 
-        listView = (ListView)findViewById(R.id.listViewSubjects);
+        listView = (ListView)rootView.findViewById(R.id.listViewSubjects);
 
         db = FirebaseDatabase.getInstance();
         dbRef = db.getReference("ChatSubjects");
 
-        adapter = new ArrayAdapter<String>(HomeActivity.this, android.R.layout.simple_list_item_1, android.R.id.text1,subjectLists);
+        adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, android.R.id.text1,subjectLists);
         listView.setAdapter(adapter);
 
 
@@ -68,7 +84,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
-                Toast.makeText(getApplicationContext(),""+databaseError.getMessage(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext().getApplicationContext(),""+databaseError.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -76,16 +92,18 @@ public class HomeActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(HomeActivity.this, ChatActivity.class);
+                Intent intent = new Intent(getActivity(), ChatActivity.class);
                 intent.putExtra("subject",subjectLists.get(position));
                 startActivity(intent);
             }
         });
+
+        return rootView;
     }
 
-    @Override
+
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu,menu);
+        getActivity().getMenuInflater().inflate(R.menu.menu,menu);
         return true;
     }
 
@@ -94,8 +112,10 @@ public class HomeActivity extends AppCompatActivity {
         if (item.getItemId() == R.id.exit)
         {
             fAuth.signOut();
-            finish();
+            getActivity().finish();
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 }

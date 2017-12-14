@@ -10,6 +10,9 @@ import com.internetradio.bt.proje.R;
 
 public class FavoriteFragment extends Fragment{
 
+    private static View rootView;
+
+
     public FavoriteFragment() {
         // Required empty public constructor
     }
@@ -23,7 +26,10 @@ public class FavoriteFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_one, container, false);
+         rootView = inflater.inflate(R.layout.fragment_two, container, false);
+
+
+        return rootView;
     }
 
 }

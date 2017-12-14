@@ -1,9 +1,11 @@
 package com.internetradio.bt.fragments;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +19,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.internetradio.bt.proje.HomeActivity;
 import com.internetradio.bt.proje.R;
 import com.internetradio.bt.proje.RegisterActivity;
 
@@ -48,11 +49,12 @@ public class ChatFragment extends Fragment {
 
     }
 
+    @SuppressLint("ResourceType")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        rootView =inflater.inflate(R.layout.fragment_three, container, false);
+        rootView =inflater.inflate(R.layout.fragment_chat, container, false);
 
         editTextUserName = (EditText) rootView.findViewById(R.id.editTextUserName);
         editTextUserPassword = (EditText) rootView.findViewById(R.id.editTextUserPassword);
@@ -64,9 +66,13 @@ public class ChatFragment extends Fragment {
 
         if (firebaseUser != null) {
 
-            Intent i = new Intent(getActivity(), HomeActivity.class);
-            startActivity(i);
-            getActivity().finish();
+            HomeFragment homeFragment = new HomeFragment();
+            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.fragment_chat, homeFragment);
+            transaction.addToBackStack(null);
+
+            // işlerimizi bitirelim
+            transaction.commit();
         }
 
         buttonLogin.setOnClickListener(new View.OnClickListener() {
@@ -105,10 +111,12 @@ public class ChatFragment extends Fragment {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-
-                            Intent i = new Intent(getActivity(),HomeActivity.class);
-                            startActivity(i);
-                            getActivity().finish();
+                            //Fragment çağırma
+                            HomeFragment fragment1 = new HomeFragment ();
+                            android.support.v4.app.FragmentManager fragmentManager = getFragmentManager();
+                            android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                            fragmentTransaction.replace(android.R.id.content, fragment1);
+                            fragmentTransaction.commit();
 
                         }
                         else{

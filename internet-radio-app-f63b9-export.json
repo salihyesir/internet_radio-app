@@ -1,0 +1,93 @@
+{
+  "ChatSubjects" : {
+    "Show Radyo" : {
+      "key" : "deneme",
+      "mesaj" : {
+        "-L0LdSPPErs6-1vrDhF9" : {
+          "gonderici" : "salih.yesir01@gmail.com",
+          "mesajText" : "Show Radyo Chat",
+          "zaman" : "14/12/2017 11:10"
+        }
+      }
+    }
+  },
+  "Radios" : {
+   "0-ShowRadyo" : {
+    "radyoAd" : "Show Radyo",
+    "radyoImg" : "https://firebasestorage.googleapis.com/v0/b/internet-radio-app-f63b9.appspot.com/o/Show_Radyo.png?alt=media&token=3e75d297-7f94-46ac-ae35-3c1de33441b9",
+    "radyoUrl" : "http://windows.showradyo.com.tr",
+	"radyoDescription" : "Türkçe Pop",
+	"radyoKategori": "Türkçe Pop"
+  },
+  "1-KralFM" : {
+    "radyoAd" : "Kral FM",
+    "radyoImg" : "https://firebasestorage.googleapis.com/v0/b/internet-radio-app-f63b9.appspot.com/o/KRAL_FM.png?alt=media&token=4b3c7fbb-eb13-48b8-bf82-d7bc1ef3f140",
+    "radyoUrl" : "http://kralwmp.radyotvonline.com:80",
+	"radyoDescription" : "Türkçe Pop",
+	"radyoKategori": "Türkçe Pop"
+  },
+  "2-RadyoFenomen" : {
+    "radyoAd" : "Radyo Fenomen",
+    "radyoImg" : "https://firebasestorage.googleapis.com/v0/b/internet-radio-app-f63b9.appspot.com/o/Radyo_Fenomen.png?alt=media&token=51822f90-8d48-4812-bf6e-b2621364e7f1",
+    "radyoUrl" : "http://195.142.3.83/fenomen/fenomenweb_mpeg_128_home/icecast.audio",
+	"radyoDescription" : "Türkçe Pop",
+	"radyoKategori": "Türkçe Pop"
+  },
+  "3-SuperFM" : {
+    "radyoAd" : "Super FM",
+    "radyoImg" : "https://firebasestorage.googleapis.com/v0/b/internet-radio-app-f63b9.appspot.com/o/superfm.png?alt=media&token=b67fe467-a610-47d2-a6f0-177ba43b1876",
+    "radyoUrl" : "http://17753.live.streamtheworld.com/SUPER2.mp3",
+	"radyoDescription" : "Türkçe Pop",
+	"radyoKategori": "Türkçe Pop"
+  },
+  "4-AlemFM" : {
+    "radyoAd" : "Alem Fm",
+    "radyoImg" : "https://firebasestorage.googleapis.com/v0/b/internet-radio-app-f63b9.appspot.com/o/Alem_FM.png?alt=media&token=8872c25f-f046-48e1-8232-d7a882cce8b0",
+    "radyoUrl" : "http://provisioning.streamtheworld.com/pls/ALEM_FMAAC.pls",
+	"radyoDescription" : "Türkçe Pop",
+	"radyoKategori": "Türkçe Pop"
+  },
+  "5-NumberOneTurk" : {
+    "radyoAd" : "Number One Türk",
+    "radyoImg" : "https://firebasestorage.googleapis.com/v0/b/internet-radio-app-f63b9.appspot.com/o/Number_One_Tuerk.png?alt=media&token=b2c43b1d-48a1-4b91-820a-5b713c413a76",
+    "radyoUrl" : "http://176.227.210.74:3332/listen.pls",
+	"radyoDescription" : "Türkçe Pop",
+	"radyoKategori": "Türkçe Pop"
+  },
+  "6-BestFM" : {
+    "radyoAd" : "Best FM",
+    "radyoImg" : "https://firebasestorage.googleapis.com/v0/b/internet-radio-app-f63b9.appspot.com/o/Best_FM.png?alt=media&token=01a4fb4e-f2e6-44fa-8cda-efcec81f659b",
+    "radyoUrl" : "http://46.20.7.125/listen.pls",
+	"radyoDescription" : "Türkçe Pop",
+	"radyoKategori": "Türkçe Pop"
+  },
+  "7-JoyFM" : {
+    "radyoAd" : "Joy FM",
+    "radyoImg" : "https://firebasestorage.googleapis.com/v0/b/internet-radio-app-f63b9.appspot.com/o/joyfm.png?alt=media&token=73992226-b6c4-48ce-a143-75e764ad569b",
+    "radyoUrl" : "http://provisioning.streamtheworld.com/pls/JOY_FMAAC.pls",
+	"radyoDescription" : "Türkçe Pop",
+	"radyoKategori": "Türkçe Pop"
+  },
+  "8-JoyTurk" : {
+    "radyoAd" : "Joy Türk",
+    "radyoImg" : "https://firebasestorage.googleapis.com/v0/b/internet-radio-app-f63b9.appspot.com/o/joyt%C3%BCrk.png?alt=media&token=0eb07d58-9e5f-4c76-a6fb-40324c81cbb1",
+    "radyoUrl" : "http://provisioning.streamtheworld.com/pls/JOY_TURKAAC.pls",
+	"radyoDescription" : "Türkçe Pop",
+	"radyoKategori": "Türkçe Pop"
+  },
+  "9-MetroFm" : {
+    "radyoAd" : "Metro FM",
+    "radyoImg" : "https://firebasestorage.googleapis.com/v0/b/internet-radio-app-f63b9.appspot.com/o/metroFM.png?alt=media&token=60dc35b6-36c6-42f4-8a84-2c9bae42adff",
+    "radyoUrl" : "http://provisioning.streamtheworld.com/pls/METRO_FMAAC.pls",
+	"radyoDescription" : "Türkçe Pop",
+	"radyoKategori": "Türkçe Pop"
+  },
+  "10-PowerFm" : {
+    "radyoAd" : "Power Fm",
+    "radyoImg" : "https://firebasestorage.googleapis.com/v0/b/internet-radio-app-f63b9.appspot.com/o/Power_FM.png?alt=media&token=6185cd15-51d9-4c41-aa0e-c24273a2eab4",
+    "radyoUrl" : "http://icast.powergroup.com.tr/PowerFM/mpeg/128/home",
+	"radyoDescription" : "USA New York",
+	"radyoKategori": "Türkçe Pop"
+  }
+  }
+}
