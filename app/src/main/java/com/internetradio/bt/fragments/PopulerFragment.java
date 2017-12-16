@@ -43,7 +43,7 @@ public class PopulerFragment extends Fragment{
     ImageView ppButton;//Play pause button
     private int controlButton=0;//Play_pause kontorolü
 
-    private MediaPlayer player;
+    private static MediaPlayer player;
 
     //Bundle sayfalar arası geçiş
     private static String streamUrl = null;
@@ -73,6 +73,7 @@ public class PopulerFragment extends Fragment{
     @Override
     public void onResume() {
         super.onResume();
+
 
         if(isAlreadyPlaying) {
             //stopRadioPlayer();//player resetlensin
@@ -167,8 +168,6 @@ public class PopulerFragment extends Fragment{
                     streamUrl=arrayList.get(pos).getRadyoUrl();
                     Toast.makeText(getContext().getApplicationContext(), "Playing the radio.", Toast.LENGTH_LONG).show();
                     ppButton.setImageResource(R.mipmap.ic_pause);
-                    controlButton=1;
-                    isAlreadyPlaying=true;
                     playRadioPlayer();
                 }
             }
@@ -280,6 +279,9 @@ public class PopulerFragment extends Fragment{
         }
     }
 
+
+
+
     @Override
     public void onPause() {
         super.onPause();
@@ -287,12 +289,18 @@ public class PopulerFragment extends Fragment{
             //player.stop();
             //stopRadioPlayer();
         //       }
+
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+    }
 
     /*
-    * widget
-    * */
+        * widget
+        * */
     //Widget başlatıldığı nokta
     private void initializeView() {
         rootView.findViewById(R.id.music_playerlogo).setOnClickListener(new View.OnClickListener() {
@@ -335,4 +343,6 @@ public class PopulerFragment extends Fragment{
             super.onActivityResult(requestCode, resultCode, data);
         }
     }
+
+
 }

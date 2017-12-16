@@ -13,8 +13,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.internetradio.bt.fragments.CategoryFragment;
@@ -30,6 +32,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements FragmentData{
 
 
+
     ChatFragment chatFragment;
 
     ArrayList<RadioModel> arrayList=new ArrayList<>();
@@ -40,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements FragmentData{
 
 
     private FirebaseAuth fAuth;
+    private FirebaseUser firebaseUser;
 
 
     private Toolbar toolbar;
@@ -60,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements FragmentData{
         setContentView(R.layout.activity_main);
 
         fAuth = FirebaseAuth.getInstance();
+        firebaseUser = fAuth.getCurrentUser(); // authenticate olan kullaniciyi aliyoruz eger var ise
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON); // uyku modunu kapatma
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -132,29 +137,59 @@ public class MainActivity extends AppCompatActivity implements FragmentData{
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+
         getMenuInflater().inflate(R.menu.menu,menu);
+
+        if (firebaseUser == null)
+        {
+            MenuItem menuItem = menu.findItem(R.id.chatOut);
+            menuItem.setVisible(false);
+        }
+        else{
+            MenuItem menuItem = menu.findItem(R.id.chatOut);
+            menuItem.setVisible(true);
+            menuItem.setTitle("LogOut");
+        }
+
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.chatOut)
-        {
-            fAuth.signOut();
-            RadioChatFragment radioChatFragment = new RadioChatFragment();
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.activity_home, radioChatFragment);
-            transaction.addToBackStack(null);
-
+        //Yenile
+        if (item.getItemId() == R.id.yenile) {
+            Toast.makeText(getApplicationContext(), "Radyo Linkleri Yenileniyor!", Toast.LENGTH_SHORT).show();
+            if(firebaseUser == null){
+                Toast.makeText(getApplicationContext(), "Chat için üye girişi yapmanızı hatırlatırız!", Toast.LENGTH_SHORT).show();
+            }
+            if(firebaseUser != null){
+                Toast.makeText(getApplicationContext(), "Chat yapma durumunuz aktiftir!", Toast.LENGTH_SHORT).show();
+            }
+            PopulerFragment populerFragment = new PopulerFragment();
+            populerFragment.stopRadioPlayer();
             Intent intent = new Intent(this, MainActivity.class);
             this.startActivity(intent);
 
+        }
+        if (item.getItemId() == R.id.chatOut)
+        {
+                fAuth.signOut();
+                //burda chat menüden giriş ekranına geri dönüş sağlıyoruz.
+                RadioChatFragment radioChatFragment = new RadioChatFragment();
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.activity_home, radioChatFragment);
+                transaction.addToBackStack(null);
+
+                Intent intent = new Intent(this, MainActivity.class);
+                this.startActivity(intent);
         }
         if(item.getItemId()== R.id.exit)
         {
             android.os.Process.killProcess(android.os.Process.myPid());
             super.onDestroy();
         }
+
+
 
         return super.onOptionsItemSelected(item);
     }
