@@ -1,5 +1,6 @@
 package com.internetradio.bt.fragments;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -15,8 +16,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.internetradio.bt.proje.R;
-
-import java.util.concurrent.Executor;
 
 /**
  * Created by Salih on 15.12.2017.
@@ -67,7 +66,7 @@ public class RegisterFragment extends Fragment {
                 userPassword = registerPassword.getText().toString();
                 if(userName.isEmpty() || userPassword.isEmpty()){
 
-                    Toast.makeText(getActivity().getApplicationContext(),"Lütfen gerekli alanları doldurunuz!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext().getApplicationContext(),"Lütfen gerekli alanları doldurunuz!",Toast.LENGTH_SHORT).show();
 
                 }else{
 
@@ -82,7 +81,7 @@ public class RegisterFragment extends Fragment {
     private void register() {
 
         mAuth.createUserWithEmailAndPassword(userName,userPassword)
-                .addOnCompleteListener((Executor) RegisterFragment.this, new OnCompleteListener<AuthResult>() {
+                .addOnCompleteListener((Activity) getActivity(), new OnCompleteListener<AuthResult>() {
             //Giriş var ise homefragmenta yönlensin
                     @Override
                     public void onComplete(Task<AuthResult> task) {

@@ -45,6 +45,8 @@ public class MainActivity extends AppCompatActivity implements FragmentData{
     private FirebaseAuth fAuth;
     private FirebaseUser firebaseUser;
 
+    private static String stream = "";
+    private static String radyoDurum = "";
 
     private Toolbar toolbar;
     private TabLayout tabLayout;
@@ -57,6 +59,8 @@ public class MainActivity extends AppCompatActivity implements FragmentData{
             R.drawable.ic_tab_call
 
     };
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +79,8 @@ public class MainActivity extends AppCompatActivity implements FragmentData{
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
         setupTabIcons();
+
+
 
 
 
@@ -98,11 +104,13 @@ public class MainActivity extends AppCompatActivity implements FragmentData{
     @Override
     public void subjectData(String pos) {
         String position =pos;
-        //Fragment2 içindeki textDegistir methodunu çağıracağımız için Fragment2 den obje oluşturuyoruz
+        //Metodu çağırıcağımız yerde yani veriyi aktarcağımız fragmentı oluşturuyoruz<
         ChatFragment radioPos = new ChatFragment();
         radioPos.setSubject(position);
 
     }
+
+
 
 
     class ViewPagerAdapter extends FragmentPagerAdapter {
@@ -165,8 +173,8 @@ public class MainActivity extends AppCompatActivity implements FragmentData{
             if(firebaseUser != null){
                 Toast.makeText(getApplicationContext(), "Chat yapma durumunuz aktiftir!", Toast.LENGTH_SHORT).show();
             }
-            PopulerFragment populerFragment = new PopulerFragment();
-            populerFragment.stopRadioPlayer();
+            Radio radio = new Radio();
+            radio.stopRadioPlayer();
             Intent intent = new Intent(this, MainActivity.class);
             this.startActivity(intent);
 
