@@ -101,7 +101,7 @@ public class PopulerFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        rootView=inflater.inflate(R.layout.fragment_one,container,false);
+        rootView=inflater.inflate(R.layout.fragment_populer,container,false);
 
         //  Firebaseden veri çekme
         // Write a message to the database

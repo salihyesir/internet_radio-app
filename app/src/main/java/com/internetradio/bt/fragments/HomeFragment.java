@@ -4,9 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -20,7 +19,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.internetradio.bt.proje.ChatActivity;
+import com.internetradio.bt.proje.MainActivity;
 import com.internetradio.bt.proje.R;
 
 import java.util.ArrayList;
@@ -29,7 +28,12 @@ import java.util.ArrayList;
  * Created by Salih on 14.12.2017.
  */
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment  {
+
+
+
+    String pos;
+    FragmentData fragmentData; //Interface referansı
 
     private ListView listView;
     private FirebaseAuth fAuth;
@@ -45,6 +49,34 @@ public class HomeFragment extends Fragment {
     }
 
 
+
+    //Geri çıkmayı engellemek için yani chat fragmenta dönüş engellenir
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if(getView()== null){
+            return;
+        }
+
+        getView().setFocusableInTouchMode(true);
+        getView().requestFocus();
+        getView().setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK){
+
+
+                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                    getActivity().startActivity(intent);
+                    return true;
+                }
+                return false;
+            }
+        });
+    }
 
 
     @Override
@@ -90,32 +122,31 @@ public class HomeFragment extends Fragment {
 
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(), ChatActivity.class);
+
+                pos=subjectLists.get(position);
+                fragmentData = (FragmentData) getActivity();
+                fragmentData.subjectData(pos);
+
+                /*Intent intent = new Intent(getActivity(), ChatActivity.class);
                 intent.putExtra("subject",subjectLists.get(position));
-                startActivity(intent);
+                startActivity(intent);*/
+                ChatFragment chatFragment = new ChatFragment();
+                android.app.FragmentTransaction transaction = getActivity().getFragmentManager().beginTransaction();
+                transaction.replace(R.id.activity_home, chatFragment);
+                transaction.addToBackStack(null);
+
+                // işlerimizi bitirelim
+                transaction.commit();
             }
         });
 
         return rootView;
     }
 
-
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getActivity().getMenuInflater().inflate(R.menu.menu,menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.exit)
-        {
-            fAuth.signOut();
-            getActivity().finish();
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
 
 }

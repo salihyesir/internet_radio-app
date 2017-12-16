@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#c19d67"
-    tools:context="com.internetradio.bt.proje.HomeActivity">
+    android:id="@+id/activity_home">
 
     <ListView
         android:id="@+id/listViewSubjects"

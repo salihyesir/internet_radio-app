@@ -3,7 +3,8 @@
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.internetradio.bt.fragments.PopulerFragment">
+    tools:context="com.internetradio.bt.fragments.PopulerFragment"
+    android:background="#ffffff">
 
     <ListView
 

@@ -1,131 +1,132 @@
 package com.internetradio.bt.fragments;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
+import android.app.Fragment;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
+import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.ListView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.internetradio.bt.proje.CustomAdapterMessage;
+import com.internetradio.bt.proje.Message;
 import com.internetradio.bt.proje.R;
-import com.internetradio.bt.proje.RegisterActivity;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 
 /**
- * Created by Salih on 9.12.2017.
+ * Created by Salih on 15.12.2017.
  */
 
 public class ChatFragment extends Fragment {
 
-    private EditText editTextUserName;
-    private EditText editTextUserPassword;
-    private Button buttonLogin;
-    private TextView txtRegister;
-    private FirebaseAuth mAuth;
-    private FirebaseUser firebaseUser;
-    private String userName;
-    private String userPassword;
+
+
+
+    private FirebaseDatabase db;
+    private DatabaseReference dbRef;
+    private FirebaseUser fUser;
+    private ArrayList<Message> chatLists = new ArrayList<>();
+    private CustomAdapterMessage customAdapterMessage;
+    private String subject;
+    private static String position;
+    private ListView listView;
+    private FloatingActionButton floatingActionButton;
+    private EditText inputChat;
 
     private static View rootView;
-    public ChatFragment() {
-        // Required empty public constructor
+
+
+    public ChatFragment(){
+
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
     }
 
-    @SuppressLint("ResourceType")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        rootView =inflater.inflate(R.layout.fragment_chat, container, false);
+        rootView = inflater.inflate(R.layout.activity_chat, container, false);
 
-        editTextUserName = (EditText) rootView.findViewById(R.id.editTextUserName);
-        editTextUserPassword = (EditText) rootView.findViewById(R.id.editTextUserPassword);
-        buttonLogin = (Button) rootView.findViewById(R.id.buttonLogin);
-        txtRegister = (TextView) rootView.findViewById(R.id.txtRegister);
+        listView = (ListView)rootView.findViewById(R.id.chatListView);
+        inputChat = (EditText)rootView.findViewById(R.id.inputChat);
+        floatingActionButton = (FloatingActionButton)rootView.findViewById(R.id.fab);
 
-        mAuth = FirebaseAuth.getInstance();
-        firebaseUser = mAuth.getCurrentUser(); // authenticate olan kullaniciyi aliyoruz eger var ise
+        db = FirebaseDatabase.getInstance();
+        fUser = FirebaseAuth.getInstance().getCurrentUser();
 
-        if (firebaseUser != null) {
 
-            HomeFragment homeFragment = new HomeFragment();
-            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.fragment_chat, homeFragment);
-            transaction.addToBackStack(null);
+        customAdapterMessage = new CustomAdapterMessage(getActivity().getApplicationContext(),chatLists,fUser);
+        listView.setAdapter(customAdapterMessage);
 
-            // işlerimizi bitirelim
-            transaction.commit();
-        }
+       if(position !=null) {
+           subject = position;
+           dbRef = db.getReference("ChatSubjects/" + subject + "/mesaj");
+           getActivity().setTitle(subject);
+       }
 
-        buttonLogin.setOnClickListener(new View.OnClickListener() {
+
+        dbRef.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onClick(View v) {
-
-                userName = editTextUserName.getText().toString();
-                userPassword = editTextUserPassword.getText().toString();
-                if (userName.isEmpty() || userPassword.isEmpty()) {
-
-                    Toast.makeText(getContext().getApplicationContext(), "Lütfen gerekli alanları doldurunuz!", Toast.LENGTH_SHORT).show();
-
-                } else {
-
-                    login();
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                chatLists.clear();
+                for(DataSnapshot ds : dataSnapshot.getChildren()){
+                    Message message = ds.getValue(Message.class);
+                    chatLists.add(message);
+                    //Log.d("VALUE",ds.getValue(Message.class).getMesajText());
                 }
+                customAdapterMessage.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
             }
         });
 
-
-        txtRegister.setOnClickListener(new View.OnClickListener() {
+//Mesajda 6 karakter sınırı
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), RegisterActivity.class);
-                startActivity(intent);
+
+                if(inputChat.getText().length()>=6){
+
+                    long msTime = System.currentTimeMillis();
+                    Date curDateTime = new Date(msTime);
+                    SimpleDateFormat formatter = new SimpleDateFormat("dd'/'MM'/'y hh:mm");
+                    String dateTime = formatter.format(curDateTime);
+                    Message message = new Message(inputChat.getText().toString(),fUser.getEmail(),dateTime);
+                    dbRef.push().setValue(message);
+                    inputChat.setText("");
+
+                }else{
+
+                    Toast.makeText(getActivity().getApplicationContext(),"Gönderilecek mesaj uzunluğu en az 6 karakter olmalıdır!",Toast.LENGTH_SHORT).show();
+                }
+
+
             }
         });
 
-        return  rootView;
 
+        return rootView;
     }
-    private void login() {
-
-        mAuth.signInWithEmailAndPassword(userName,userPassword).addOnCompleteListener(getActivity(),
-                new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            //Fragment çağırma
-                            HomeFragment fragment1 = new HomeFragment ();
-                            android.support.v4.app.FragmentManager fragmentManager = getFragmentManager();
-                            android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                            fragmentTransaction.replace(android.R.id.content, fragment1);
-                            fragmentTransaction.commit();
-
-                        }
-                        else{
-                            // hata
-                            Toast.makeText(getContext().getApplicationContext(),task.getException().getMessage(),Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                });
+    public void setSubject(String pos){
+        position = pos;
     }
 
 }
