@@ -10,14 +10,13 @@
         android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/altRadyoLinear"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/tabs"
         android:clickable="false"
         android:descendantFocusability="blocksDescendants"
         android:focusable="false"
-        android:focusableInTouchMode="false">
+        android:focusableInTouchMode="false"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
 
     </ListView>
@@ -29,7 +28,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:background="@color/username8"
+        android:background="@color/colorPrimaryDark"
         android:orientation="horizontal"
         android:visibility="visible">
 
@@ -39,7 +38,7 @@
             android:id="@+id/music_playerlogo"
             android:layout_width="150dp"
             android:layout_height="80dp"
-            android:background="@color/username8"
+            android:background="@color/colorPrimaryDark"
             android:src="@drawable/music_playerlogo"
             tools:ignore="ContentDescription" />
 
