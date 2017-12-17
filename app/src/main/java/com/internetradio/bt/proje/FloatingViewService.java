@@ -1,4 +1,5 @@
 package com.internetradio.bt.proje;
+
 import android.app.Service;
 import android.content.Intent;
 import android.graphics.PixelFormat;
@@ -12,20 +13,29 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.internetradio.bt.fragments.FragmentData;
+import com.internetradio.bt.fragments.PopulerFragment;
+
 public class FloatingViewService extends Service
 {
 
+    FragmentData fragmentData; //Interface referansı
 
+
+    public static String stream ="";
     private static String streamUrl = "";
-
+// PopulerFragmentan gelen veri
+    private static String radioDurum = "";
+    // MainActivity'e gönderceğimiz veri
+    public static String widgetRadioDurum ="";
     private WindowManager mWindowManager;
     private View mFloatingView;
 
     ImageView ppButton;
     private Bundle extras = null;
 
-    private int controlButton=0;//Play_pause kontorolü
 
+    Radio radio = new Radio();
 
     public FloatingViewService() {
 
@@ -43,11 +53,15 @@ public class FloatingViewService extends Service
     public int onStartCommand(Intent intent, int flags, int startId) {
         if (intent != null && intent.getExtras() != null){
             extras=intent.getExtras();
-            //streamUrl= extras.getString(PopulerFragment.stream,"http://sc.powergroup.com.tr/RadyoFenomen/mpeg/128/tunein");
-            //isAlreadyPlaying = true;
-            //ppButton.setImageResource(R.mipmap.ic_pause);
-            //playRadioPlayer();
-
+            streamUrl= extras.getString(PopulerFragment.stream,"http://sc.powergroup.com.tr/RadyoFenomen/mpeg/128/tunein");
+            radioDurum = extras.getString(PopulerFragment.widgetDurum,"pause");
+            if (radioDurum.equals("play"))
+            {
+                ppButton.setImageResource(R.mipmap.ic_pause);
+                radio.playRadioPlayer(streamUrl);
+                Radio.isAlreadyPlaying= true;
+                radio.controlButton = 1;
+            }
         }
         return START_STICKY;
     }
@@ -89,8 +103,9 @@ public class FloatingViewService extends Service
         closeButtonCollapsed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //isAlreadyPlaying = false;
-                //stopRadioPlayer();
+                Radio.isAlreadyPlaying = false;
+                radio.controlButton = 0;
+                radio.stopRadioPlayer();
                 //close the service and remove the from from the window
                 stopSelf();
             }
@@ -103,21 +118,21 @@ public class FloatingViewService extends Service
             @Override
             public void onClick(View v) {
                 //playing radio
-                if(controlButton == 0)
+                if(radio.controlButton == 0)
                 {
-                    //radyo yüklenmesi
-                    //initializeMediaPlayer();
                     Toast.makeText(FloatingViewService.this, "Playing the radio.", Toast.LENGTH_LONG).show();
                     ppButton.setImageResource(R.mipmap.ic_pause);
-                    //controlButton=1;
-                    //playRadioPlayer();
+                    radio.playRadioPlayer(streamUrl);
+                    radio.controlButton=1;
+                    Radio.isAlreadyPlaying = true;
                 }
                 //Pause radio
-                else if(controlButton==1){
+                else if(radio.controlButton==1){
                     Toast.makeText(FloatingViewService.this, "Pausing the radio.", Toast.LENGTH_LONG).show();
                     ppButton.setImageResource(R.mipmap.ic_play);
-                    //controlButton=0;
-                   // stopRadioPlayer();
+                    radio.stopRadioPlayer();
+                    Radio.isAlreadyPlaying =false;
+                    radio.controlButton=0;
                 }
 
             }
@@ -162,12 +177,18 @@ public class FloatingViewService extends Service
             @Override
             public void onClick(View view) {
                 //Open the application  click.
-                //isAlreadyPlaying = true;
-                //stopRadioPlayer();
+
+
+/*
+                radio.stopRadioPlayer();
+                controlButton = 0;
+                isAlreadyPlaying = false;
+*/
+
                 Intent intent = new Intent(FloatingViewService.this, MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtras(extras);
                 startActivity(intent);
-
                 //close the service and remove view from the view hierarchy
                 stopSelf();
             }
@@ -223,48 +244,6 @@ public class FloatingViewService extends Service
         });
 
     }
-/*
-    public void playRadioPlayer() {
-
-        if (player.isPlaying())
-            player.stop();
-
-        player.prepareAsync();
-        player.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-
-            public void onPrepared(MediaPlayer mp) {
-                player.start();
-            }
-        });
-    }
-
-    public void stopRadioPlayer() {
-
-        if (player.isPlaying()) {
-            player.stop();
-            player.release();
-            initializeMediaPlayer();
-        }
-
-        //playButton.setEnabled(true);
-        //prevButton.setEnabled(false);
-    }
-// initializeMediaPlayer() methodunda urli  stream ediyoruz.
-
-    private void initializeMediaPlayer() {
-        player = new MediaPlayer();
-        try {
-            player.setDataSource(streamUrl);
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        } catch (IllegalStateException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-*/
 
     /**
      * Detect if the floating view is collapsed or expanded.

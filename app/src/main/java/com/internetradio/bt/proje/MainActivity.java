@@ -1,29 +1,39 @@
 package com.internetradio.bt.proje;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.WindowManager;
+import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.internetradio.bt.fragments.CategoryFragment;
 import com.internetradio.bt.fragments.ChatFragment;
 import com.internetradio.bt.fragments.FavoriteFragment;
+import com.internetradio.bt.fragments.FragmentData;
 import com.internetradio.bt.fragments.PopulerFragment;
+import com.internetradio.bt.fragments.RadioChatFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements FragmentData{
 
 
-
+    public static SQLiteHelper sqLiteHelper;
+    ChatFragment chatFragment;
 
     ArrayList<RadioModel> arrayList=new ArrayList<>();
 
@@ -32,7 +42,11 @@ public class MainActivity extends AppCompatActivity {
     DatabaseReference myRef = database.getReference("Radios");
 
 
+    private FirebaseAuth fAuth;
+    private FirebaseUser firebaseUser;
 
+    private static String stream = "";
+    private static String radyoDurum = "";
 
     private Toolbar toolbar;
     private TabLayout tabLayout;
@@ -46,19 +60,27 @@ public class MainActivity extends AppCompatActivity {
 
     };
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        fAuth = FirebaseAuth.getInstance();
+        firebaseUser = fAuth.getCurrentUser(); // authenticate olan kullaniciyi aliyoruz eger var ise
+
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON); // uyku modunu kapatma
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
         setupTabIcons();
+
+
 
 
 
@@ -72,12 +94,24 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFrag(new PopulerFragment(), "Popüler");
-        adapter.addFrag(new CategoryFragment(), "Kategoriler");
-        adapter.addFrag(new FavoriteFragment(), "Favoriler");
-        adapter.addFrag(new ChatFragment(),"Chat");
+        adapter.addFrag(new PopulerFragment(), "");
+        adapter.addFrag(new CategoryFragment(), "");
+        adapter.addFrag(new FavoriteFragment(), "");
+        adapter.addFrag(new RadioChatFragment(),"");
         viewPager.setAdapter(adapter);
     }
+
+    @Override
+    public void subjectData(String pos) {
+        String position =pos;
+        //Metodu çağırıcağımız yerde yani veriyi aktarcağımız fragmentı oluşturuyoruz<
+        ChatFragment radioPos = new ChatFragment();
+        radioPos.setSubject(position);
+
+    }
+
+
+
 
     class ViewPagerAdapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();
@@ -97,11 +131,11 @@ public class MainActivity extends AppCompatActivity {
             return mFragmentList.size();
         }
 
+
         public void addFrag(Fragment fragment, String title) {
             mFragmentList.add(fragment);
             mFragmentTitleList.add(title);
         }
-
 
         @Override
         public CharSequence getPageTitle(int position) {
@@ -109,5 +143,63 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.menu,menu);
+
+        if (firebaseUser == null)
+        {
+            MenuItem menuItem = menu.findItem(R.id.chatOut);
+            menuItem.setVisible(false);
+        }
+        else{
+            MenuItem menuItem = menu.findItem(R.id.chatOut);
+            menuItem.setVisible(true);
+            menuItem.setTitle("LogOut");
+        }
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        //Yenile
+        if (item.getItemId() == R.id.yenile) {
+            Toast.makeText(getApplicationContext(), "Radyo Linkleri Yenileniyor!", Toast.LENGTH_SHORT).show();
+            if(firebaseUser == null){
+                Toast.makeText(getApplicationContext(), "Chat için üye girişi yapmanızı hatırlatırız!", Toast.LENGTH_SHORT).show();
+            }
+            if(firebaseUser != null){
+                Toast.makeText(getApplicationContext(), "Chat yapma durumunuz aktiftir!", Toast.LENGTH_SHORT).show();
+            }
+            Radio radio = new Radio();
+            radio.stopRadioPlayer();
+            Intent intent = new Intent(this, MainActivity.class);
+            this.startActivity(intent);
+
+        }
+        if (item.getItemId() == R.id.chatOut)
+        {
+                fAuth.signOut();
+                //burda chat menüden giriş ekranına geri dönüş sağlıyoruz.
+                RadioChatFragment radioChatFragment = new RadioChatFragment();
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.activity_home, radioChatFragment);
+                transaction.addToBackStack(null);
+
+                Intent intent = new Intent(this, MainActivity.class);
+                this.startActivity(intent);
+        }
+        if(item.getItemId()== R.id.exit)
+        {
+            android.os.Process.killProcess(android.os.Process.myPid());
+            super.onDestroy();
+        }
+
+
+
+        return super.onOptionsItemSelected(item);
+    }
 
 }

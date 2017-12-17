@@ -1,14 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_two"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#c19d67"
-    android:id="@+id/activity_home">
+    tools:context="com.internetradio.bt.fragments.CategoryFragment"
+    >
 
     <ListView
-        android:id="@+id/listViewSubjects"
+        android:id="@+id/listViewFav"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"></ListView>
 
 </RelativeLayout>
