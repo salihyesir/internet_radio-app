@@ -37,11 +37,17 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         statement.executeInsert();
     }
 
-   /* public void deleteData(int id){
+    public void deleteData(int id){
         SQLiteDatabase database=getWritableDatabase();
 
-        String sql="DELETE FROM RADYO WHERE id = ?"
-    }*/
+        String sql="DELETE FROM RADYO WHERE id = ?";
+        SQLiteStatement statement=database.compileStatement(sql);
+        statement.clearBindings();
+        statement.bindDouble(1,(double)id);
+
+        statement.execute();
+        statement.close();
+    }
 
     public Cursor getData(String sql)
     {

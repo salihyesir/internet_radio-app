@@ -3,9 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://C:\Users\HakanKurt\Documents\GitHub\internet_radio-app\app\app.iml" filepath="C:\Users\HakanKurt\Documents\GitHub\internet_radio-app\app\app.iml" />
       <module fileurl="file://$PROJECT_DIR$/internet_radio-app.iml" filepath="$PROJECT_DIR$/internet_radio-app.iml" />
-      <module fileurl="file://C:\Users\HakanKurt\Documents\GitHub\internet_radio-app\internet_radio-app.iml" filepath="C:\Users\HakanKurt\Documents\GitHub\internet_radio-app\internet_radio-app.iml" />
     </modules>
   </component>
 </project>

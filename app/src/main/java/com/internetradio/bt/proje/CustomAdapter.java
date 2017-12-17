@@ -118,7 +118,7 @@ public class CustomAdapter extends ArrayAdapter<RadioModel> {
                 }catch (Exception e){
                     e.printStackTrace();
                 }
-
+                notifyDataSetChanged();
 
             }
         });

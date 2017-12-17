@@ -2,10 +2,13 @@ package com.internetradio.bt.fragments;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.internetradio.bt.proje.CustomAdapter;
 import com.internetradio.bt.proje.DatabaseRadyoAdapter;
@@ -27,6 +30,8 @@ public class FavoriteFragment extends Fragment{
     DatabaseRadyoAdapter adapter=null;
 
 
+
+
     public FavoriteFragment() {
         // Required empty public constructor
     }
@@ -46,6 +51,7 @@ public class FavoriteFragment extends Fragment{
          adapter=new DatabaseRadyoAdapter(getActivity(), R.layout.fav_radyo_item,list);
          listView.setAdapter(adapter);
 
+
          //Veritabanından tüm verileri getir.
 
         Cursor cursor= CustomAdapter.sqLiteHelper.getData("SELECT * FROM RADYO");
@@ -62,6 +68,8 @@ public class FavoriteFragment extends Fragment{
         }
 
         adapter.notifyDataSetChanged();
+
+
 
         return rootView;
     }
