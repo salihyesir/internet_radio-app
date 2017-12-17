@@ -1,6 +1,8 @@
 package com.internetradio.bt.fragments;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
@@ -12,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -26,7 +29,10 @@ import com.internetradio.bt.proje.FloatingViewService;
 import com.internetradio.bt.proje.R;
 import com.internetradio.bt.proje.Radio;
 import com.internetradio.bt.proje.RadioModel;
+import com.internetradio.bt.proje.SQLiteHelper;
+import com.squareup.picasso.Picasso;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 import static android.app.Activity.RESULT_OK;
@@ -38,7 +44,7 @@ public class PopulerFragment extends Fragment{
     private static final int CODE_DRAW_OVER_OTHER_APP_PERMISSION = 2084;
 
 
-    public Button button_fav;
+
     public Button button_kategori;
     ImageView ppButton;//Play pause button
 
@@ -55,6 +61,11 @@ public class PopulerFragment extends Fragment{
     Radio radio = new Radio();
 
     private static View rootView;
+
+    public ListView listView;
+
+
+
 
 
 
@@ -103,7 +114,7 @@ public class PopulerFragment extends Fragment{
                              Bundle savedInstanceState) {
 
         rootView=inflater.inflate(R.layout.fragment_populer,container,false);
-
+        listView = (ListView) rootView.findViewById(R.id.listView);
 
         //  Firebaseden veri çekme
         // Write a message to the database
@@ -112,7 +123,9 @@ public class PopulerFragment extends Fragment{
 
 
 
-        final ListView listView = (ListView) rootView.findViewById(R.id.listView);
+
+
+
 
         // Burdan devam edilecek. **********************************
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -175,8 +188,11 @@ public class PopulerFragment extends Fragment{
                     radio.controlButton = 1;
                     Radio.isAlreadyPlaying = true;
                 }
+
+
             }
         });
+
 
 
 
@@ -227,10 +243,16 @@ public class PopulerFragment extends Fragment{
 
 
 
+
+
         // Inflate the layout for this fragment
         return rootView;
 
     }
+
+
+
+
 
 
 

@@ -1,16 +1,22 @@
 package com.internetradio.bt.proje;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
+import java.io.ByteArrayOutputStream;
 import java.util.List;
 
 
@@ -47,6 +53,13 @@ public class CustomAdapter extends ArrayAdapter<RadioModel> {
 
     };*/
 
+    //SQLite
+    public static SQLiteHelper sqLiteHelper;
+
+    public ImageView image;
+    public String imageUrl;
+
+    public ImageButton button_fav;
 
 
 
@@ -60,13 +73,14 @@ public class CustomAdapter extends ArrayAdapter<RadioModel> {
             convertView=inflater.inflate(R.layout.kanal_layout,null);
         }
 
-        RadioModel radioByPosition=radioList.get(pos);
+        final RadioModel radioByPosition=radioList.get(pos);
 
 
-        ImageView imageView=(ImageView) convertView.findViewById(R.id.imageKanal);
+        final ImageView imageView=(ImageView) convertView.findViewById(R.id.imageKanal);
 
-        TextView textView_header=(TextView) convertView.findViewById(R.id.textHeader);
+        final TextView textView_header=(TextView) convertView.findViewById(R.id.textHeader);
         TextView textView_desc=(TextView) convertView.findViewById(R.id.textDescription);
+        button_fav=(ImageButton)convertView.findViewById(R.id.imageFavButton);
 
 
         Picasso.with(context).load(radioByPosition.getRadyoImg()).into(imageView);
@@ -76,7 +90,48 @@ public class CustomAdapter extends ArrayAdapter<RadioModel> {
         textView_desc.setText(radioByPosition.getRadyoDescription());
         /*textView_desc.setText(radioByPosition.getRadyoUrl());*/
 
+        //SQLite işlemleri
+        sqLiteHelper=new SQLiteHelper(getContext(),"RadyoDB.sqlite",null,1);
+
+        sqLiteHelper.queryData("CREATE TABLE IF NOT EXISTS RADYO(Id INTEGER PRIMARY KEY AUTOINCREMENT,radyoAd VARCHAR,radyoUrl VARCHAR,radyoImg BLOB,radyoKategori VARCHAR)");
+
+
+        //final int position=listView.getPositionForView(rootView);
+        // Favori butonuna tıklandığında
+        button_fav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+
+
+
+                try {
+                    sqLiteHelper.insertData(
+                            radioByPosition.getRadyoAd(),
+                            radioByPosition.getRadyoUrl(),
+                            ImageViewToByte(imageView),
+                            radioByPosition.getRadyoKategori()
+                    );
+                    Toast.makeText(getContext(), "Favorilere eklendi!",Toast.LENGTH_SHORT).show();
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+
+            }
+        });
+
 
         return convertView;
+    }
+
+    public static byte[] ImageViewToByte(ImageView image) {
+        Bitmap bitmap = ((BitmapDrawable)image.getDrawable()).getBitmap();
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] byteArray = stream.toByteArray();
+        return byteArray;
     }
 }

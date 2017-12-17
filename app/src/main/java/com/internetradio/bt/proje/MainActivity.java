@@ -32,7 +32,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements FragmentData{
 
 
-
+    public static SQLiteHelper sqLiteHelper;
     ChatFragment chatFragment;
 
     ArrayList<RadioModel> arrayList=new ArrayList<>();
