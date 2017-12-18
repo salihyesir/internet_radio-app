@@ -92,14 +92,14 @@ public class DatabaseRadyoAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 try {
-
+                    CustomAdapter.sqLiteHelper.deleteData(radyoFavModel.getId());
                     radyoList.remove(position);
                     notifyDataSetChanged();
-                    CustomAdapter.sqLiteHelper.deleteData(radyoFavModel.getId());
                     Toast.makeText(context, "İşlem tamam!", Toast.LENGTH_SHORT).show();
                 }catch (Exception e){
                     Log.e("error",e.getMessage());
                 }
+
 
 
             }

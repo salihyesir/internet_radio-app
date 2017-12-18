@@ -36,6 +36,8 @@ public class PopulerFragment extends Fragment{
     private static final int CODE_DRAW_OVER_OTHER_APP_PERMISSION = 2084;
 
 
+    FragmentData fragmentData;
+    String position;
     ImageView ppButton;//Play pause button
     ImageView nextButton;
     ImageView prevButton;
@@ -145,7 +147,17 @@ public class PopulerFragment extends Fragment{
                     count++;
                     if(count==2 && System.currentTimeMillis()-previousMil<=1000)
                     {
-                        Toast.makeText(getActivity(),"Double tap at"+pos,Toast.LENGTH_SHORT).show();
+                        position=arrayList.get(pos).getRadyoAd();
+                        fragmentData = (FragmentData) getActivity();
+                        fragmentData.subjectData(position);
+                        ChatFragment chatFragment = new ChatFragment();
+                        android.app.FragmentTransaction transaction = getActivity().getFragmentManager().beginTransaction();
+                        transaction.replace(R.id.fragment_pop, chatFragment);
+                        transaction.addToBackStack(null);
+
+                        // işlerimizi bitirelim
+                        transaction.commit();
+                        Toast.makeText(getActivity(),arrayList.get(pos).getRadyoAd()+" Chat Odasına Hoş Geldiniz",Toast.LENGTH_SHORT).show();
                         count=1;
                     }
                 }

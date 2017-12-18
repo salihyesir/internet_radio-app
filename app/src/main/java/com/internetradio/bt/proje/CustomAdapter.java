@@ -142,12 +142,17 @@ public class CustomAdapter extends ArrayAdapter<RadioModel> {
         Cursor cursor= CustomAdapter.sqLiteHelper.getData("SELECT * FROM RADYO");
         while (cursor.moveToNext()) {
             String radyoAd = cursor.getString(1);
-            if (ad.equals(radyoAd))
-                    return -1;
+            if (ad.equals(radyoAd)){
+                cursor.close();
+                return -1;
+            }
         }
-        if (cursor.moveToFirst() == false)
+        if (cursor.moveToFirst() == false) {
+            cursor.close();
             return 100;
+        }
 
+        cursor.close();
         return 1;
     }
 

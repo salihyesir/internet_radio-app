@@ -85,7 +85,7 @@ public class FavoriteFragment extends Fragment{
             String radyoKategori=cursor.getString(4);
             list.add(new RadyoFavModel(id,radyoAd,radyoUrl,image,radyoKategori));
         }
-
         adapter.notifyDataSetChanged();
+        cursor.close();
     }
 }
