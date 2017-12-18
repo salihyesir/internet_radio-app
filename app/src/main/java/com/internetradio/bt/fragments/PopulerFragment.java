@@ -245,8 +245,11 @@ public class PopulerFragment extends Fragment{
                 extras.putString(widgetDurum,durum);
                 // String deneme="";
                 //extras.putBoolean(deneme,false);
+                //stream baştan çalışmasın diye
+                radio.stopRadioPlayer();
                 Intent intent = new Intent(getActivity().getApplicationContext(), FloatingViewService.class);
                 intent.putExtras(extras);
+                getActivity().finish();
                 getActivity().startService(intent);
                 getActivity().finish();
             }

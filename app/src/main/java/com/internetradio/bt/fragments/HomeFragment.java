@@ -49,11 +49,7 @@ public class HomeFragment extends Fragment  {
     public HomeFragment() {
         // Required empty public constructor
     }
-
-
-
     //Geri çıkmayı engellemek için yani chat fragmenta dönüş engellenir
-
     @Override
     public void onResume() {
         super.onResume();
@@ -69,8 +65,6 @@ public class HomeFragment extends Fragment  {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
 
                 if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK){
-
-
                     Intent intent = new Intent(getActivity(), MainActivity.class);
                     getActivity().startActivity(intent);
                     getActivity().finish();
