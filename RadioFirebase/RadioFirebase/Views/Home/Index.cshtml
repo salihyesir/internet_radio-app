@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div style="padding:20px;" id="a">
+
+    </div>
+
+
+@ViewBag.a
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+    
+    $.getJSON("https://internet-radio-app-f63b9.firebaseio.com/Radios/.json", function (result) {
+        $.each(result, function (i, field) {
+            $('#a').append('<div style="width:50%; float:left;">' + field.radyoAd + '</div><div style="width:50%; float:left;"><a href="Home/Edit?id=' + i + '">Düzenle</a></div>');
+        });
+    });
+
+</script>
