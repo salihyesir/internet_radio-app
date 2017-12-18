@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fragment_chat"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black">
+
+
+    <ImageView
+        android:id="@+id/imageViewLogo"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_marginTop="154dp"
+        app:srcCompat="@drawable/not_connection" />
+
+
+    <TextView
+        android:id="@+id/notText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageViewLogo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="35dp"
+        android:fontFamily="sans-serif-smallcaps"
+        android:text="İNTERNET BAĞLANTINIZ YOK"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/notText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="23dp"
+        android:text="Lütfen İnternete bağlanın ve tekrar deneyin"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="@color/cardview_light_background"
+        android:textSize="14sp" />
+
+    <ImageView
+        android:id="@+id/imageViewReflesh"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_below="@+id/textView3"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/refresh"
+        app:srcCompat="@drawable/refresh" />
+
+</RelativeLayout>

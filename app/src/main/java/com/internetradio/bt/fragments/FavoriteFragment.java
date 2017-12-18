@@ -12,6 +12,7 @@ import android.widget.ListView;
 import com.internetradio.bt.proje.CustomAdapter;
 import com.internetradio.bt.proje.DatabaseRadyoAdapter;
 import com.internetradio.bt.proje.MainActivity;
+import com.internetradio.bt.proje.NotConnectionActivity;
 import com.internetradio.bt.proje.R;
 import com.internetradio.bt.proje.RadyoFavModel;
 
@@ -27,7 +28,7 @@ public class FavoriteFragment extends Fragment{
     public static ArrayList<RadyoFavModel> list;
     DatabaseRadyoAdapter adapter=null;
 
-
+    public static int sans=0;
 
 
 
@@ -51,15 +52,24 @@ public class FavoriteFragment extends Fragment{
          listView.setAdapter(adapter);
          try {
              veriGetir();
+             return rootView;
          }catch (NullPointerException e)
          {
+             sans ++;
              //Sqllite ilk başta hangi cihaz da denenirse denensin kesin null gelicek bundan emin olduğumdan uygulama en başta iki
              //defa başlatılır birince null gelen ikince tam dolacaktır
              Intent intent = new Intent(getActivity(), MainActivity.class);
              getActivity().startActivity(intent);
              getActivity().finish();
+             if(sans >2) {
+                 Intent intent1 = new Intent(getActivity(), NotConnectionActivity.class);
+                 getActivity().startActivity(intent1);
+                 getActivity().finish();
+             }
+             return rootView;
+
          }
-        return rootView;
+
     }
 
     private void veriGetir() {
