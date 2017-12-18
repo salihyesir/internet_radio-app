@@ -63,9 +63,9 @@ public class HomeFragment extends Fragment  {
         getView().setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-
                 if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK){
                     Intent intent = new Intent(getActivity(), MainActivity.class);
+                    getActivity().finish();
                     getActivity().startActivity(intent);
                     getActivity().finish();
                     return true;

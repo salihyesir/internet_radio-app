@@ -16,11 +16,16 @@ import android.widget.Toast;
 import com.internetradio.bt.fragments.FragmentData;
 import com.internetradio.bt.fragments.PopulerFragment;
 
+import static com.internetradio.bt.fragments.PopulerFragment.index;
+
 public class FloatingViewService extends Service
 {
 
     FragmentData fragmentData; //Interface referansı
 
+
+    ImageView nextButton;
+    ImageView prevButton;
 
     public static String stream ="";
     private static String streamUrl = "";
@@ -130,26 +135,55 @@ public class FloatingViewService extends Service
             }
         });
 
-        //Set the next button.
-        ImageView nextButton = (ImageView) mFloatingView.findViewById(R.id.next_btn);
+        nextButton = (ImageView) mFloatingView.findViewById(R.id.next_btn);
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(FloatingViewService.this, "Playing next radio channel.", Toast.LENGTH_LONG).show();
-
-
+                // Radyo sonda ise
+                index = index +1;
+                int temp =PopulerFragment.arrayList.size();
+                if (temp == index)
+                {
+                    index=0;
+                    streamUrl = PopulerFragment.arrayList.get(index).getRadyoUrl();
+                    radio.playRadioPlayer(streamUrl);
+                    ppButton.setImageResource(R.mipmap.ic_pause);
+                    Toast.makeText(getApplicationContext(), "Playing the " + PopulerFragment.arrayList.get(index).getRadyoAd() + ". ", Toast.LENGTH_LONG).show();
+                }
+                //normal durum
+                else {
+                    streamUrl = PopulerFragment.arrayList.get(index).getRadyoUrl();
+                    radio.playRadioPlayer(streamUrl);
+                    ppButton.setImageResource(R.mipmap.ic_pause);
+                    Toast.makeText(getApplicationContext(), "Playing the " + PopulerFragment.arrayList.get(index).getRadyoAd() + ". ", Toast.LENGTH_LONG).show();
+                }
             }
         });
-        //
-        //Set the pause button.
-        ImageView prevButton = (ImageView) mFloatingView.findViewById(R.id.prev_btn);
+
+        prevButton = (ImageView) mFloatingView.findViewById(R.id.prev_btn);
         prevButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(FloatingViewService.this, "Playing previous song.", Toast.LENGTH_LONG).show();
-
+                //radyo başta ise
+                if (index == 0)
+                {
+                    index =PopulerFragment.arrayList.size()-1;
+                    streamUrl = PopulerFragment.arrayList.get(index).getRadyoUrl();
+                    radio.playRadioPlayer(streamUrl);
+                    ppButton.setImageResource(R.mipmap.ic_pause);
+                    Toast.makeText(getApplicationContext(), "Playing the " + PopulerFragment.arrayList.get(index).getRadyoAd() + ". ", Toast.LENGTH_LONG).show();
+                }
+                //Normal durum
+                else{
+                    index = index - 1;
+                    streamUrl = PopulerFragment.arrayList.get(index).getRadyoUrl();
+                    radio.playRadioPlayer(streamUrl);
+                    ppButton.setImageResource(R.mipmap.ic_pause);
+                    Toast.makeText(getApplicationContext(), "Playing the " + PopulerFragment.arrayList.get(index).getRadyoAd() + ". ", Toast.LENGTH_LONG).show();
+                }
             }
         });
+
         //Bu expanded kısmındaki button baloncuğun açılmış hali
         //Set the close button
         ImageView closeButton = (ImageView) mFloatingView.findViewById(R.id.close_button);

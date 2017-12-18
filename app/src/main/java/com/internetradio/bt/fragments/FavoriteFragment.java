@@ -53,7 +53,6 @@ public class FavoriteFragment extends Fragment{
          listView.setAdapter(adapter);
          try {
              veriGetir();
-             return rootView;
          }catch (NullPointerException e)
          {
 
@@ -70,7 +69,7 @@ public class FavoriteFragment extends Fragment{
              return rootView;
 
          }
-
+        return rootView;
     }
 
     private void veriGetir() {
@@ -88,9 +87,11 @@ public class FavoriteFragment extends Fragment{
 
             list.add(new RadyoFavModel(id,radyoAd,radyoUrl,image,radyoKategori));
         }
-
         adapter.notifyDataSetChanged();
 
+        if (cursor != null && !cursor.isClosed())
+            cursor.close();
     }
+
 
 }

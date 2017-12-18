@@ -140,12 +140,13 @@ public class CustomAdapter extends ArrayAdapter<RadioModel> {
         while (cursor.moveToNext())
         {
             id=cursor.getInt(0);
-            System.out.println(id);
             String radyoAd=cursor.getString(1);
             if (ad.equals(radyoAd)){
                 return -1;
             }
         }
+        if (cursor != null && !cursor.isClosed())
+            cursor.close();
         return id;
     }
 

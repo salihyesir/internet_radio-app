@@ -21,7 +21,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.internetradio.bt.proje.CustomAdapter;
 import com.internetradio.bt.proje.FloatingViewService;
-import com.internetradio.bt.proje.MainActivity;
 import com.internetradio.bt.proje.R;
 import com.internetradio.bt.proje.Radio;
 import com.internetradio.bt.proje.RadioModel;
@@ -38,7 +37,10 @@ public class PopulerFragment extends Fragment{
 
 
     ImageView ppButton;//Play pause button
+    ImageView nextButton;
+    ImageView prevButton;
 
+    public static int index=0;
 
     //Bundle sayfalar arası geçiş
     private static String streamUrl = null;
@@ -47,13 +49,14 @@ public class PopulerFragment extends Fragment{
     public static String widgetDurum = null;
     public static String durum="";
 
+
     Radio radio = new Radio();
 
     private static View rootView;
 
     public ListView listView;
 
-    ArrayList<RadioModel> arrayList=new ArrayList<>();
+    public static ArrayList<RadioModel> arrayList=new ArrayList<>();
 
     // Write a message to the database
     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -85,15 +88,10 @@ public class PopulerFragment extends Fragment{
 
     }
 
-    public void reloadFavori(){
-        Intent intent = new Intent(getActivity(), MainActivity.class);
-        getActivity().startActivity(intent);
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         rootView=inflater.inflate(R.layout.fragment_populer,container,false);
         listView = (ListView) rootView.findViewById(R.id.listView);
 
@@ -102,15 +100,18 @@ public class PopulerFragment extends Fragment{
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("Radios");
 
+
         // Burdan devam edilecek. **********************************
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 arrayList.clear();
 
-                for(DataSnapshot radioSnapshot: dataSnapshot.getChildren()){
+                for(DataSnapshot radioSnapshot: dataSnapshot.getChildren())
+                {
                     RadioModel radio=radioSnapshot.getValue(RadioModel.class);
                     arrayList.add(radio);
+
                 }
                 //Çekilen verilerin lisview'e aktarımı
                 try {
@@ -155,7 +156,7 @@ public class PopulerFragment extends Fragment{
                     count=1;
                     previousMil=System.currentTimeMillis();
 
-
+                    index = pos;
                     streamUrl=arrayList.get(pos).getRadyoUrl();
                     Toast.makeText(getActivity().getApplicationContext(), "Playing the radio.", Toast.LENGTH_LONG).show();
                     ppButton.setImageResource(R.mipmap.ic_pause);
@@ -188,8 +189,60 @@ public class PopulerFragment extends Fragment{
             }
         });
 
+
         if (Radio.isAlreadyPlaying == false)
             radio.initializeMediaPlayer();
+
+        nextButton = (ImageView) rootView.findViewById(R.id.mainNext_btn);
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Radyo sonda ise
+                index = index +1;
+                int temp =arrayList.size();
+                if (temp == index)
+                {
+                    index=0;
+                    streamUrl = arrayList.get(index).getRadyoUrl();
+                    radio.playRadioPlayer(streamUrl);
+                    ppButton.setImageResource(R.mipmap.ic_pause);
+                    Toast.makeText(getActivity().getApplicationContext(), "Playing the " + arrayList.get(index).getRadyoAd() + ". ", Toast.LENGTH_LONG).show();
+                }
+                //normal durum
+                else {
+                    streamUrl = arrayList.get(index).getRadyoUrl();
+                    radio.playRadioPlayer(streamUrl);
+                    ppButton.setImageResource(R.mipmap.ic_pause);
+                    Toast.makeText(getActivity().getApplicationContext(), "Playing the " + arrayList.get(index).getRadyoAd() + ". ", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        prevButton = (ImageView) rootView.findViewById(R.id.mainPrev_btn);
+        prevButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //radyo başta ise
+                if (index == 0)
+                {
+                    index =arrayList.size()-1;
+                  streamUrl = arrayList.get(index).getRadyoUrl();
+                  radio.playRadioPlayer(streamUrl);
+                  ppButton.setImageResource(R.mipmap.ic_pause);
+                    Toast.makeText(getActivity().getApplicationContext(), "Playing the " + arrayList.get(index).getRadyoAd() + ". ", Toast.LENGTH_LONG).show();
+                }
+                //Normal durum
+                else{
+                    index = index - 1;
+
+                    streamUrl = arrayList.get(index).getRadyoUrl();
+                    radio.playRadioPlayer(streamUrl);
+                    ppButton.setImageResource(R.mipmap.ic_pause);
+                    Toast.makeText(getActivity().getApplicationContext(), "Playing the " + arrayList.get(index).getRadyoAd() + ". ", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
 
         //Widget
         //Check if the application has draw over other apps permission or not?

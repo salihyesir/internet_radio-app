@@ -48,7 +48,7 @@ public class Radio  {
         try {
 
             if (streamUrl == null)
-                streamUrl = "http://17753.live.streamtheworld.com/SUPER_FM.mp3";
+                streamUrl = "http://windows.showradyo.com.tr";
             player.setDataSource(streamUrl);
         } catch (IllegalArgumentException e) {
             e.printStackTrace();

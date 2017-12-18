@@ -70,6 +70,12 @@ public class MainActivity extends AppCompatActivity implements FragmentData, Con
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //İnternet yok ise kullanıcının uygulamaya girmesinin bir anlamı yok
+        if(ConnectivityReceiver.isConnected() == false) {
+            Intent intent1 = new Intent(MainActivity.this, NotConnectionActivity.class);
+            startActivity(intent1);
+            finish();
+        }
         fAuth = FirebaseAuth.getInstance();
         firebaseUser = fAuth.getCurrentUser(); // authenticate olan kullaniciyi aliyoruz eger var ise
 
@@ -82,10 +88,6 @@ public class MainActivity extends AppCompatActivity implements FragmentData, Con
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
         setupTabIcons();
-
-
-
-
 
     }
     private void setupTabIcons() {
@@ -177,7 +179,9 @@ public class MainActivity extends AppCompatActivity implements FragmentData, Con
             Radio radio = new Radio();
             radio.stopRadioPlayer();
             Intent intent = new Intent(this, MainActivity.class);
+            finish();
             this.startActivity(intent);
+
 
         }
         if (item.getItemId() == R.id.chatOut)
