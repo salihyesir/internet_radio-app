@@ -61,8 +61,4 @@ public class RadioModel {
     public void setRadyoDescription(String radyoDescription) {
         this.radyoDescription = radyoDescription;
     }
-
-
-
-
 }
