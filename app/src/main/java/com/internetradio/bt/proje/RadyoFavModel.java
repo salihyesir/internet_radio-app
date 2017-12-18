@@ -10,6 +10,7 @@ public class RadyoFavModel {
     private String dbRadyoUrl;
     private byte[] dbRadyoImg;
     private String dbRadyoKategori;
+    public static int idTemp;
 
     public RadyoFavModel(int id, String dbRadyoAd, String dbRadyoUrl, byte[] dbRadyoImg, String dbRadyoKategori) {
         this.id = id;
@@ -20,10 +21,12 @@ public class RadyoFavModel {
     }
 
     public int getId() {
+
         return id;
     }
 
     public void setId(int id) {
+
         this.id = id;
     }
 

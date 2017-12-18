@@ -1,21 +1,19 @@
 package com.internetradio.bt.fragments;
+
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.internetradio.bt.proje.CustomAdapter;
 import com.internetradio.bt.proje.DatabaseRadyoAdapter;
 import com.internetradio.bt.proje.MainActivity;
 import com.internetradio.bt.proje.R;
 import com.internetradio.bt.proje.RadyoFavModel;
-import com.internetradio.bt.proje.SQLiteHelper;
 
 import java.util.ArrayList;
 
@@ -26,8 +24,9 @@ public class FavoriteFragment extends Fragment{
 
     private static View rootView;
     ListView listView;
-    ArrayList<RadyoFavModel> list;
+    public static ArrayList<RadyoFavModel> list;
     DatabaseRadyoAdapter adapter=null;
+
 
 
 
@@ -50,10 +49,22 @@ public class FavoriteFragment extends Fragment{
          list=new ArrayList<>();
          adapter=new DatabaseRadyoAdapter(getActivity(), R.layout.fav_radyo_item,list);
          listView.setAdapter(adapter);
+         try {
+             veriGetir();
+         }catch (NullPointerException e)
+         {
+             //Sqllite ilk başta hangi cihaz da denenirse denensin kesin null gelicek bundan emin olduğumdan uygulama en başta iki
+             //defa başlatılır birince null gelen ikince tam dolacaktır
+             Intent intent = new Intent(getActivity(), MainActivity.class);
+             getActivity().startActivity(intent);
+             getActivity().finish();
+         }
+        return rootView;
+    }
 
+    private void veriGetir() {
 
-         //Veritabanından tüm verileri getir.
-
+        //Veritabanından tüm verileri getir.
         Cursor cursor= CustomAdapter.sqLiteHelper.getData("SELECT * FROM RADYO");
         list.clear();
 
@@ -69,9 +80,6 @@ public class FavoriteFragment extends Fragment{
 
         adapter.notifyDataSetChanged();
 
-
-
-        return rootView;
     }
 
 }

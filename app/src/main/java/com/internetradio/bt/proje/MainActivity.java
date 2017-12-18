@@ -1,7 +1,11 @@
 package com.internetradio.bt.proje;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -12,14 +16,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.internetradio.bt.fragments.CategoryFragment;
 import com.internetradio.bt.fragments.ChatFragment;
 import com.internetradio.bt.fragments.FavoriteFragment;
 import com.internetradio.bt.fragments.FragmentData;
@@ -29,11 +34,10 @@ import com.internetradio.bt.fragments.RadioChatFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements FragmentData{
+public class MainActivity extends AppCompatActivity implements FragmentData, ConnectivityReceiver.ConnectivityReceiverListener{
 
 
-    public static SQLiteHelper sqLiteHelper;
-    ChatFragment chatFragment;
+
 
     ArrayList<RadioModel> arrayList=new ArrayList<>();
 
@@ -54,7 +58,6 @@ public class MainActivity extends AppCompatActivity implements FragmentData{
     //Resimler
     private int[] tabIcons = {
             R.drawable.ic_tab_radio,
-            R.drawable.ic_tab_category,
             R.drawable.ic_tab_favourite,
             R.drawable.ic_tab_call
 
@@ -89,13 +92,11 @@ public class MainActivity extends AppCompatActivity implements FragmentData{
         tabLayout.getTabAt(0).setIcon(tabIcons[0]);
         tabLayout.getTabAt(1).setIcon(tabIcons[1]);
         tabLayout.getTabAt(2).setIcon(tabIcons[2]);
-        tabLayout.getTabAt(3).setIcon(tabIcons[3]);
     }
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFrag(new PopulerFragment(), "");
-        adapter.addFrag(new CategoryFragment(), "");
         adapter.addFrag(new FavoriteFragment(), "");
         adapter.addFrag(new RadioChatFragment(),"");
         viewPager.setAdapter(adapter);
@@ -200,6 +201,57 @@ public class MainActivity extends AppCompatActivity implements FragmentData{
 
 
         return super.onOptionsItemSelected(item);
+    }
+
+    // Method to manually check connection status
+    private void checkConnection() {
+        boolean isConnected = ConnectivityReceiver.isConnected();
+        showSnack(isConnected);
+    }
+
+    // Showing the status in Snackbar
+    private void showSnack(boolean isConnected) {
+        String message;
+        int color;
+
+        if (isConnected) {
+            message = "İnternet Bağlantınız Sağlandı!";
+            color = Color.WHITE;
+        } else {
+            message = "İnternet Bağlantınızı Kontrol ediniz";
+            color = Color.RED;
+        }
+
+        Snackbar snackbar = Snackbar
+                .make(findViewById(R.id.fabInternet), message, Snackbar.LENGTH_LONG);
+
+        View sbView = snackbar.getView();
+        TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+        textView.setTextColor(color);
+        snackbar.show();
+    }
+
+    private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        return cm.getActiveNetworkInfo() != null;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // register connection status listener
+        MyApplication.getInstance().setConnectivityListener(this);
+    }
+
+    /**
+     * Callback will be triggered when there is change in
+     * network connection
+     */
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        showSnack(isConnected);
     }
 
 }

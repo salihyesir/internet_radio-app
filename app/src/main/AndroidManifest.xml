@@ -2,14 +2,19 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.internetradio.bt.proje">
 
+
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!-- Mobil bağlantıya izin-->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
+
 
     <!-- widget için-->
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
 
 
     <application
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -22,13 +27,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".Radio" />
-
         <service
             android:name="com.internetradio.bt.proje.FloatingViewService"
             android:enabled="true"
             android:exported="false"/>
+
+        <receiver
+            android:name=".ConnectivityReceiver"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
     </application>
+
 
 </manifest>

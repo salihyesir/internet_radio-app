@@ -3,7 +3,6 @@ package com.internetradio.bt.proje;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +24,8 @@ public class DatabaseRadyoAdapter extends BaseAdapter {
     private Context context;
     private int layout;
     private ArrayList<RadyoFavModel> radyoList;
+
+
     //SQLite
     public static SQLiteHelper sqLiteHelper;
 
@@ -57,7 +58,7 @@ public class DatabaseRadyoAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         View row=convertView;
         ViewHolder holder=new ViewHolder();
@@ -92,11 +93,10 @@ public class DatabaseRadyoAdapter extends BaseAdapter {
             public void onClick(View v) {
                 try {
 
-
+                    radyoList.remove(position);
+                    notifyDataSetChanged();
                     CustomAdapter.sqLiteHelper.deleteData(radyoFavModel.getId());
                     Toast.makeText(context, "İşlem tamam!", Toast.LENGTH_SHORT).show();
-
-
                 }catch (Exception e){
                     Log.e("error",e.getMessage());
                 }

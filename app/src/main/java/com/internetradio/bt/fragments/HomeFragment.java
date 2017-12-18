@@ -1,7 +1,9 @@
 package com.internetradio.bt.fragments;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -125,6 +127,7 @@ public class HomeFragment extends Fragment  {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 
+            @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 

@@ -54,11 +54,12 @@
             <TextView
                 android:id="@+id/txtRegister"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="33dp"
                 android:layout_marginTop="15dp"
+                android:text="Kayıt Ol!"
                 android:textAlignment="center"
-                android:textColor="#000"
-                android:text="Kayıt Ol!" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Widget.DropDownItem"
+                android:textColor="#000" />
 
         </LinearLayout>
 

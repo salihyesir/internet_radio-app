@@ -29,6 +29,7 @@ import com.internetradio.bt.proje.R;
 
 public class RadioChatFragment extends Fragment {
 
+
     private EditText editTextUserName;
     private EditText editTextUserPassword;
     private Button buttonLogin;

@@ -6,6 +6,8 @@ package com.internetradio.bt.fragments;
 
 public interface FragmentData {
 
+
+
     public void subjectData(String pos);
 
 

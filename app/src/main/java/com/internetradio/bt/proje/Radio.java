@@ -10,9 +10,6 @@ import java.io.IOException;
 
 public class Radio  {
 
-
-
-
     private static MediaPlayer player;
 
     //Bundle sayfalar arası geçiş

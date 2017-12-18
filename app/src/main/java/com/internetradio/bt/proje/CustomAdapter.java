@@ -1,6 +1,7 @@
 package com.internetradio.bt.proje;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.support.annotation.NonNull;
@@ -10,10 +11,10 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.internetradio.bt.fragments.FavoriteFragment;
 import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
@@ -27,6 +28,15 @@ public class CustomAdapter extends ArrayAdapter<RadioModel> {
     private List<RadioModel> radioList;
 
 
+
+
+    //SQLite
+    public static SQLiteHelper sqLiteHelper;
+
+    public ImageView image;
+    public String imageUrl;
+
+    public ImageButton button_fav;
 
 
     public CustomAdapter(@NonNull Context context, List<RadioModel> radioList){
@@ -53,20 +63,12 @@ public class CustomAdapter extends ArrayAdapter<RadioModel> {
 
     };*/
 
-    //SQLite
-    public static SQLiteHelper sqLiteHelper;
-
-    public ImageView image;
-    public String imageUrl;
-
-    public ImageButton button_fav;
-
 
 
 
 
     @Override
-    public View getView(int pos, View convertView, ViewGroup viewGroup) {
+    public View getView(final int pos, View convertView, ViewGroup viewGroup) {
         if(convertView==null)
         {
             LayoutInflater inflater=(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -101,30 +103,50 @@ public class CustomAdapter extends ArrayAdapter<RadioModel> {
         button_fav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-
-
-
                 try {
-                    sqLiteHelper.insertData(
-                            radioByPosition.getRadyoAd(),
-                            radioByPosition.getRadyoUrl(),
-                            ImageViewToByte(imageView),
-                            radioByPosition.getRadyoKategori()
-                    );
-                    Toast.makeText(getContext(), "Favorilere eklendi!",Toast.LENGTH_SHORT).show();
+                    int id = veriKontrol(radioByPosition.getRadyoAd());
+                    if (id !=-1 ) {
+                        sqLiteHelper.insertData(
+                                radioByPosition.getRadyoAd(),
+                                radioByPosition.getRadyoUrl(),
+                                ImageViewToByte(imageView),
+                                radioByPosition.getRadyoKategori()
+                        );
 
+                        Toast.makeText(getContext(), "Favorilere eklendi!", Toast.LENGTH_SHORT).show();
+                        FavoriteFragment.list.add(new RadyoFavModel(id,radioByPosition.getRadyoAd(),
+                                radioByPosition.getRadyoUrl(),ImageViewToByte(imageView),radioByPosition.getRadyoKategori()));
+                        System.out.println(radioByPosition);
+                        System.out.println(radioList);
+                        notifyDataSetChanged();
+                    }
+                    else {
+                        Toast.makeText(getContext(), "Favorilerde bulunmakta!", Toast.LENGTH_SHORT).show();
+                    }
                 }catch (Exception e){
                     e.printStackTrace();
                 }
-                notifyDataSetChanged();
-
             }
         });
 
 
         return convertView;
+    }
+
+    private int veriKontrol(String ad) {
+        //Veritabanından tüm verileri getir.
+        Cursor cursor= CustomAdapter.sqLiteHelper.getData("SELECT * FROM RADYO");
+        int id = -1;
+        while (cursor.moveToNext())
+        {
+            id=cursor.getInt(0);
+            System.out.println(id);
+            String radyoAd=cursor.getString(1);
+            if (ad.equals(radyoAd)){
+                return -1;
+            }
+        }
+        return id;
     }
 
     public static byte[] ImageViewToByte(ImageView image) {

@@ -59,8 +59,6 @@ public class FloatingViewService extends Service
             {
                 ppButton.setImageResource(R.mipmap.ic_pause);
                 radio.playRadioPlayer(streamUrl);
-                Radio.isAlreadyPlaying= true;
-                radio.controlButton = 1;
             }
         }
         return START_STICKY;
@@ -103,8 +101,6 @@ public class FloatingViewService extends Service
         closeButtonCollapsed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Radio.isAlreadyPlaying = false;
-                radio.controlButton = 0;
                 radio.stopRadioPlayer();
                 //close the service and remove the from from the window
                 stopSelf();
@@ -123,16 +119,12 @@ public class FloatingViewService extends Service
                     Toast.makeText(FloatingViewService.this, "Playing the radio.", Toast.LENGTH_LONG).show();
                     ppButton.setImageResource(R.mipmap.ic_pause);
                     radio.playRadioPlayer(streamUrl);
-                    radio.controlButton=1;
-                    Radio.isAlreadyPlaying = true;
                 }
                 //Pause radio
                 else if(radio.controlButton==1){
                     Toast.makeText(FloatingViewService.this, "Pausing the radio.", Toast.LENGTH_LONG).show();
                     ppButton.setImageResource(R.mipmap.ic_play);
                     radio.stopRadioPlayer();
-                    Radio.isAlreadyPlaying =false;
-                    radio.controlButton=0;
                 }
 
             }

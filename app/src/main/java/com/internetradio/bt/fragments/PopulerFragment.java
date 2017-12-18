@@ -1,9 +1,6 @@
 package com.internetradio.bt.fragments;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,8 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -26,13 +21,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.internetradio.bt.proje.CustomAdapter;
 import com.internetradio.bt.proje.FloatingViewService;
+import com.internetradio.bt.proje.MainActivity;
 import com.internetradio.bt.proje.R;
 import com.internetradio.bt.proje.Radio;
 import com.internetradio.bt.proje.RadioModel;
-import com.internetradio.bt.proje.SQLiteHelper;
-import com.squareup.picasso.Picasso;
 
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 import static android.app.Activity.RESULT_OK;
@@ -44,12 +37,8 @@ public class PopulerFragment extends Fragment{
     private static final int CODE_DRAW_OVER_OTHER_APP_PERMISSION = 2084;
 
 
-
-    public Button button_kategori;
     ImageView ppButton;//Play pause button
 
-
-    private static MediaPlayer player;
 
     //Bundle sayfalar arası geçiş
     private static String streamUrl = null;
@@ -64,26 +53,15 @@ public class PopulerFragment extends Fragment{
 
     public ListView listView;
 
-
-
-
-
-
-
     ArrayList<RadioModel> arrayList=new ArrayList<>();
 
     // Write a message to the database
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference("Radios");
 
-
     public PopulerFragment() {
         // Required empty public constructor
     }
-
-
-
-
 
     @Override
     public void onResume() {
@@ -105,8 +83,11 @@ public class PopulerFragment extends Fragment{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+    }
 
-
+    public void reloadFavori(){
+        Intent intent = new Intent(getActivity(), MainActivity.class);
+        getActivity().startActivity(intent);
     }
 
     @Override
@@ -120,12 +101,6 @@ public class PopulerFragment extends Fragment{
         // Write a message to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("Radios");
-
-
-
-
-
-
 
         // Burdan devam edilecek. **********************************
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -185,17 +160,11 @@ public class PopulerFragment extends Fragment{
                     Toast.makeText(getActivity().getApplicationContext(), "Playing the radio.", Toast.LENGTH_LONG).show();
                     ppButton.setImageResource(R.mipmap.ic_pause);
                     radio.playRadioPlayer(streamUrl);
-                    radio.controlButton = 1;
-                    Radio.isAlreadyPlaying = true;
                 }
 
 
             }
         });
-
-
-
-
 
         ppButton = (ImageView) rootView.findViewById(R.id.mainpp_btn);
 
@@ -208,16 +177,12 @@ public class PopulerFragment extends Fragment{
                     Toast.makeText(getActivity().getApplicationContext(), "Playing the radio.", Toast.LENGTH_LONG).show();
                     ppButton.setImageResource(R.mipmap.ic_pause);
                     radio.playRadioPlayer(streamUrl);
-                    radio.controlButton = 1;
-                    Radio.isAlreadyPlaying = true;
                 }
                 //Pause radio
                 else if(radio.controlButton==1){
                     Toast.makeText(getActivity().getApplicationContext(), "Pausing the radio.", Toast.LENGTH_LONG).show();
                     ppButton.setImageResource(R.mipmap.ic_play);
                     radio.stopRadioPlayer();
-                    radio.controlButton = 0;
-                    Radio.isAlreadyPlaying = false;
                 }
 
             }
@@ -241,22 +206,10 @@ public class PopulerFragment extends Fragment{
             initializeView();
         }
 
-
-
-
-
         // Inflate the layout for this fragment
         return rootView;
 
     }
-
-
-
-
-
-
-
-
 
 
     @Override
@@ -268,13 +221,11 @@ public class PopulerFragment extends Fragment{
         //       }
 
     }
-
     @Override
     public void onDestroy() {
         super.onDestroy();
 
     }
-
     /*
         * widget
         * */
@@ -283,8 +234,6 @@ public class PopulerFragment extends Fragment{
         rootView.findViewById(R.id.music_playerlogo).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
                 if (Radio.isAlreadyPlaying == true){
                     durum="play";
                 }
@@ -294,14 +243,8 @@ public class PopulerFragment extends Fragment{
                 Bundle extras = new Bundle();
                 extras.putString(stream,streamUrl);
                 extras.putString(widgetDurum,durum);
-
-
-
                 // String deneme="";
                 //extras.putBoolean(deneme,false);
-
-
-
                 Intent intent = new Intent(getActivity().getApplicationContext(), FloatingViewService.class);
                 intent.putExtras(extras);
                 getActivity().startService(intent);
@@ -309,7 +252,6 @@ public class PopulerFragment extends Fragment{
             }
         });
     }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
