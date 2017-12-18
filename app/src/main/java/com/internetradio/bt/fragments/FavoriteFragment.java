@@ -63,8 +63,9 @@ public class FavoriteFragment extends Fragment{
              getActivity().finish();
              if(ConnectivityReceiver.isConnected() == false) {
                  Intent intent1 = new Intent(getActivity(), NotConnectionActivity.class);
-                 getActivity().startActivity(intent1);
                  getActivity().finish();
+                 getActivity().startActivity(intent1);
+
              }
              return rootView;
 
@@ -72,26 +73,19 @@ public class FavoriteFragment extends Fragment{
         return rootView;
     }
 
-    private void veriGetir() {
-
+    public void veriGetir() {
         //Veritabanından tüm verileri getir.
         Cursor cursor= CustomAdapter.sqLiteHelper.getData("SELECT * FROM RADYO");
         list.clear();
-
         while (cursor.moveToNext()){
             int id=cursor.getInt(0);
             String radyoAd=cursor.getString(1);
             String radyoUrl=cursor.getString(2);
             byte[] image=cursor.getBlob(3);
             String radyoKategori=cursor.getString(4);
-
             list.add(new RadyoFavModel(id,radyoAd,radyoUrl,image,radyoKategori));
         }
+
         adapter.notifyDataSetChanged();
-
-        if (cursor != null && !cursor.isClosed())
-            cursor.close();
     }
-
-
 }

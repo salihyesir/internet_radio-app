@@ -194,6 +194,7 @@ public class MainActivity extends AppCompatActivity implements FragmentData, Con
                 transaction.addToBackStack(null);
 
                 Intent intent = new Intent(this, MainActivity.class);
+                finish();
                 this.startActivity(intent);
         }
         if(item.getItemId()== R.id.exit)
