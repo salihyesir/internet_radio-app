@@ -1,6 +1,7 @@
 package com.internetradio.bt.proje;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -116,9 +117,12 @@ public class CustomAdapter extends ArrayAdapter<RadioModel> {
                         Toast.makeText(getContext(), "Favorilere eklendi!", Toast.LENGTH_SHORT).show();
                         FavoriteFragment.list.add(new RadyoFavModel(id,radioByPosition.getRadyoAd(),
                                 radioByPosition.getRadyoUrl(),ImageViewToByte(imageView),radioByPosition.getRadyoKategori()));
-                        System.out.println(radioByPosition);
-                        System.out.println(radioList);
                         notifyDataSetChanged();
+                        if (id ==100)
+                        {
+                            Intent intent = new Intent(getContext(), MainActivity.class);
+                            getContext().startActivity(intent);
+                        }
                     }
                     else {
                         Toast.makeText(getContext(), "Favorilerde bulunmakta!", Toast.LENGTH_SHORT).show();
@@ -136,18 +140,20 @@ public class CustomAdapter extends ArrayAdapter<RadioModel> {
     private int veriKontrol(String ad) {
         //Veritabanından tüm verileri getir.
         Cursor cursor= CustomAdapter.sqLiteHelper.getData("SELECT * FROM RADYO");
-        int id = -1;
-        while (cursor.moveToNext())
-        {
-            id=cursor.getInt(0);
-            String radyoAd=cursor.getString(1);
+        while (cursor.moveToNext()) {
+            String radyoAd = cursor.getString(1);
             if (ad.equals(radyoAd)){
+                cursor.close();
                 return -1;
             }
         }
-        if (cursor != null && !cursor.isClosed())
+        if (cursor.moveToFirst() == false) {
             cursor.close();
-        return id;
+            return 100;
+        }
+
+        cursor.close();
+        return 1;
     }
 
     public static byte[] ImageViewToByte(ImageView image) {
