@@ -41,26 +41,27 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="14dp"
         android:layout_marginStart="14dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
         android:layout_toEndOf="@+id/imageKanal"
         android:layout_toRightOf="@+id/imageKanal"
         android:clickable="false"
         android:focusable="false"
         android:focusableInTouchMode="false"
         android:text="TextView"
-        android:textSize="15sp" />
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/textDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textHeader"
+        android:layout_alignStart="@+id/textHeader"
         android:layout_below="@+id/textHeader"
-        android:layout_centerHorizontal="true"
         android:clickable="false"
         android:focusable="false"
         android:focusableInTouchMode="false"
         android:text="TextView"
-        android:textSize="12sp" />
+        android:textSize="9sp" />
 
     <ImageButton
         android:id="@+id/imageFavButton"

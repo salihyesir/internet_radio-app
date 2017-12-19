@@ -1,8 +1,11 @@
 package com.internetradio.bt.proje;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,10 +24,12 @@ import java.util.ArrayList;
 
 public class DatabaseRadyoAdapter extends BaseAdapter {
 
+    private static int temp=-1;
     private Context context;
     private int layout;
     private ArrayList<RadyoFavModel> radyoList;
 
+    Radio radio = new Radio();
 
     //SQLite
     public static SQLiteHelper sqLiteHelper;
@@ -52,6 +57,7 @@ public class DatabaseRadyoAdapter extends BaseAdapter {
 
     private class ViewHolder{
         ImageView imageView;
+        ImageView radyoDurum;
         TextView radyoAd, radyoUrl, radyoKategori;
         ImageButton deleteButton;
 
@@ -69,10 +75,12 @@ public class DatabaseRadyoAdapter extends BaseAdapter {
 
             //Delete button
             holder.deleteButton=(ImageButton)row.findViewById(R.id.imageDelButton);
+            holder.radyoDurum=(ImageView) row.findViewById(R.id.favpp_btn);
 
             holder.radyoAd=(TextView)row.findViewById(R.id.textHeaderFav);
             holder.imageView=(ImageView)row.findViewById(R.id.imageRadyoFav);
             holder.radyoKategori=(TextView)row.findViewById(R.id.textDescriptionFav);
+
             row.setTag(holder);
         }else{
             holder=(ViewHolder)row.getTag();
@@ -93,19 +101,46 @@ public class DatabaseRadyoAdapter extends BaseAdapter {
             public void onClick(View v) {
                 try {
                     CustomAdapter.sqLiteHelper.deleteData(radyoFavModel.getId());
+
                     radyoList.remove(position);
                     notifyDataSetChanged();
                     Toast.makeText(context, "İşlem tamam!", Toast.LENGTH_SHORT).show();
                 }catch (Exception e){
                     Log.e("error",e.getMessage());
                 }
-
-
-
             }
 
         });
 
+// Bu kısın yarım kaldı.
+        final ViewHolder finalHolder = holder;
+        holder.radyoDurum.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @SuppressLint("ResourceType")
+            @Override
+            public void onClick(View v) {
+                if(position != temp) {
+                    radio.playRadioPlayer(radyoList.get(position).getDbRadyoUrl());
+                    finalHolder.radyoDurum.setVisibility(position);
+                    finalHolder.radyoDurum.setImageResource(R.mipmap.ic_pause);
+                }
+                else if(position == temp) {
+                    radio.stopRadioPlayer();
+                    finalHolder.radyoDurum.setImageResource(R.mipmap.ic_play);
+                }
+                temp = position;
+
+                for(int i=0; i<getCount();i++ ) {
+
+                    if (position==i)
+                        continue;
+
+                    finalHolder.radyoDurum.setVisibility(position);
+                }
+
+
+            }
+        });
         return row;
     }
 }

@@ -20,31 +20,47 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="14dp"
         android:layout_marginStart="14dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
         android:layout_toEndOf="@+id/imageRadyoFav"
         android:layout_toRightOf="@+id/imageRadyoFav"
         android:clickable="false"
         android:focusable="false"
         android:focusableInTouchMode="false"
         android:text="TextView"
-        android:textSize="15sp" />
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/textDescriptionFav"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textHeaderFav"
+        android:layout_alignStart="@+id/textHeaderFav"
         android:layout_below="@+id/textHeaderFav"
-        android:layout_centerHorizontal="true"
         android:clickable="false"
         android:focusable="false"
         android:focusableInTouchMode="false"
         android:text="TextView"
-        android:textSize="12sp" />
+        android:textSize="9sp" />
+
+    <ImageView
+        android:id="@+id/favpp_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imageDelButton"
+        android:layout_alignTop="@+id/imageDelButton"
+        android:layout_gravity="center_vertical"
+        android:layout_marginEnd="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_toLeftOf="@+id/imageDelButton"
+        android:layout_toStartOf="@+id/imageDelButton"
+        android:src="@mipmap/ic_play"
+        android:visibility="invisible" />
 
     <ImageButton
         android:id="@+id/imageDelButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/textHeaderFav"

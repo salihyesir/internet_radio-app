@@ -10,5 +10,7 @@ public interface FragmentData {
 
     public void subjectData(String pos);
 
+    public void setImage(boolean ppBut);
+
 
 }

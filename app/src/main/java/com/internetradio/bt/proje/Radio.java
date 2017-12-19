@@ -14,7 +14,6 @@ public class Radio  {
 
     //Bundle sayfalar arası geçiş
     private static String streamUrl = null;
-    public static String stream="";
     public static boolean isAlreadyPlaying = false;
     public static int controlButton;
 
@@ -23,8 +22,7 @@ public class Radio  {
     {
 
         streamUrl = streamRadio;
-
-        if(isAlreadyPlaying)
+        if(player.isPlaying() && player != null)
             stopRadioPlayer();
 
         initializeMediaPlayer();

@@ -113,8 +113,11 @@ public class MainActivity extends AppCompatActivity implements FragmentData, Con
 
     }
 
-
-
+    @Override
+    public void setImage(boolean ppBut) {
+        PopulerFragment populerBut = new PopulerFragment();
+        populerBut.setImage(ppBut);
+    }
 
     class ViewPagerAdapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();
@@ -197,6 +200,7 @@ public class MainActivity extends AppCompatActivity implements FragmentData, Con
                 finish();
                 this.startActivity(intent);
         }
+
         if(item.getItemId()== R.id.exit)
         {
             android.os.Process.killProcess(android.os.Process.myPid());

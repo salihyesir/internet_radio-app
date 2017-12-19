@@ -82,6 +82,7 @@ public class RegisterFragment extends Fragment {
 
         mAuth.createUserWithEmailAndPassword(userName,userPassword)
                 .addOnCompleteListener((Activity) getActivity(), new OnCompleteListener<AuthResult>() {
+
             //Giriş var ise homefragmenta yönlensin
                     @Override
                     public void onComplete(Task<AuthResult> task) {

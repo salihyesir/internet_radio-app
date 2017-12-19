@@ -8,9 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.internetradio.bt.proje.ConnectivityReceiver;
 import com.internetradio.bt.proje.CustomAdapter;
 import com.internetradio.bt.proje.DatabaseRadyoAdapter;
@@ -26,6 +28,8 @@ import java.util.ArrayList;
 public class FavoriteFragment extends Fragment{
 
 
+    private FirebaseAuth fAuth;
+    private FirebaseUser firebaseUser;
 
     private static View rootView;
     ListView listView;
@@ -34,12 +38,11 @@ public class FavoriteFragment extends Fragment{
 
     String streamUrl=null;
 
-    Radio radyo=new Radio();
 
-    
+    Radio radio = new Radio();
+    private String position;
 
-
-
+    FragmentData fragmentData;
     public FavoriteFragment() {
         // Required empty public constructor
     }
@@ -62,25 +65,11 @@ public class FavoriteFragment extends Fragment{
          listView.setAdapter(adapter);
 
 
+        fAuth = FirebaseAuth.getInstance();
+        firebaseUser = fAuth.getCurrentUser(); // authenticate olan kullaniciyi aliyoruz eger var ise
 
-         try {
+        try {
              veriGetir();
-
-             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                 @Override
-                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                     streamUrl=list.get(position).getDbRadyoUrl();
-
-
-                     radyo.playRadioPlayer(streamUrl);
-
-
-
-
-                 }
-             });
-
          }catch (NullPointerException e)
          {
 
@@ -96,8 +85,61 @@ public class FavoriteFragment extends Fragment{
 
              }
              return rootView;
-
          }
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            int previousPosition=-1;
+            int count=0;
+            long previousMil=0;
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int pos, long id) {
+
+                //Radyoya iki defa tıklama
+                if(previousPosition==pos)
+                {
+                    count++;
+                    if(count==2 && System.currentTimeMillis()-previousMil<=1000)
+                    {
+                        if(firebaseUser != null) {
+                            position = list.get(pos).getDbRadyoAd();
+                            fragmentData = (FragmentData) getActivity();
+                            fragmentData.subjectData(position);
+                            fragmentData.setImage(true);
+                            ChatFragment chatFragment = new ChatFragment();
+                            android.app.FragmentTransaction transaction = getActivity().getFragmentManager().beginTransaction();
+                            transaction.replace(R.id.favori_fragment, chatFragment);
+                            transaction.addToBackStack(null);
+
+                            // işlerimizi bitirelim
+                            transaction.commit();
+                            Toast.makeText(getActivity(), list.get(pos).getDbRadyoAd() + " Chat Odasına Hoş Geldiniz", Toast.LENGTH_SHORT).show();
+                        }
+                        else{
+                            Toast.makeText(getActivity(), list.get(pos).getDbRadyoAd() + " Chat odasına girmek için ilk önce login olunuz", Toast.LENGTH_SHORT).show();
+
+                        }
+                        count=1;
+                    }
+                }
+                //Radyo Bir kere tıklama
+                else
+                {
+                    previousPosition=pos;
+                    count=1;
+                    previousMil=System.currentTimeMillis();
+                    fragmentData = (FragmentData) getActivity();
+                    fragmentData.setImage(true);
+                    // set drawable image like it
+                    PopulerFragment.index = pos;
+                    streamUrl=list.get(pos).getDbRadyoUrl();
+                    Toast.makeText(getActivity().getApplicationContext(), "Playing the radio.", Toast.LENGTH_LONG).show();
+                    radio.playRadioPlayer(streamUrl);
+                }
+
+
+            }
+        });
+
         return rootView;
     }
 

@@ -1,8 +1,10 @@
 package com.internetradio.bt.fragments;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +20,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.internetradio.bt.proje.CustomAdapterMessage;
+import com.internetradio.bt.proje.MainActivity;
 import com.internetradio.bt.proje.Message;
 import com.internetradio.bt.proje.R;
 
@@ -50,6 +53,31 @@ public class ChatFragment extends Fragment {
 
     public ChatFragment(){
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if(getView()== null){
+            return;
+        }
+
+        getView().setFocusableInTouchMode(true);
+        getView().requestFocus();
+        getView().setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK){
+                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                    getActivity().finish();
+                    getActivity().startActivity(intent);
+                    getActivity().finish();
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 
     @Override
@@ -121,8 +149,6 @@ public class ChatFragment extends Fragment {
 
             }
         });
-
-
         return rootView;
     }
     public void setSubject(String pos){

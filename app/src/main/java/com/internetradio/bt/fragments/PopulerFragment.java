@@ -14,6 +14,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,6 +38,8 @@ public class PopulerFragment extends Fragment{
     private static final int CODE_DRAW_OVER_OTHER_APP_PERMISSION = 2084;
 
 
+    private FirebaseAuth fAuth;
+    private FirebaseUser firebaseUser;
     FragmentData fragmentData;
     String position;
     ImageView ppButton;//Play pause button
@@ -45,7 +49,7 @@ public class PopulerFragment extends Fragment{
     public static int index=0;
 
     //Bundle sayfalar arası geçiş
-    private static String streamUrl = null;
+    public static String streamUrl = null;
     public static String stream="";
 
     public static String widgetDurum = null;
@@ -97,6 +101,10 @@ public class PopulerFragment extends Fragment{
         rootView=inflater.inflate(R.layout.fragment_populer,container,false);
         listView = (ListView) rootView.findViewById(R.id.listView);
 
+        fAuth = FirebaseAuth.getInstance();
+        firebaseUser = fAuth.getCurrentUser(); // authenticate olan kullaniciyi aliyoruz eger var ise
+
+
         //  Firebaseden veri çekme
         // Write a message to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -147,18 +155,23 @@ public class PopulerFragment extends Fragment{
                     count++;
                     if(count==2 && System.currentTimeMillis()-previousMil<=1000)
                     {
-                        position=arrayList.get(pos).getRadyoAd();
-                        fragmentData = (FragmentData) getActivity();
-                        fragmentData.subjectData(position);
-                        ChatFragment chatFragment = new ChatFragment();
-                        android.app.FragmentTransaction transaction = getActivity().getFragmentManager().beginTransaction();
-                        transaction.replace(R.id.fragment_pop, chatFragment);
-                        transaction.addToBackStack(null);
+                        if(firebaseUser != null) {
+                            position = arrayList.get(pos).getRadyoAd();
+                            fragmentData = (FragmentData) getActivity();
+                            fragmentData.subjectData(position);
+                            ChatFragment chatFragment = new ChatFragment();
+                            android.app.FragmentTransaction transaction = getActivity().getFragmentManager().beginTransaction();
+                            transaction.replace(R.id.fragment_pop, chatFragment);
+                            transaction.addToBackStack(null);
+                            // işlerimizi bitirelim
+                            transaction.commit();
+                            Toast.makeText(getActivity(), arrayList.get(pos).getRadyoAd() + " Chat Odasına Hoş Geldiniz", Toast.LENGTH_SHORT).show();
+                        }
+                        else{
+                            Toast.makeText(getActivity(), arrayList.get(pos).getRadyoAd() + " Chat odasına girmek için ilk önce login olunuz", Toast.LENGTH_SHORT).show();
 
-                        // işlerimizi bitirelim
-                        transaction.commit();
-                        Toast.makeText(getActivity(),arrayList.get(pos).getRadyoAd()+" Chat Odasına Hoş Geldiniz",Toast.LENGTH_SHORT).show();
-                        count=1;
+                        }
+                        count = 1;
                     }
                 }
                 //Radyo Bir kere tıklama
@@ -341,6 +354,11 @@ public class PopulerFragment extends Fragment{
         }
     }
 
+    public void setImage(boolean ppBut){
+        //if (ppBut)
+            //ppButton.setImageResource(R.mipmap.ic_pause);
+
+    }
 
 
 }
