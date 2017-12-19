@@ -7,6 +7,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.internetradio.bt.proje.ConnectivityReceiver;
@@ -15,6 +17,7 @@ import com.internetradio.bt.proje.DatabaseRadyoAdapter;
 import com.internetradio.bt.proje.MainActivity;
 import com.internetradio.bt.proje.NotConnectionActivity;
 import com.internetradio.bt.proje.R;
+import com.internetradio.bt.proje.Radio;
 import com.internetradio.bt.proje.RadyoFavModel;
 
 import java.util.ArrayList;
@@ -29,13 +32,19 @@ public class FavoriteFragment extends Fragment{
     public static ArrayList<RadyoFavModel> list;
     DatabaseRadyoAdapter adapter=null;
 
+    String streamUrl=null;
 
+    Radio radyo=new Radio();
+
+    
 
 
 
     public FavoriteFragment() {
         // Required empty public constructor
     }
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,8 +60,27 @@ public class FavoriteFragment extends Fragment{
          list=new ArrayList<>();
          adapter=new DatabaseRadyoAdapter(getActivity(), R.layout.fav_radyo_item,list);
          listView.setAdapter(adapter);
+
+
+
          try {
              veriGetir();
+
+             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                 @Override
+                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                     streamUrl=list.get(position).getDbRadyoUrl();
+
+
+                     radyo.playRadioPlayer(streamUrl);
+
+
+
+
+                 }
+             });
+
          }catch (NullPointerException e)
          {
 
